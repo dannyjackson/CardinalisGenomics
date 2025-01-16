@@ -36,6 +36,11 @@ for i in `cat /xdisk/mcnew/dannyjackson/cardinals/sampleids.txt`;
 	/xdisk/mcnew/dannyjackson/cardinals_dfinch/indelmap.sh $i
 done
 
+for job in {11127334..11127357}; do
+    scancel $job
+done
+
+
 #!/bin/bash
 IND=$1
 
@@ -47,8 +52,18 @@ apptainer exec ~/programs/gatk3_3.7-0.sif java -jar /usr/GenomeAnalysisTK.jar \
 
 # 11126461 - 11126484
 
+# repeat with lagging sample
+sbatch --account=mcnew \
+--job-name=indelmap_UWBM100621 \
+--partition=standard \
+--mail-type=ALL \
+--output=slurm_output/output.indelmap_UWBM100621.%j \
+--nodes=1 \
+--ntasks-per-node=12 \
+--time=10:00:00 \
+/xdisk/mcnew/dannyjackson/cardinals_dfinch/indelmap.sh UWBM100621
 
-
+# Submitted batch job 11127294
 
 for i in `cat /xdisk/mcnew/dannyjackson/cardinals/sampleids.txt`;
 	do echo $i
@@ -75,4 +90,8 @@ apptainer exec ~/programs/gatk3_3.7-0.sif java -jar /usr/GenomeAnalysisTK.jar -T
 -o /xdisk/mcnew/dannyjackson/cardinals_dfinch/indelrealignment/${IND}.realigned.bam
 
 
-# 3467823 - 3467870
+# 12031356 - 12031379
+
+for job in {3467823..3467870}; do
+    scancel $job
+done
