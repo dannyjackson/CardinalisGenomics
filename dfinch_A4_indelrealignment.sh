@@ -95,3 +95,4 @@ apptainer exec ~/programs/gatk3_3.7-0.sif java -jar /usr/GenomeAnalysisTK.jar -T
 for job in {3467823..3467870}; do
     scancel $job
 done
+
