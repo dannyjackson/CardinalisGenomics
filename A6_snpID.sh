@@ -1,4 +1,4 @@
-# A6_snpID
+# A6_snpID 
 
 cd /xdisk/mcnew/dannyjackson/cardinals/referencelists
 

@@ -21,19 +21,32 @@ sbatch --account=mcnew \
 /xdisk/mcnew/dannyjackson/cardinals_dfinch/bamstats.sh 
 # Submitted batch job 12031591
 
-cd /xdisk/mcnew/dannyjackson/cardinals/bamstats
+
+#!/bin/bash
+
+cd /xdisk/mcnew/dannyjackson/cardinals_dfinch/bamstats
 
 while read -r cardinal;
 do 
   echo $cardinal
   echo $cardinal >> depthstats.txt
 
-  # average and standard deviaiton
-  awk '{sum+=$3; sumsq+=$3*$3} END { print "Average = ",sum/NR; print "Stdev = ",sqrt(sumsq/NR - (sum/NR)**2)}' "$cardinal".depthstats >> depthstats.txt
+  # average and standard deviation
+  awk '{sum+=$3; sumsq+=$3*$3} END { print "Average = ",sum/NR; print "Stdev = ",sqrt(sumsq/NR - (sum/NR)**2)}' "$cardinal"_depthstats.txt >> depthstats.txt
 
 done < /xdisk/mcnew/dannyjackson/cardinals/sampleids.txt
 
+sbatch --account=mcnew \
+--job-name=calcdepth \
+--partition=standard \
+--mail-type=ALL \
+--output=slurm_output/output.calcdepth.%j \
+--nodes=1 \
+--ntasks-per-node=16 \
+--time=48:00:00 \
+/xdisk/mcnew/dannyjackson/cardinals_dfinch/calcdepth.sh
 
+Submitted batch job 11131337
 
 # depth stats aligned to b10k genome
 Sample  Average Stdev
@@ -62,3 +75,31 @@ UWBM77781	4.35542	39.769
 UWBM77856	5.5126	32.4115
 UWBM77978	6.47198	29.9459
 mean	5.833972083	29.498825
+
+
+# depth stats aligned to  darwin's finch genome
+Sample  Average Stdev
+MSB25201	6.97814	51.5322
+NOCA003	4.49975	35.926
+NOCA004	3.50371	32.1905
+NOCA006	5.80631	48.1065
+NOCA008	4.85283	41.6011
+NOCA012	4.58593	40.8785
+NOCA013	5.25671	50.7062
+PYRR003	4.08382	22.4905
+PYRR004	5.57957	35.043
+PYRR006	4.62345	24.0894
+PYRR007	4.20723	23.6736
+PYRR009	4.5434	27.004
+PYRR011	4.83675	31.0408
+UWBM100619	6.6082	39.3782
+UWBM100620	5.66758	24.0897
+UWBM100621	6.64143	30.1046
+UWBM103345	5.12688	40.3668
+UWBM103346	4.42484	19.0454
+UWBM77548	4.97307	15.239
+UWBM77718	4.85499	19.9508
+UWBM77780	5.73054	28.0262
+UWBM77781	4.00269	43.9651
+UWBM77856	4.82667	30.0542
+UWBM77978	5.66109	28.2475
