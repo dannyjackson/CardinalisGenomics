@@ -1,5 +1,17 @@
-# B1_PCA.sh with trans, subset
-# after evaluating various subsets of the data, I've determined to move forward with this one, which drops one of two genomes that appears to be siblings or close relatives (dropped the one with lower average depth and higher SD of depth)
+# B1_PCA.sh
+# install pcangsd
+git clone https://github.com/Rosemeis/pcangsd
+cd pcangsd/
+
+python3 setup.py build_ext --inplace
+
+cd ~/programs/pcangsd/pcangsd/
+pip3 install --user -r requirements.txt
+pip3 install .
+
+
+# for pcangsd, I need to subset by unlinked snps
+# and to prune linked SNPs using a window size of 50kb, a step size of 5 SNPs, and an r2 threshold of 0.5
 
 #!/bin/bash
 
@@ -8,14 +20,14 @@ module load R
 module load plink/1.9
 module load samtools
 
-cd /xdisk/mcnew/dannyjackson/cardinals_dfinch/datafiles/vcf_likelihoods/subset
+cd /xdisk/mcnew/dannyjackson/cardinals_dfinch/vcf_likelihoods/all
 
-~/programs/angsd/angsd -vcf-gl genolike_subset.bcf -doPlink 2 -out genolike_plink -doGeno -1 -dopost 1 -domaf 1 -doMajorMinor 1 -sites /xdisk/mcnew/dannyjackson/cardinals_dfinch/referencelists/sites_headless.mafs
+~/programs/angsd/angsd -vcf-gl genolike.bcf -doPlink 2 -out genolike_plink -doGeno -1 -dopost 1 -domaf 1 -doMajorMinor 1 -sites /xdisk/mcnew/dannyjackson/cardinals_dfinch/referencelists/sites_headless.mafs
 
 
-plink --tped /xdisk/mcnew/dannyjackson/cardinals_dfinch/datafiles/vcf_likelihoods/subset/genolike_plink.tped --tfam /xdisk/mcnew/dannyjackson/cardinals_dfinch/datafiles/vcf_likelihoods/subset/genolike_plink.tfam --allow-extra-chr --snps-only 'just-acgt' --indep-pairwise 50kb 1 0.5 --out genolike_filtered
+plink --tped /xdisk/mcnew/dannyjackson/cardinals_dfinch/vcf_likelihoods/all/genolike_plink.tped --tfam /xdisk/mcnew/dannyjackson/cardinals_dfinch/vcf_likelihoods/all/genolike_plink.tfam --allow-extra-chr --snps-only 'just-acgt' --indep-pairwise 50kb 1 0.5 --out genolike_filtered
 
-plink --tped /xdisk/mcnew/dannyjackson/cardinals_dfinch/datafiles/vcf_likelihoods/subset/genolike_plink.tped --tfam /xdisk/mcnew/dannyjackson/cardinals_dfinch/datafiles/vcf_likelihoods/subset/genolike_plink.tfam --allow-extra-chr --snps-only 'just-acgt' --extract genolike_filtered.prune.in --out genolike_pruned --make-bed 
+plink --tped /xdisk/mcnew/dannyjackson/cardinals_dfinch/vcf_likelihoods/all/genolike_plink.tped --tfam /xdisk/mcnew/dannyjackson/cardinals_dfinch/vcf_likelihoods/all/genolike_plink.tfam --allow-extra-chr --snps-only 'just-acgt' --extract genolike_filtered.prune.in --out genolike_pruned --make-bed 
 
 # bgzip genolike_pruned.beagle.bed
 
@@ -25,21 +37,24 @@ sbatch --account=mcnew \
 --mail-type=ALL \
 --output=slurm_output/pruneforlinkage%j \
 --nodes=1 \
---ntasks-per-node=4 \
+--ntasks-per-node=16 \
 --time=24:00:00 \
 pruneforlinkage.sh
 
-# Submitted batch job 3637791
+# Submitted batch job 11146436
+
+# 2090305 of 2591209
+# 500,904 unlinked variants remain
 
 #!/bin/bash
-cd /xdisk/mcnew/dannyjackson/cardinals_dfinch/analyses/pca/subset
+
 # for selection / this is only able to look at differences between species not urban/rural
 module load python
 
-pcangsd -b /xdisk/mcnew/dannyjackson/cardinals_dfinch/datafiles/vcf_likelihoods/subset/genolike_subset.beagle.gz -o /xdisk/mcnew/dannyjackson/cardinals_dfinch/analyses/pca/subset/subset -t 12 -e 2 --selection --pcadapt --sites_save --snp_weights
+pcangsd -b /xdisk/mcnew/dannyjackson/cardinals_dfinch/datafiles/vcf_likelihoods/all/genolike.beagle.gz -o /xdisk/mcnew/dannyjackson/cardinals_dfinch/analyses/pca/all -t 12 -e 2 --selection --pcadapt --sites_save --snp_weights
 
 # for pop gen
-pcangsd -p /xdisk/mcnew/dannyjackson/cardinals_dfinch/datafiles/vcf_likelihoods/subset/genolike_pruned -o /xdisk/mcnew/dannyjackson/cardinals_dfinch/analyses/pca/subset/pruned -t 12 -e 2 --selection --admix
+pcangsd -p /xdisk/mcnew/dannyjackson/cardinals_dfinch/datafiles/vcf_likelihoods/all/genolike_pruned -o /xdisk/mcnew/dannyjackson/cardinals_dfinch/analyses/pca/pruned -t 12 -e 2 --selection --admix
 
 
 sbatch --account=mcnew \
@@ -48,13 +63,14 @@ sbatch --account=mcnew \
 --mail-type=ALL \
 --output=slurm_output/selection_pca%j \
 --nodes=1 \
---ntasks-per-node=12 \
+--ntasks-per-node=16 \
 --time=24:00:00 \
-selection_pca_subset.sh
+selection_pca.sh
 
-Submitted batch job 3643488
 
-# save the following as: /xdisk/mcnew/dannyjackson/cardinals_dfinch/referencelists/sample_info_subset.txt
+# it's possible that UWBM77548 and UWBM77718 are related...
+
+# save the following as: /xdisk/mcnew/dannyjackson/cardinals_dfinch/referencelists/sample_info.txt
 
 Sample  Species Treatment  
 MSB25201    PYRR    Rural
@@ -83,11 +99,11 @@ UWBM77856   NOCA    Rural
 UWBM77978   NOCA    Rural
 
 # plot it in R
-cd /xdisk/mcnew/dannyjackson/cardinals_dfinch/analyses/pca/subset/
+cd /xdisk/mcnew/dannyjackson/cardinals_dfinch/analyses/pca/
 
 C <- as.matrix(read.table("pruned.cov")) # Reads estimated covariance matrix
 D <- as.matrix(read.table("output.selection")) # Reads PC based selection statistics
-tab <- read.table("/xdisk/mcnew/dannyjackson/cardinals_dfinch/referencelists/sample_info_subset.txt", header = TRUE)
+tab <- read.table("/xdisk/mcnew/dannyjackson/cardinals_dfinch/referencelists/sample_info.txt", header = TRUE)
 labs <- data.frame(tab)
 # Plot PCA plot
 e <- eigen(C)
@@ -238,24 +254,6 @@ module load python
 pcangsd -b /xdisk/mcnew/dannyjackson/cardinals_dfinch/datafiles/vcf_likelihoods/all/genolike.beagle.gz -o /xdisk/mcnew/dannyjackson/cardinals_dfinch/analyses/pca/subset -t 12 -e 2 --selection --pcadapt --sites_save --snp_weights
 
 Submitted batch job 12043363
-
-
-
-
-
-
-
-
-# done up to here. I did not look further into the PCAdapt output because it is only capable of detecting differences between the two species, which is not a major goal of this paper.
-
-
-
-
-
-
-
-
-
 
 
 # https://github.com/Rosemeis/pcangsd/blob/master/scripts/pcadapt.R

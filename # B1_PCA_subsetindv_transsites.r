@@ -1,5 +1,5 @@
-# B1_PCA.sh with trans, subset
-# after evaluating various subsets of the data, I've determined to move forward with this one, which drops one of two genomes that appears to be siblings or close relatives (dropped the one with lower average depth and higher SD of depth)
+# B1_PCA.sh with subset of individuals, including trans sites
+
 
 #!/bin/bash
 
@@ -238,24 +238,6 @@ module load python
 pcangsd -b /xdisk/mcnew/dannyjackson/cardinals_dfinch/datafiles/vcf_likelihoods/all/genolike.beagle.gz -o /xdisk/mcnew/dannyjackson/cardinals_dfinch/analyses/pca/subset -t 12 -e 2 --selection --pcadapt --sites_save --snp_weights
 
 Submitted batch job 12043363
-
-
-
-
-
-
-
-
-# done up to here. I did not look further into the PCAdapt output because it is only capable of detecting differences between the two species, which is not a major goal of this paper.
-
-
-
-
-
-
-
-
-
 
 
 # https://github.com/Rosemeis/pcangsd/blob/master/scripts/pcadapt.R
