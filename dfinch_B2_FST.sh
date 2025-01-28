@@ -23,7 +23,7 @@ sbatch --account=mcnew \
 --output=slurm_output/output.fst_1.%j \
 --nodes=1 \
 --ntasks-per-node=4 \
---time=40:00:00 \
+--time=4:00:00 \
 ~/programs/Genomics-Main/fst_1.sh -p ~/programs/Genomics-Main/fst_params.sh
 
-# Submitted batch job 3691902
+# Submitted batch job 3692112
