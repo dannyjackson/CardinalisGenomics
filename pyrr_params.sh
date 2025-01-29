@@ -1,6 +1,7 @@
 module load R/4.4.0
 module load htslib/1.19.1
 module load bedtools2/2.29.2
+module load python/3.11/3.11.4
 
 MSMCTOOLS=~/programs/msmc-tools # directory with msmc-tools binaries
 PATH=$PATH:$MSMCTOOLS
@@ -11,6 +12,10 @@ ANGSD=~/programs/angsd/     # path to directory with angsd executables
 scriptdir=~/programs/CardinalisGenomics/
 PATH=$PATH:$scriptdir # this adds the workshop script directory to our path, so that executable scripts in it can be called without using the full path
 
+# define the names of the two populations that will be compared
+POP1=pyrrurban
+POP2=pyrrrural
+
 # make directories for intermediate files-- will fail if these don't exist
 
 mkdir -p ${OUTDIR}/analyses/fst
@@ -19,18 +24,13 @@ mkdir -p ${OUTDIR}/datafiles/safs
 mkdir -p ${OUTDIR}/datafiles/mls/
 mkdir -p ${OUTDIR}/analyses/fst/${WIN}
 mkdir -p ${OUTDIR}/analyses/genelist/${WIN}
+mkdir -p ${OUTDIR}/analyses/dxy/
+mkdir -p ${OUTDIR}/analyses/dxy/${POP1}_${POP2}
 
-
-# for fst_1.sh
-
-# define the names of the two populations that will be compared
-POP1=pyrrurban
-POP2=pyrrrural
 
 # define two colors to be used 
 color1=#E69F00
 color2=#7570B3
-
 
 # characters at the start of a chromosome number (excluding scaffolds)
 # note that this script also assumes chromosomes will end in .1 i.e. NC_012345.1, and will remove the .1 from files where it will disrupt plotting etc

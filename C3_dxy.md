@@ -10,7 +10,7 @@ git pull
 chmod +x dxy_1.sh
 cd /xdisk/mcnew/dannyjackson/cardinals/analyses/dxy
 
-~/programs/Genomics-Main/dxy_1.sh -p ~/programs/CardinalisGenomics/noca_params.sh -w 10000 -s 10000
+~/programs/Genomics-Main/dxy_1.sh -p ~/programs/CardinalisGenomics/noca_params.sh -w 10000 -c /xdisk/mcnew/dannyjackson/cardinals/referencelists/GCF_901933205_chromconversion.txt
 
 
 

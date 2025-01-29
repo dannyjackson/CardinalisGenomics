@@ -1,6 +1,7 @@
 module load R/4.4.0
 module load htslib/1.19.1
 module load bedtools2/2.29.2
+module load python/3.11/3.11.4
 
 MSMCTOOLS=~/programs/msmc-tools # directory with msmc-tools binaries
 PATH=$PATH:$MSMCTOOLS
@@ -11,6 +12,10 @@ ANGSD=~/programs/angsd/     # path to directory with angsd executables
 scriptdir=~/programs/CardinalisGenomics/
 PATH=$PATH:$scriptdir # this adds the workshop script directory to our path, so that executable scripts in it can be called without using the full path
 
+# define the names of the two populations that will be compared
+POP1=nocaurban
+POP2=nocarural
+
 # make directories for intermediate files-- will fail if these don't exist
 
 mkdir -p ${OUTDIR}/analyses/fst
@@ -19,13 +24,9 @@ mkdir -p ${OUTDIR}/datafiles/safs
 mkdir -p ${OUTDIR}/datafiles/mls/
 mkdir -p ${OUTDIR}/analyses/fst/${WIN}
 mkdir -p ${OUTDIR}/analyses/genelist/${WIN}
+mkdir -p ${OUTDIR}/analyses/dxy/
+mkdir -p ${OUTDIR}/analyses/dxy/${POP1}_${POP2}
 
-
-# for fst_1.sh
-
-# define the names of the two populations that will be compared
-POP1=nocaurban
-POP2=nocarural
 
 # define two colors to be used 
 color1=#7570B3

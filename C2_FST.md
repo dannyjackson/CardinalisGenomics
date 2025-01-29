@@ -101,7 +101,7 @@ sbatch --account=mcnew \
 # 3694293
 
 sbatch --account=mcnew \
---job-name=fst_2 \
+--job-name=fst_2_pyrr \
 --partition=standard \
 --mail-type=ALL \
 --output=slurm_output/output.fst_2.%j \
@@ -109,7 +109,7 @@ sbatch --account=mcnew \
 --ntasks-per-node=4 \
 --time=5:00:00 \
 ~/programs/CardinalisGenomics/fst_2.sh -p ~/programs/CardinalisGenomics/pyrr_params.sh -c /xdisk/mcnew/dannyjackson/cardinals/referencelists/GCF_901933205_chromconversion.txt
-# 3694294
+# 3694400
 ```
 
 
