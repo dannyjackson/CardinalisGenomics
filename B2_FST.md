@@ -1,6 +1,6 @@
-Notes on how I ran Fst on my Cardinalis genomes
+Notes on how I analyzed the *Cardinalis* genomes using F<sub>ST</sub>
 
-First, I copied the following scripts from my Genomics-Main repository into my CardinalisGenomics directory: 
+First, I copied the following scripts from my [Genomics-Main](https://github.com/dannyjackson/Genomics-Main) repository into my CardinalisGenomics repository: 
  - fst_params.sh
  - fst_1.sh
  - fst_2.sh
@@ -13,13 +13,13 @@ Most of these remained unedited, but I copied them to this repository so that th
 
 I edited the fst_params.sh script to reflect my desired parameters for each run (now saved as noca_params.sh and pyrr_params.sh). I then performed the following steps:
 
-Index the reference genome
+Index the reference genome:
 ```
 module load samtools/1.19.2
 samtools faidx /xdisk/mcnew/dannyjackson/cardinals/datafiles/referencegenome/ncbi_dataset/data/GCF_901933205.1/GCF_901933205.1_STF_HiC_genomic.fna
 ```
 
-Make chromosome conversion file
+Make a comma separated chromosome conversion file without a header where the first column is the name of the chromosome and the second is the name of the associated scaffold in the reference genome:
 ```
 echo '1,NC_044571.1' > /xdisk/mcnew/dannyjackson/cardinals/referencelists/GCF_901933205_chromconversion.txt
 echo '2,NC_044572.1' >> /xdisk/mcnew/dannyjackson/cardinals/referencelists/GCF_901933205_chromconversion.txt
@@ -55,13 +55,13 @@ echo 'Z,NC_044601.1' >> /xdisk/mcnew/dannyjackson/cardinals/referencelists/GCF_9
 ```
 
 
-Set the working directory to fst so that all relevant slurm output files appear here as well
+Set the working directory to fst so that all relevant slurm output files appear here as well:
 ```
 cd /xdisk/mcnew/dannyjackson/cardinals/analyses/fst
 ```
 
 
-Run fst 1 on both northern cardinals and pyrrhuloxia
+Run fst 1 on both northern cardinals and pyrrhuloxia:
 ```
 sbatch --account=mcnew \
 --job-name=fst_1 \
@@ -98,6 +98,7 @@ sbatch --account=mcnew \
 --ntasks-per-node=4 \
 --time=5:00:00 \
 ~/programs/CardinalisGenomics/fst_2.sh -p ~/programs/CardinalisGenomics/noca_params.sh -c /xdisk/mcnew/dannyjackson/cardinals/referencelists/GCF_901933205_chromconversion.txt
+# 3694293
 
 sbatch --account=mcnew \
 --job-name=fst_2 \
@@ -108,6 +109,7 @@ sbatch --account=mcnew \
 --ntasks-per-node=4 \
 --time=5:00:00 \
 ~/programs/CardinalisGenomics/fst_2.sh -p ~/programs/CardinalisGenomics/pyrr_params.sh -c /xdisk/mcnew/dannyjackson/cardinals/referencelists/GCF_901933205_chromconversion.txt
+# 3694294
 ```
 
 
