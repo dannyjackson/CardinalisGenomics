@@ -10,6 +10,7 @@ sbatch --account=mcnew \
 --ntasks-per-node=4 \
 --time=5:00:00 \
 ~/programs/CardinalisGenomics/C3_dxy_1.sh -p ~/programs/CardinalisGenomics/noca_params.sh -w 10000 -s 10000
+# 3694302
 
 sbatch --account=mcnew \
 --job-name=fst_1 \
@@ -20,7 +21,7 @@ sbatch --account=mcnew \
 --ntasks-per-node=4 \
 --time=5:00:00 \
 ~/programs/CardinalisGenomics/C3_dxy_1.sh -p ~/programs/CardinalisGenomics/pyrr_params.sh -w 10000 -s 10000
-
+# 3694303
 
 # testing
 
