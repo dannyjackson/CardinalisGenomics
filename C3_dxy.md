@@ -1,4 +1,18 @@
 # C3_dxy.md
+# testing
+
+cd ~/programs/CardinalisGenomics/
+chmod -x *
+git pull
+cd ~/programs/Genomics-Main/
+chmod -x *
+git pull
+chmod +x dxy_1.sh
+cd /xdisk/mcnew/dannyjackson/cardinals/analyses/dxy
+
+~/programs/Genomics-Main/dxy_1.sh -p ~/programs/CardinalisGenomics/noca_params.sh -w 10000 -s 10000
+
+
 
 # script
 sbatch --account=mcnew \
