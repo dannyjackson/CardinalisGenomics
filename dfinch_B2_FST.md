@@ -1,11 +1,13 @@
-# dfinch_B2_FST.sh
+Notes on how I ran Fst on my Cardinalis genomes
 
-# index reference genome
+Index the reference genome
+```
 module load samtools/1.19.2
 samtools faidx /xdisk/mcnew/dannyjackson/cardinals_dfinch/datafiles/referencegenome/ncbi_dataset/data/GCF_901933205.1/GCF_901933205.1_STF_HiC_genomic.fna
+```
 
-# make chromosome conversion file
-# /xdisk/mcnew/dannyjackson/cardinals_dfinch/referencelists/GCF_901933205_chromconversion.txt
+Make chromosome conversion file
+```
 echo '1,NC_044571.1' > /xdisk/mcnew/dannyjackson/cardinals_dfinch/referencelists/GCF_901933205_chromconversion.txt
 echo '2,NC_044572.1' >> /xdisk/mcnew/dannyjackson/cardinals_dfinch/referencelists/GCF_901933205_chromconversion.txt
 echo '3,NC_044573.1' >> /xdisk/mcnew/dannyjackson/cardinals_dfinch/referencelists/GCF_901933205_chromconversion.txt
@@ -37,11 +39,17 @@ echo '28,NC_044598.1' >> /xdisk/mcnew/dannyjackson/cardinals_dfinch/referencelis
 echo '29,NC_044599.1' >> /xdisk/mcnew/dannyjackson/cardinals_dfinch/referencelists/GCF_901933205_chromconversion.txt
 echo '4A,NC_044600.1' >> /xdisk/mcnew/dannyjackson/cardinals_dfinch/referencelists/GCF_901933205_chromconversion.txt
 echo 'Z,NC_044601.1' >> /xdisk/mcnew/dannyjackson/cardinals_dfinch/referencelists/GCF_901933205_chromconversion.txt
+```
 
-# set wd to fst so that all relevant slurm output files appear here as well
+
+Set the working directory to fst so that all relevant slurm output files appear here as well
+```
 cd /xdisk/mcnew/dannyjackson/cardinals_dfinch/analyses/fst
+```
 
-# fst 1
+
+Run fst 1 on both northern cardinals and pyrrhuloxia
+```
 sbatch --account=mcnew \
 --job-name=fst_1 \
 --partition=standard \
@@ -51,7 +59,7 @@ sbatch --account=mcnew \
 --ntasks-per-node=4 \
 --time=5:00:00 \
 ~/programs/Genomics-Main/fst_1.sh -p ~/programs/CardinalisGenomics/noca_params.sh
-# 3694145
+# 3694147
 
 sbatch --account=mcnew \
 --job-name=fst_1 \
@@ -62,9 +70,12 @@ sbatch --account=mcnew \
 --ntasks-per-node=4 \
 --time=5:00:00 \
 ~/programs/Genomics-Main/fst_1.sh -p ~/programs/CardinalisGenomics/pyrr_params.sh
-# 3694146
+# 3694148
+```
 
-# fst 2
+
+Run fst 2 on both northern cardinals and pyrrhuloxia
+```
 sbatch --account=mcnew \
 --job-name=fst_2 \
 --partition=standard \
@@ -75,7 +86,6 @@ sbatch --account=mcnew \
 --time=5:00:00 \
 ~/programs/Genomics-Main/fst_2.sh -p ~/programs/CardinalisGenomics/noca_params.sh -c /xdisk/mcnew/dannyjackson/cardinals_dfinch/referencelists/GCF_901933205_chromconversion.txt
 
-
 sbatch --account=mcnew \
 --job-name=fst_2 \
 --partition=standard \
@@ -85,9 +95,12 @@ sbatch --account=mcnew \
 --ntasks-per-node=4 \
 --time=5:00:00 \
 ~/programs/Genomics-Main/fst_2.sh -p ~/programs/CardinalisGenomics/pyrr_params.sh -c /xdisk/mcnew/dannyjackson/cardinals_dfinch/referencelists/GCF_901933205_chromconversion.txt
+```
 
-# fst 3
-# 10000 windows
+
+Run fst 3 on both northern cardinals and pyrrhuloxia
+First with 10,000 bp windows:
+```
 sbatch --account=mcnew \
 --job-name=fst_3 \
 --partition=standard \
@@ -107,8 +120,10 @@ sbatch --account=mcnew \
 --ntasks-per-node=4 \
 --time=5:00:00 \
 ~/programs/Genomics-Main/fst_3.sh -p ~/programs/Genomics-Main/pyrr_params.sh -w 10000 -s 10000 -c /xdisk/mcnew/dannyjackson/cardinals_dfinch/referencelists/GCF_901933205_chromconversion.txt
+```
 
-# 1000 windows
+And next with 1,000 bp windows:
+```
 sbatch --account=mcnew \
 --job-name=fst_3 \
 --partition=standard \
@@ -128,3 +143,4 @@ sbatch --account=mcnew \
 --ntasks-per-node=4 \
 --time=5:00:00 \
 ~/programs/Genomics-Main/fst_3.sh -p ~/programs/Genomics-Main/pyrr_params.sh -w 1000 -s 1000 -c /xdisk/mcnew/dannyjackson/cardinals_dfinch/referencelists/GCF_901933205_chromconversion.txt
+```
