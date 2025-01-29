@@ -2,7 +2,7 @@
 
 # script
 sbatch --account=mcnew \
---job-name=fst_1 \
+--job-name=dxy_1 \
 --partition=standard \
 --mail-type=ALL \
 --output=slurm_output/output.dxy_1.%j \
@@ -13,7 +13,7 @@ sbatch --account=mcnew \
 # 3694302
 
 sbatch --account=mcnew \
---job-name=fst_1 \
+--job-name=dxy_1 \
 --partition=standard \
 --mail-type=ALL \
 --output=slurm_output/output.dxy_1.%j \
