@@ -12,11 +12,7 @@ cd /xdisk/mcnew/dannyjackson/cardinals/analyses/dxy
 
 ~/programs/Genomics-Main/dxy_1.sh -p ~/programs/CardinalisGenomics/noca_params.sh -w 10000 -c /xdisk/mcnew/dannyjackson/cardinals/referencelists/GCF_901933205_chromconversion.txt
 
-# Run visualization scripts
-source ~/programs/CardinalisGenomics/noca_params.sh 
-Rscript ~/programs/Genomics-Main/dxy_snps.r "${OUTDIR}" "${POP1}" "${POP2}" "${COLOR1}" "${COLOR2}"
-
-python ~/programs/Genomics-Main/dxy_windows.py --outdir "${OUTDIR}" --pop1 "${POP1}" --pop2 "${POP2}" --win "${WIN}"
+~/programs/Genomics-Main/dxy_1.sh -p ~/programs/CardinalisGenomics/pyrr_params.sh -w 10000 -c /xdisk/mcnew/dannyjackson/cardinals/referencelists/GCF_901933205_chromconversion.txt
 
 
 # script
