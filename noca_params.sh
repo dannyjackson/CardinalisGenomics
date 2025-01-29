@@ -46,11 +46,17 @@ GFF=/xdisk/mcnew/dannyjackson/cardinals/datafiles/referencegenome/ncbi_dataset/d
 
 # make reference files
 # first, make a file with chromosome name and length of chromosome
-awk 'BEGIN {OFS = "\t"} {print $1,$2}' ${REF}.fai | grep ${CHRLEAD} ${OUTDIR}/referencelists/allscaffs_lengths.txt | grep -v ${SEXCHR} ${OUTDIR}/referencelists/allchroms_lengths.txt > ${OUTDIR}/referencelists/autosomes_lengths.txt
+if [ -f "${OUTDIR}/referencelists/autosomes_lengths.txt"]
+        then
+            echo "Chromosome lengths table already complete, moving on!"
+        else
+            awk 'BEGIN {OFS = "\t"} {print $1,$2}' ${REF}.fai | grep ${CHRLEAD} | grep -v ${SEXCHR} > ${OUTDIR}/referencelists/autosomes_lengths.txt
+            while IFS=',' read -r first second; do
+                sed -i "s/$second/$first/g" ${OUTDIR}/referencelists/autosomes_lengths.txt 
+            done <<< "$CHROM"
+fi
 
-while IFS=',' read -r first second; do
-    sed -i "s/$second/$first/g" ${OUTDIR}/referencelists/autosomes_lengths.txt 
-done <<< "$CHROM"
+
 
 
 
