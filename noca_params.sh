@@ -5,10 +5,10 @@ module load bedtools2/2.29.2
 MSMCTOOLS=~/programs/msmc-tools # directory with msmc-tools binaries
 PATH=$PATH:$MSMCTOOLS
 
-OUTDIR=/xdisk/mcnew/dannyjackson/cardinals_dfinch/    # main directory for output files
+OUTDIR=/xdisk/mcnew/dannyjackson/cardinals/    # main directory for output files
 ANGSD=~/programs/angsd/     # path to directory with angsd executables
 
-scriptdir=~/programs/Genomics-Main/
+scriptdir=~/programs/CardinalisGenomics/
 PATH=$PATH:$scriptdir # this adds the workshop script directory to our path, so that executable scripts in it can be called without using the full path
 
 # make directories for intermediate files-- will fail if these don't exist
@@ -37,6 +37,6 @@ color2=#CAB2D6
 CHRLEAD=NC_0
 SEXCHR=NC_044601
 # path to reference genome
-REF=/xdisk/mcnew/dannyjackson/cardinals_dfinch/datafiles/referencegenome/ncbi_dataset/data/GCF_901933205.1/GCF_901933205.1_STF_HiC_genomic.fna
+REF=/xdisk/mcnew/dannyjackson/cardinals/datafiles/referencegenome/ncbi_dataset/data/GCF_901933205.1/GCF_901933205.1_STF_HiC_genomic.fna
 # path to gff file
-GFF=/xdisk/mcnew/dannyjackson/cardinals_dfinch/datafiles/referencegenome/ncbi_dataset/data/GCA_013397215.1/genomic.gff 
+GFF=/xdisk/mcnew/dannyjackson/cardinals/datafiles/referencegenome/ncbi_dataset/data/GCA_013397215.1/genomic.gff 

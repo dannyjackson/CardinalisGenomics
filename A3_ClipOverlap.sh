@@ -1,36 +1,43 @@
 ## Clip overlapping read pairs
+
+for i in `cat /xdisk/mcnew/dannyjackson/cardinals/sampleids.txt`;
+	do echo $i
+	IND=$i
+	sbatch --account=mcnew \
+	--job-name=clip_${i} \
+    --partition=standard \
+	--mail-type=ALL \
+	--output=slurm_output/output.clip_${i}.%j \
+	--nodes=1 \
+	--ntasks-per-node=16 \
+	--time=50:00:00 \
+	/xdisk/mcnew/dannyjackson/cardinals_dfinch/clip.sh $i
+done
+
+
+# 11125990 - 11126013
+
 #!/bin/bash
+IND=$1
 
-#SBATCH --job-name=clipoverlap
-#SBATCH --ntasks=12
-#SBATCH --nodes=1             
-#SBATCH --time=30:00:00   
-#SBATCH --partition=standard
-#SBATCH --account=mcnew
-#SBATCH --mem-per-cpu=5gb
-#SBATCH --mail-type=ALL
-#SBATCH --mail-user=dannyjackson@arizona.edu
-#SBATCH --output=output.clipping.%j
+echo "clipping" "${IND}" >> /xdisk/mcnew/dannyjackson/cardinals_dfinch/clipoverlap/clippingstats.txt 
 
-cd /xdisk/mcnew/dannyjackson/cardinals/clipoverlap
+/home/u15/dannyjackson/programs/bamUtil-master/bin/bam clipOverlap --in /xdisk/mcnew/dannyjackson/cardinals_dfinch/sortedbamfiles/${IND}/${IND}_sorted_RGadded_dupmarked.bam --out /xdisk/mcnew/dannyjackson/cardinals_dfinch/clipoverlap/${IND}.all.sorted.marked.clipped.bam --stats --params
 
-module load parallel
+echo "done " ${IND} >>/xdisk/mcnew/dannyjackson/cardinals_dfinch/clipoverlap/clippingstats.txt 
 
-clipping () {
-echo "clipping" "$@" >> /xdisk/mcnew/dannyjackson/cardinals/clipoverlap/clippingstats.txt 
+sbatch --account=mcnew \
+	--job-name=clip_UWBM100621 \
+    --partition=standard \
+	--mail-type=ALL \
+	--output=slurm_output/output.clip_UWBM100621.%j \
+	--nodes=1 \
+	--ntasks-per-node=16 \
+	--time=50:00:00 \
+	/xdisk/mcnew/dannyjackson/cardinals_dfinch/clip.sh UWBM100621
 
-
-/home/u15/dannyjackson/programs/bamUtil-master/bin/bam clipOverlap --in /xdisk/mcnew/dannyjackson/cardinals/sortedbamfiles_indv/"$@"_sorted_RGadded.bam --out /xdisk/mcnew/dannyjackson/cardinals/clipoverlap/"$@".all.sorted.marked.clipped.bam --stats --params
+# Submitted batch job 11126328
 
 
-echo "done " $@ >>/xdisk/mcnew/dannyjackson/cardinals/clipoverlap/clippingstats.txt 
-
-}
 
 
-export -f clipping 
-
-parallel -j 12 clipping :::: /xdisk/mcnew/dannyjackson/cardinals/sampleids.txt
-
-sbatch clipoverlap.sh 
-Submitted batch job 2162945
