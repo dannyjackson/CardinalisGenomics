@@ -37,7 +37,7 @@ sbatch --account=mcnew \
 --ntasks-per-node=4 \
 --time=5:00:00 \
 ~/programs/CardinalisGenomics/fst_1.sh -p ~/programs/CardinalisGenomics/noca_params.sh
-# 3696213
+# 3696285
 
 sbatch --account=mcnew \
 --job-name=fst_1 \
@@ -48,15 +48,15 @@ sbatch --account=mcnew \
 --ntasks-per-node=4 \
 --time=5:00:00 \
 ~/programs/CardinalisGenomics/fst_1.sh -p ~/programs/CardinalisGenomics/pyrr_params.sh
-# 3696214
-# 12067898
+# 3696282
+# 3696445
 ```
 
 
 Run fst 2 on both northern cardinals and pyrrhuloxia
 ```
 sbatch --account=mcnew \
---job-name=fst_2 \
+--job-name=fst_2_noca \
 --partition=standard \
 --mail-type=ALL \
 --output=slurm_output/output.fst_2.%j \
@@ -64,7 +64,7 @@ sbatch --account=mcnew \
 --ntasks-per-node=4 \
 --time=5:00:00 \
 ~/programs/CardinalisGenomics/fst_2.sh -p ~/programs/CardinalisGenomics/noca_params.sh -c /xdisk/mcnew/dannyjackson/cardinals/referencelists/GCF_901933205_chromconversion.txt
-# 3694293
+# 3696273
 
 sbatch --account=mcnew \
 --job-name=fst_2_pyrr \
