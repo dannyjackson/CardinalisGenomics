@@ -49,6 +49,7 @@ sbatch --account=mcnew \
 --time=5:00:00 \
 ~/programs/CardinalisGenomics/fst_1.sh -p ~/programs/CardinalisGenomics/pyrr_params.sh
 # 3696214
+# 12067898
 ```
 
 

@@ -32,7 +32,7 @@ echo "Current script: fst.sh"
 
 # Generate saf files for each population in angsd. Skip if there is any output already in ${OUTDIR}/datafiles/safs/.
 
-if [ -f "${OUTDIR}/datafiles/safs/${POP1}"* ]
+if [ -f "${OUTDIR}/datafiles/safs/${POP1}*" ]
         then
             echo "${POP1} files present in safs directory, assuming they are already generated and moving on!"
         else
