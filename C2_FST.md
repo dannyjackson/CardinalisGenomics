@@ -37,7 +37,7 @@ sbatch --account=mcnew \
 --ntasks-per-node=4 \
 --time=5:00:00 \
 ~/programs/CardinalisGenomics/fst_1.sh -p ~/programs/CardinalisGenomics/noca_params.sh
-# 3694147
+# 3696213
 
 sbatch --account=mcnew \
 --job-name=fst_1 \
@@ -48,7 +48,7 @@ sbatch --account=mcnew \
 --ntasks-per-node=4 \
 --time=5:00:00 \
 ~/programs/CardinalisGenomics/fst_1.sh -p ~/programs/CardinalisGenomics/pyrr_params.sh
-# 3694148
+# 3696214
 ```
 
 
