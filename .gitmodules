@@ -1,0 +1,6 @@
+[submodule "path/to/project_repository"]
+	path = path/to/project_repository
+	url = https://github.com/dannyjackson/Genomics-Main/
+[submodule "Genomics-Main"]
+	path = Genomics-Main
+	url = https://github.com/dannyjackson/Genomics-Main/
