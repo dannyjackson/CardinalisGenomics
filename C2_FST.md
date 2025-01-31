@@ -64,7 +64,7 @@ sbatch --account=mcnew \
 --ntasks-per-node=4 \
 --time=5:00:00 \
 ~/programs/CardinalisGenomics/Genomics-Main/fst_2.sh -p ~/programs/CardinalisGenomics/noca_params.sh -c /xdisk/mcnew/dannyjackson/cardinals/referencelists/GCF_901933205_chromconversion.txt
-# Submitted batch job 3696580
+# Submitted batch job 3696587
 
 sbatch --account=mcnew \
 --job-name=fst_2_pyrr \
@@ -75,7 +75,7 @@ sbatch --account=mcnew \
 --ntasks-per-node=4 \
 --time=5:00:00 \
 ~/programs/CardinalisGenomics/Genomics-Main/fst_2.sh -p ~/programs/CardinalisGenomics/pyrr_params.sh -c /xdisk/mcnew/dannyjackson/cardinals/referencelists/GCF_901933205_chromconversion.txt
-# 3696581
+# 3696593
 ```
 
 
@@ -91,7 +91,7 @@ sbatch --account=mcnew \
 --ntasks-per-node=4 \
 --time=5:00:00 \
 ~/programs/Genomics-Main/fst_3.sh -p ~/programs/CardinalisGenomics/noca_params.sh -w 10000 -s 10000 -c /xdisk/mcnew/dannyjackson/cardinals/referencelists/GCF_901933205_chromconversion.txt
-# Submitted batch job 3696582
+# Submitted batch job 3696588
 
 sbatch --account=mcnew \
 --job-name=fst_3 \
@@ -102,7 +102,7 @@ sbatch --account=mcnew \
 --ntasks-per-node=4 \
 --time=5:00:00 \
 ~/programs/Genomics-Main/fst_3.sh -p ~/programs/CardinalisGenomics/pyrr_params.sh -w 10000 -s 10000 -c /xdisk/mcnew/dannyjackson/cardinals/referencelists/GCF_901933205_chromconversion.txt
-# Submitted batch job 3696583
+# Submitted batch job 3696594
 ```
 
 And next with 1,000 bp windows:
@@ -116,7 +116,7 @@ sbatch --account=mcnew \
 --ntasks-per-node=4 \
 --time=5:00:00 \
 ~/programs/Genomics-Main/fst_3.sh -p ~/programs/CardinalisGenomics/noca_params.sh -w 1000 -s 1000 -c /xdisk/mcnew/dannyjackson/cardinals/referencelists/GCF_901933205_chromconversion.txt
-# Submitted batch job 3696584
+# Submitted batch job 3696595
 
 sbatch --account=mcnew \
 --job-name=fst_3 \
@@ -127,5 +127,5 @@ sbatch --account=mcnew \
 --ntasks-per-node=4 \
 --time=5:00:00 \
 ~/programs/Genomics-Main/fst_3.sh -p ~/programs/CardinalisGenomics/pyrr_params.sh -w 1000 -s 1000 -c /xdisk/mcnew/dannyjackson/cardinals/referencelists/GCF_901933205_chromconversion.txt
-# Submitted batch job 3696585
+# Submitted batch job 3696596
 ```
