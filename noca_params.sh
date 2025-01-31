@@ -8,6 +8,7 @@ module load python/3.11/3.11.4
 MSMCTOOLS=~/programs/msmc-tools  # Directory with MSMC-tools binaries
 ANGSD=~/programs/angsd/           # Path to ANGSD executables
 SCRIPTDIR=~/programs/CardinalisGenomics/
+scriptdir=~/programs/CardinalisGenomics/
 
 # Update PATH
 export PATH="$PATH:$MSMCTOOLS:$SCRIPTDIR"

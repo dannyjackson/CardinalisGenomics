@@ -64,7 +64,7 @@ sbatch --account=mcnew \
 --ntasks-per-node=4 \
 --time=5:00:00 \
 ~/programs/CardinalisGenomics/fst_2.sh -p ~/programs/CardinalisGenomics/noca_params.sh -c /xdisk/mcnew/dannyjackson/cardinals/referencelists/GCF_901933205_chromconversion.txt
-# 3696273
+# Submitted batch job 3696541
 
 sbatch --account=mcnew \
 --job-name=fst_2_pyrr \
@@ -75,7 +75,7 @@ sbatch --account=mcnew \
 --ntasks-per-node=4 \
 --time=5:00:00 \
 ~/programs/CardinalisGenomics/fst_2.sh -p ~/programs/CardinalisGenomics/pyrr_params.sh -c /xdisk/mcnew/dannyjackson/cardinals/referencelists/GCF_901933205_chromconversion.txt
-# 3694400
+# 3696542
 ```
 
 
@@ -90,7 +90,8 @@ sbatch --account=mcnew \
 --nodes=1 \
 --ntasks-per-node=4 \
 --time=5:00:00 \
-~/programs/Genomics-Main/fst_3.sh -p ~/programs/Genomics-Main/noca_params.sh -w 10000 -s 10000 -c /xdisk/mcnew/dannyjackson/cardinals/referencelists/GCF_901933205_chromconversion.txt
+~/programs/Genomics-Main/fst_3.sh -p ~/programs/CardinalisGenomics/noca_params.sh -w 10000 -s 10000 -c /xdisk/mcnew/dannyjackson/cardinals/referencelists/GCF_901933205_chromconversion.txt
+# Submitted batch job 3696548
 
 sbatch --account=mcnew \
 --job-name=fst_3 \
@@ -100,7 +101,8 @@ sbatch --account=mcnew \
 --nodes=1 \
 --ntasks-per-node=4 \
 --time=5:00:00 \
-~/programs/Genomics-Main/fst_3.sh -p ~/programs/Genomics-Main/pyrr_params.sh -w 10000 -s 10000 -c /xdisk/mcnew/dannyjackson/cardinals/referencelists/GCF_901933205_chromconversion.txt
+~/programs/Genomics-Main/fst_3.sh -p ~/programs/CardinalisGenomics/pyrr_params.sh -w 10000 -s 10000 -c /xdisk/mcnew/dannyjackson/cardinals/referencelists/GCF_901933205_chromconversion.txt
+# Submitted batch job 3696549
 ```
 
 And next with 1,000 bp windows:
@@ -113,7 +115,8 @@ sbatch --account=mcnew \
 --nodes=1 \
 --ntasks-per-node=4 \
 --time=5:00:00 \
-~/programs/Genomics-Main/fst_3.sh -p ~/programs/Genomics-Main/noca_params.sh -w 1000 -s 1000 -c /xdisk/mcnew/dannyjackson/cardinals/referencelists/GCF_901933205_chromconversion.txt
+~/programs/Genomics-Main/fst_3.sh -p ~/programs/CardinalisGenomics/noca_params.sh -w 1000 -s 1000 -c /xdisk/mcnew/dannyjackson/cardinals/referencelists/GCF_901933205_chromconversion.txt
+# Submitted batch job 3696550
 
 sbatch --account=mcnew \
 --job-name=fst_3 \
@@ -123,5 +126,6 @@ sbatch --account=mcnew \
 --nodes=1 \
 --ntasks-per-node=4 \
 --time=5:00:00 \
-~/programs/Genomics-Main/fst_3.sh -p ~/programs/Genomics-Main/pyrr_params.sh -w 1000 -s 1000 -c /xdisk/mcnew/dannyjackson/cardinals/referencelists/GCF_901933205_chromconversion.txt
+~/programs/Genomics-Main/fst_3.sh -p ~/programs/CardinalisGenomics/pyrr_params.sh -w 1000 -s 1000 -c /xdisk/mcnew/dannyjackson/cardinals/referencelists/GCF_901933205_chromconversion.txt
+# Submitted batch job 3696551
 ```
