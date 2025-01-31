@@ -23,8 +23,8 @@ sbatch --account=mcnew \
 --nodes=1 \
 --ntasks-per-node=4 \
 --time=5:00:00 \
-~/programs/CardinalisGenomics/C3_dxy_1.sh -p ~/programs/CardinalisGenomics/noca_params.sh -w 10000 -s 10000
-# 3694302
+~/programs/Genomics-Main/dxy_1.sh -p ~/programs/CardinalisGenomics/noca_params.sh -w 10000 -s 10000 -c /xdisk/mcnew/dannyjackson/cardinals/referencelists/GCF_901933205_chromconversion.txt
+# 3696632
 
 sbatch --account=mcnew \
 --job-name=dxy_1 \
@@ -34,8 +34,8 @@ sbatch --account=mcnew \
 --nodes=1 \
 --ntasks-per-node=4 \
 --time=5:00:00 \
-~/programs/CardinalisGenomics/C3_dxy_1.sh -p ~/programs/CardinalisGenomics/pyrr_params.sh -w 10000 -s 10000
-# 3694303
+~/programs/Genomics-Main/dxy_1.sh -p ~/programs/CardinalisGenomics/pyrr_params.sh -w 10000 -s 10000 -c /xdisk/mcnew/dannyjackson/cardinals/referencelists/GCF_901933205_chromconversion.txt
+# 3696633
 
 # testing
 
