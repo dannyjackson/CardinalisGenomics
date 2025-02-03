@@ -29,6 +29,7 @@ sbatch --account=mcnew \
 
 # compute 10,000bp windows 
 # northern cardinals
+# 12089926
 sbatch --account=mcnew \
 --job-name=dxy_10k_noca \
 --partition=standard \
@@ -39,6 +40,7 @@ sbatch --account=mcnew \
 --time=5:00:00 \
 ~/programs/CardinalisGenomics/Genomics-Main/dxy/dxy.sh -p ~/programs/CardinalisGenomics/noca_params_dxy.sh -w 10000 -s 10000 -c /xdisk/mcnew/dannyjackson/cardinals/referencelists/GCF_901933205_chromconversion.txt
 # pyrrhuloxia
+# 12089927
 sbatch --account=mcnew \
 --job-name=dxy_10k_pyrr \
 --partition=standard \
