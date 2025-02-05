@@ -1,26 +1,4 @@
-module load R/4.4.0
-module load htslib/1.19.1
-module load bedtools2/2.29.2
-module load python/3.11/3.11.4
-module load bwa/0.7.17
-module load bcftools/1.19
-module load vcftools/0.1.16
-module load plink/1.9
-module load samtools/1.19.2
-
-# Define variables
-# all
-OUTDIR=/xdisk/mcnew/dannyjackson/cardinals/    # main directory for output files
-PROGDIR=~/programs
-BAMDIR=/xdisk/mcnew/dannyjackson/cardinals/datafiles/clipoverlap/
-PROJHUB=cardinals
-SCRIPTDIR=${PROGDIR}/${PROJHUB}
-PATH=$PATH:$SCRIPTDIR # this adds the workshop script directory to our path, so that executable scripts in it can be called without using the full path
-THREADS=4
-ID=name_of_project
-FILENAME_LIST="${OUTDIR}/referencelists/samplenames_subset.txt" # list with sample codes associated with each file in dataset, one per line
-CUTOFF=0.001
-
+# base_setup.sh
 
 # make main directories
 # specific to selection analyses (fst, dxy, Tajima's D, RAiSD)
@@ -31,67 +9,21 @@ mkdir -p ${OUTDIR}/datafiles/
 mkdir -p ${OUTDIR}/referencelists/
 
 
-
-# define the names of the two populations that will be compared in fst, dxy, etc
-POP1=nocaurban
-POP2=nocarural
-# define two colors to be used 
-COLOR1=#7570B3
-COLOR2=#CAB2D6
-
-# define aspects of the reference genome
-CHRLEAD=NC_0 # characters at the start of a chromosome number (excluding scaffolds)
-SEXCHR=NC_044601
-REF=/path/to/reference/genome/file.fna # path to reference genome
-GFF=/path/to/reference/genome/gff/genomic.gff # path to gff file
+# make reference files
 
 # Generate scaffold list
-if [ -f "${SCRIPTDIR}/SCAFFOLDS.txt"]
+if [ -f "${OUTDIR}/referencelists/SCAFFOLDS.txt" ];
         then
             echo "SCAFFOLDS.txt already exists, moving on!"
         else
-        awk '{print $1}' "${GENOME}.fai" > "${OUTDIR}/referencelists/SCAFFOLDS.all.txt"
+        awk '{print $1}' "${REF}.fai" > "${OUTDIR}/referencelists/SCAFFOLDS.all.txt"
         grep "$CHRLEAD" "${OUTDIR}/referencelists/SCAFFOLDS.all.txt" > "${OUTDIR}/referencelists/SCAFFOLDS.chroms.txt"
         grep -v "$SEXCHR" "${OUTDIR}/referencelists/SCAFFOLDS.chroms.txt" > "${OUTDIR}/referencelists/SCAFFOLDS.txt"
 fi
 
-# specific to selection analyses (fst, dxy, Tajima's D, RAiSD)
-ANGSD=~/programs/angsd/ # path to directory with angsd executables
 
-# msmc specific
-k=150 # For snpability.sh
-prefix=GCF_901933205
-MSMCTOOLS=${PROGDIR}/msmc-tools # directory with msmc-tools binaries
-PATH=$PATH:$MSMCTOOLS # add directory with msmc-tools binaries to path
-METHOD=samtools  # or another variant calling method
-
-
-# other code
-# specific to selection analyses (fst, dxy, Tajima's D, RAiSD)
-# make directories for intermediate files-- will fail if these don't exist
-
-
-mkdir -p ${OUTDIR}/analyses/{fst,genelist,dxy}
-mkdir -p ${OUTDIR}/datafiles/{safs,mls}
-mkdir -p ${OUTDIR}/analyses/fst/${WIN}
-mkdir -p ${OUTDIR}/analyses/genelist/${WIN}
-mkdir -p ${OUTDIR}/analyses/dxy/${POP1}_${POP2}
-mkdir -p ${OUTDIR}/analyses/dxy/${POP1}_${POP2}/${WIN}
-
-
-
-
-
-
-
-
-
-
-
-# Miscellaneous
-# make reference files
-# first, make a file with chromosome name and length of chromosome
-awk 'BEGIN {OFS = "\t"} {print $1,$2}' ${REF}.fai | grep ${CHRLEAD} ${OUTDIR}/referencelists/allscaffs_lengths.txt | grep -v ${SEXCHR} ${OUTDIR}/referencelists/allchroms_lengths.txt > ${OUTDIR}/referencelists/autosomes_lengths.txt
+# Make a file with chromosome name and length of chromosome
+awk 'BEGIN {OFS = "\t"} {print $1,$2}' ${REF}.fai | grep ${CHRLEAD} | grep -v ${SEXCHR} > ${OUTDIR}/referencelists/autosomes_lengths.txt
 
 while IFS=',' read -r first second; do
     sed -i "s/$second/$first/g" ${OUTDIR}/referencelists/autosomes_lengths.txt 
@@ -99,7 +31,7 @@ done <<< "$CHROM"
 
 # Make a comma separated chromosome conversion file without a header where the first column is the name of the chromosome and the second is the name of the associated scaffold in the reference genome:
 
-if [ -f "${OUTDIR}/referencelists/GCF_901933205_chromconversion.txt"]
+if [ -f "${OUTDIR}/referencelists/GCF_901933205_chromconversion.txt" ]
         then
             echo "Chromosome conversion table already complete, moving on!"
         else
