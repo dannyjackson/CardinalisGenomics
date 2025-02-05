@@ -1,4 +1,4 @@
-# params_tajima
+# params_fst
 source /home/u15/dannyjackson/programs/CardinalisGenomics/params_base.sh
 
 ANGSD=~/programs/angsd/ # path to directory with angsd executables
@@ -10,8 +10,8 @@ COLOR1="#6247aa"
 COLOR2="#b185db"
 
 # define the names of the two populations that will be compared
-POP=nocaurban
+POP1=nocaurban
+POP2=nocarural
 
-# source the setup file for tajima
-source ${SCRIPTDIR}/Genomics-Main/tajima/setup_tajima.sh
-
+# source the setup file for fst
+source ${SCRIPTDIR}/Genomics-Main/fst/setup_fst.sh
