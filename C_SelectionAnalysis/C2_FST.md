@@ -24,108 +24,62 @@ Set the working directory to fst so that all relevant slurm output files appear 
 ```
 cd /xdisk/mcnew/dannyjackson/cardinals/analyses/fst
 ```
+# Run once per species to generate all files
+
+# Define species, environments, and window sizes
+declare -A time_limits=( [500000]=1:00:00 [10000]=1:00:00 [1000]=1:00:00 [1]=10:00:00 )
+species=( "noca" "pyrr" )
+window_sizes=( 500000 )
+
+# Iterate over each combination
+for win in "${window_sizes[@]}"; do
+    for sp in "${species[@]}"; do
+        time_limit=${time_limits[$win]}
+        [ $win -eq 1 ] && mem_limit="100gb"
+
+        sbatch --account=mcnew \
+               --job-name=fst_${win}_${sp} \
+               --partition=standard \
+               --mail-type=ALL \
+               --output=slurm_output/output.fst_${win}_${sp}.%j \
+               --nodes=1 \
+               --ntasks-per-node=4 \
+               --time=$time_limit \
+               --mem=$mem_limit \
+               ~/programs/CardinalisGenomics/Genomics-Main/fst/fst.sh \
+               -p ~/programs/CardinalisGenomics/${sp}_params_fst.sh \
+               -w $win -s $win
+    done
+done
 
 
-Run fst 1 on both northern cardinals and pyrrhuloxia:
-```
-sbatch --account=mcnew \
---job-name=fst_1 \
---partition=standard \
---mail-type=ALL \
---output=slurm_output/output.fst_1.%j \
---nodes=1 \
---ntasks-per-node=4 \
---time=5:00:00 \
-~/programs/CardinalisGenomics/fst_1.sh -p ~/programs/CardinalisGenomics/noca_params.sh
-# 3696285
-
-sbatch --account=mcnew \
---job-name=fst_1 \
---partition=standard \
---mail-type=ALL \
---output=slurm_output/output.fst_1.%j \
---nodes=1 \
---ntasks-per-node=4 \
---time=5:00:00 \
-~/programs/CardinalisGenomics/fst_1.sh -p ~/programs/CardinalisGenomics/pyrr_params.sh
-# 3696282
-# 3696445
-```
 
 
-Run fst 2 on both northern cardinals and pyrrhuloxia
-```
-sbatch --account=mcnew \
---job-name=fst_2_noca \
---partition=standard \
---mail-type=ALL \
---output=slurm_output/output.fst_2.%j \
---nodes=1 \
---ntasks-per-node=4 \
---time=5:00:00 \
-~/programs/CardinalisGenomics/Genomics-Main/fst_2.sh -p ~/programs/CardinalisGenomics/noca_params.sh -c /xdisk/mcnew/dannyjackson/cardinals/referencelists/GCF_901933205_chromconversion.txt
-# Submitted batch job 3696587
 
-sbatch --account=mcnew \
---job-name=fst_2_pyrr \
---partition=standard \
---mail-type=ALL \
---output=slurm_output/output.fst_2.%j \
---nodes=1 \
---ntasks-per-node=4 \
---time=5:00:00 \
-~/programs/CardinalisGenomics/Genomics-Main/fst_2.sh -p ~/programs/CardinalisGenomics/pyrr_params.sh -c /xdisk/mcnew/dannyjackson/cardinals/referencelists/GCF_901933205_chromconversion.txt
-# 3696593
-```
+# Iterate over several window sizes
 
+# Define species, environments, and window sizes
+declare -A time_limits=( [500000]=1:00:00 [10000]=1:00:00 [1000]=1:00:00 [1]=10:00:00 )
+species=( "noca" "pyrr" )
+window_sizes=( 10000 1000 1 )
 
-Run fst 3 on both northern cardinals and pyrrhuloxia
-First with 10,000 bp windows:
-```
-sbatch --account=mcnew \
---job-name=fst_3 \
---partition=standard \
---mail-type=ALL \
---output=slurm_output/output.fst_3.%j \
---nodes=1 \
---ntasks-per-node=4 \
---time=5:00:00 \
-~/programs/Genomics-Main/fst_3.sh -p ~/programs/CardinalisGenomics/noca_params.sh -w 10000 -s 10000 -c /xdisk/mcnew/dannyjackson/cardinals/referencelists/GCF_901933205_chromconversion.txt
-# Submitted batch job 3696588
+# Iterate over each combination
+for win in "${window_sizes[@]}"; do
+    for sp in "${species[@]}"; do
+        time_limit=${time_limits[$win]}
+        [ $win -eq 1 ] && mem_limit="100gb"
 
-sbatch --account=mcnew \
---job-name=fst_3 \
---partition=standard \
---mail-type=ALL \
---output=slurm_output/output.fst_3.%j \
---nodes=1 \
---ntasks-per-node=4 \
---time=5:00:00 \
-~/programs/Genomics-Main/fst_3.sh -p ~/programs/CardinalisGenomics/pyrr_params.sh -w 10000 -s 10000 -c /xdisk/mcnew/dannyjackson/cardinals/referencelists/GCF_901933205_chromconversion.txt
-# Submitted batch job 3696594
-```
-
-And next with 1,000 bp windows:
-```
-sbatch --account=mcnew \
---job-name=fst_3 \
---partition=standard \
---mail-type=ALL \
---output=slurm_output/output.fst_3.%j \
---nodes=1 \
---ntasks-per-node=4 \
---time=5:00:00 \
-~/programs/Genomics-Main/fst_3.sh -p ~/programs/CardinalisGenomics/noca_params.sh -w 1000 -s 1000 -c /xdisk/mcnew/dannyjackson/cardinals/referencelists/GCF_901933205_chromconversion.txt
-# Submitted batch job 3696595
-
-sbatch --account=mcnew \
---job-name=fst_3 \
---partition=standard \
---mail-type=ALL \
---output=slurm_output/output.fst_3.%j \
---nodes=1 \
---ntasks-per-node=4 \
---time=5:00:00 \
-~/programs/Genomics-Main/fst_3.sh -p ~/programs/CardinalisGenomics/pyrr_params.sh -w 1000 -s 1000 -c /xdisk/mcnew/dannyjackson/cardinals/referencelists/GCF_901933205_chromconversion.txt
-# Submitted batch job 3696596
-```
+        sbatch --account=mcnew \
+               --job-name=fst_${win}_${sp} \
+               --partition=standard \
+               --mail-type=ALL \
+               --output=slurm_output/output.fst_${win}_${sp}.%j \
+               --nodes=1 \
+               --ntasks-per-node=4 \
+               --time=$time_limit \
+               --mem=$mem_limit \
+               ~/programs/CardinalisGenomics/Genomics-Main/fst/fst.sh \
+               -p ~/programs/CardinalisGenomics/${sp}_params_fst.sh \
+               -w $win -s $win
+    done
+done
