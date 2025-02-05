@@ -9,6 +9,7 @@ module load vcftools/0.1.16
 module load plink/1.9
 
 source ~/programs/CardinalisGenomics/params_base.sh
+source ~/programs/CardinalisGenomics/preprocessing_setup.sh
 
 # across all preprocessing
 THREADS=8
