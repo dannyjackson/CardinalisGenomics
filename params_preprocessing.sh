@@ -14,12 +14,12 @@ source ~/programs/CardinalisGenomics/params_base.sh
 THREADS=8
 
 # trimming
-FASTAS=/path/to/fasta/files # format must be samplename_
-TRIMJAR=/path/to/trimmomatic/jarfile.jar
-LEAD=<SET_VALUE> # value to trim from leading strand, often 20
-TRAIN=<SET_VALUE> # value to trim from trailing strand, often 20
-SLIDE=<SET_VALUE> # threshold and windlow length, often 4:20
-MINREADLEN=<SET_VALUE> # minimum length for a read to be kept, often 90 for 150bp sequencing
+FASTAS=/xdisk/mcnew/dannyjackson/cardinals/condensed_fastas/ # format must be samplename_
+TRIMJAR=~/programs/Trimmomatic/dist/jar/trimmomatic-0.40-rc1.jar
+LEAD=20 # value to trim from leading strand, often 20
+TRAIN=20 # value to trim from trailing strand, often 20
+SLIDE=4:20 # threshold and windlow length, often 4:20
+MINREADLEN=90 # minimum length for a read to be kept, often 90 for 150bp sequencing
 
 # clipping
 BAMUTILBAM=/path/to/bamutil/bin/bam/file
