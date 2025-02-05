@@ -39,4 +39,4 @@ sbatch --account=mcnew \
 --ntasks-per-node=16 \
 --time=20:00:00 \
 ~/programs/CardinalisGenomics/Genomics-Main/A_Preprocessing/A2.2_generate_mask.sh -p ~/programs/CardinalisGenomics/params_preprocessing.sh
-# 12102845
+# 12102865
