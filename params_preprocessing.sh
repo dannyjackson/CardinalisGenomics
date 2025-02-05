@@ -22,7 +22,7 @@ SLIDE=4:20 # threshold and windlow length, often 4:20
 MINREADLEN=90 # minimum length for a read to be kept, often 90 for 150bp sequencing
 
 # clipping
-BAMUTILBAM=/path/to/bamutil/bin/bam/file
+BAMUTILBAM=/home/u15/dannyjackson/programs/bamUtil-master/bin/bam
 
 # bam statistics
 
@@ -34,3 +34,7 @@ MININD=20 # minimum number of individuals required for a site to be kept
 MINQ=30 # minimum quality score required for a site to be kept
 MINMAF=0.05 # minimum minor allele frequency required for a site to be kept
 MINMAPQ=30 # minimum mapping quality score required for a site to be kept
+
+# generate mask
+k=150
+prefix=GCF_901933205
