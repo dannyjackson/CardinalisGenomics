@@ -58,3 +58,60 @@ for win in "${window_sizes[@]}"; do
 done
 
 12100781 - 12100796
+
+# troubleshoot snps sbatch settings
+
+sbatch --account=mcnew \
+        --job-name=tajima_1_nocaurban \
+        --partition=standard \
+        --mail-type=ALL \
+        --output=slurm_output/output.tajima_1_nocaurban.%j \
+        --nodes=1 \
+        --ntasks-per-node=4 \
+        --time=10:00:00 \
+        --mem=300gb \
+        ~/programs/CardinalisGenomics/Genomics-Main/tajima/tajima.sh \
+        -p ~/programs/CardinalisGenomics/nocaurban_params_tajima.sh \
+        -w 1 -s 1
+
+
+sbatch --account=mcnew \
+        --job-name=tajima_1_nocarural \
+        --partition=standard \
+        --mail-type=ALL \
+        --output=slurm_output/output.tajima_1_nocarural.%j \
+        --nodes=1 \
+        --ntasks-per-node=4 \
+        --time=10:00:00 \
+        --mem=300gb \
+        ~/programs/CardinalisGenomics/Genomics-Main/tajima/tajima.sh \
+        -p ~/programs/CardinalisGenomics/nocarural_params_tajima.sh \
+        -w 1 -s 1
+
+
+sbatch --account=mcnew \
+        --job-name=tajima_1_pyrrurban \
+        --partition=standard \
+        --mail-type=ALL \
+        --output=slurm_output/output.tajima_1_pyrrurban.%j \
+        --nodes=1 \
+        --ntasks-per-node=4 \
+        --time=10:00:00 \
+        --mem=300gb \
+        ~/programs/CardinalisGenomics/Genomics-Main/tajima/tajima.sh \
+        -p ~/programs/CardinalisGenomics/pyrrurban_params_tajima.sh \
+        -w 1 -s 1
+
+
+sbatch --account=mcnew \
+        --job-name=tajima_1_pyrrrural \
+        --partition=standard \
+        --mail-type=ALL \
+        --output=slurm_output/output.tajima_1_pyrrrural.%j \
+        --nodes=1 \
+        --ntasks-per-node=4 \
+        --time=10:00:00 \
+        --mem=300gb \
+        ~/programs/CardinalisGenomics/Genomics-Main/tajima/tajima.sh \
+        -p ~/programs/CardinalisGenomics/pyrrrural_params_tajima.sh \
+        -w 1 -s 1
