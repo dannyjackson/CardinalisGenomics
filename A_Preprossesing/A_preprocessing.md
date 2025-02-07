@@ -29,7 +29,19 @@ sbatch --account=mcnew \
 ~/programs/CardinalisGenomics/Genomics-Main/A_Preprocessing/A2.1_callvariants.sh -p ~/programs/CardinalisGenomics/params_preprocessing.sh -b /xdisk/mcnew/dannyjackson/cardinals/datafiles/indelrealignment/ -r cardinalis
 # 12102489
 
-# A2.2 generate mask
+# A2.2 filter vcf
+sbatch --account=mcnew \
+--job-name=filtervcf \
+--partition=standard \
+--mail-type=ALL \
+--output=slurm_output/output.filtervcf.%j \
+--nodes=1 \
+--ntasks-per-node=16 \
+--time=240:00:00 \
+~/programs/CardinalisGenomics/Genomics-Main/A_Preprocessing/A2.2_filtervcf.sh -p ~/programs/CardinalisGenomics/params_preprocessing.sh 
+# 12107182
+
+# A2.3 generate mask
 sbatch --account=mcnew \
 --job-name=generate_mask \
 --partition=standard \
@@ -38,5 +50,34 @@ sbatch --account=mcnew \
 --nodes=1 \
 --ntasks-per-node=16 \
 --time=20:00:00 \
-~/programs/CardinalisGenomics/Genomics-Main/A_Preprocessing/A2.2_generate_mask.sh -p ~/programs/CardinalisGenomics/params_preprocessing.sh
+~/programs/CardinalisGenomics/Genomics-Main/A_Preprocessing/A2.3_generate_mask.sh -p ~/programs/CardinalisGenomics/params_preprocessing.sh
 # 12102865
+
+
+# A2.4 individual mask vcf 
+# test
+sbatch --account=mcnew \
+--job-name=ind_mask_vcf \
+--partition=standard \
+--mail-type=ALL \
+--output=slurm_output/output.ind_mask_vcf.%j \
+--nodes=1 \
+--ntasks-per-node=8 \
+--time=48:00:00 \
+~/programs/CardinalisGenomics/Genomics-Main/A_Preprocessing/A2.4_individual_mask_vcf.sh -p ~/programs/CardinalisGenomics/params_preprocessing.sh -b /xdisk/mcnew/dannyjackson/cardinals/datafiles/indelrealignment/ -i NOCA003
+# 12107151
+
+# run in a slurm array
+for i in `cat /xdisk/mcnew/dannyjackson/cardinals/referencelists/samplenames_subset.txt`;
+	do echo $i
+	IND=$i
+    sbatch --account=mcnew \
+    --job-name=mask_vcf_${i} \
+    --partition=standard \
+    --mail-type=ALL \
+    --output=slurm_output/output.mask_vcf_${i}.%j \
+    --nodes=1 \
+    --ntasks-per-node=8 \
+    --time=48:00:00 \
+    ~/programs/CardinalisGenomics/Genomics-Main/A_Preprocessing/A2.4_individual_mask_vcf.sh -p ~/programs/CardinalisGenomics/params_preprocessing.sh -b /xdisk/mcnew/dannyjackson/cardinals/datafiles/indelrealignment/ -i $i
+done
