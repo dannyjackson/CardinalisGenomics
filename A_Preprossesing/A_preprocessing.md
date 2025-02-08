@@ -81,3 +81,35 @@ for i in `cat /xdisk/mcnew/dannyjackson/cardinals/referencelists/samplenames_sub
     --time=48:00:00 \
     ~/programs/CardinalisGenomics/Genomics-Main/A_Preprocessing/A2.4_individual_mask_vcf.sh -p ~/programs/CardinalisGenomics/params_preprocessing.sh -b /xdisk/mcnew/dannyjackson/cardinals/datafiles/indelrealignment/ -i $i
 done
+
+
+# phasing
+
+# test on one ind
+sbatch --account=mcnew \
+--job-name=phase_NOCA003 \
+--partition=standard \
+--mail-type=ALL \
+--output=slurm_output/output.phase_NOCA003.%j \
+--nodes=1 \
+--ntasks-per-node=8 \
+--time=48:00:00 \
+~/programs/CardinalisGenomics/Genomics-Main/A_Preprocessing/A2.5_phasing.sh -p ~/programs/CardinalisGenomics/params_preprocessing.sh -b /xdisk/mcnew/dannyjackson/cardinals/datafiles/indelrealignment/ -i NOCA003
+# 12113101
+
+# run in a slurm array
+for i in `cat /xdisk/mcnew/dannyjackson/cardinals/referencelists/samplenames_subset.txt`;
+	do echo $i
+	IND=$i
+    sbatch --account=mcnew \
+    --job-name=phase_${i} \
+    --partition=standard \
+    --mail-type=ALL \
+    --output=slurm_output/output.phase_${i}.%j \
+    --nodes=1 \
+    --ntasks-per-node=8 \
+    --time=48:00:00 \
+    ~/programs/CardinalisGenomics/Genomics-Main/A_Preprocessing/A2.5_phasing.sh -p ~/programs/CardinalisGenomics/params_preprocessing.sh -b /xdisk/mcnew/dannyjackson/cardinals/datafiles/indelrealignment/ -i $i
+done
+
+# 12113266 - 12113289

@@ -69,7 +69,7 @@ sbatch --account=mcnew \
         --nodes=1 \
         --ntasks-per-node=4 \
         --time=48:00:00 \
-        --mem=300gb \
+        --mem=470gb \
         ~/programs/CardinalisGenomics/Genomics-Main/tajima/tajima.sh \
         -p ~/programs/CardinalisGenomics/nocaurban_params_tajima.sh \
         -w 1 -s 1
@@ -83,11 +83,10 @@ sbatch --account=mcnew \
         --nodes=1 \
         --ntasks-per-node=4 \
         --time=48:00:00 \
-        --mem=300gb \
+        --mem=470gb \
         ~/programs/CardinalisGenomics/Genomics-Main/tajima/tajima.sh \
         -p ~/programs/CardinalisGenomics/nocarural_params_tajima.sh \
         -w 1 -s 1
-# 12108010
 
 sbatch --account=mcnew \
         --job-name=tajima_1_pyrrurban \
@@ -97,7 +96,7 @@ sbatch --account=mcnew \
         --nodes=1 \
         --ntasks-per-node=4 \
         --time=48:00:00 \
-        --mem=300gb \
+        --mem=470gb \
         ~/programs/CardinalisGenomics/Genomics-Main/tajima/tajima.sh \
         -p ~/programs/CardinalisGenomics/pyrrurban_params_tajima.sh \
         -w 1 -s 1
@@ -111,9 +110,9 @@ sbatch --account=mcnew \
         --nodes=1 \
         --ntasks-per-node=4 \
         --time=48:00:00 \
-        --mem=300gb \
+        --mem=470gb \
         ~/programs/CardinalisGenomics/Genomics-Main/tajima/tajima.sh \
         -p ~/programs/CardinalisGenomics/pyrrrural_params_tajima.sh \
         -w 1 -s 1
 
-# 12105175-12105178
+# 12113086-12113089
