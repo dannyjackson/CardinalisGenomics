@@ -83,3 +83,5 @@ for win in "${window_sizes[@]}"; do
                -w $win -s $win
     done
 done
+
+

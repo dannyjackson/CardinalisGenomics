@@ -115,4 +115,4 @@ sbatch --account=mcnew \
         -p ~/programs/CardinalisGenomics/pyrrrural_params_tajima.sh \
         -w 1 -s 1
 
-# 12113086-12113089
+# 12115213-12115216
