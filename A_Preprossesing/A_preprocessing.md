@@ -14,7 +14,7 @@ for sp in "${species[@]}"; do
     --nodes=1 \
     --ntasks-per-node=4 \
     --time=5:00:00 \
-    ~/programs/CardinalisGenomics/Genomics-Main/A_Preprossesing/A1.3_siteallelefrequency.sh -p ~/programs/CardinalisGenomics/params_preprocessing.sh -n ${sp}
+    ~/programs/CardinalisGenomics/Genomics-Main/A_Preprocessing/A1.3_siteallelefrequency.sh -p ~/programs/CardinalisGenomics/params_preprocessing.sh -n ${sp}
 done
 
 # A2.1 call variants
@@ -26,7 +26,7 @@ sbatch --account=mcnew \
 --nodes=1 \
 --ntasks-per-node=16 \
 --time=240:00:00 \
-~/programs/CardinalisGenomics/Genomics-Main/A_Preprossesing/A2.1_callvariants.sh -p ~/programs/CardinalisGenomics/params_preprocessing.sh -b /xdisk/mcnew/dannyjackson/cardinals/datafiles/indelrealignment/ -r cardinalis
+~/programs/CardinalisGenomics/Genomics-Main/A_Preprocessing/A2.1_callvariants.sh -p ~/programs/CardinalisGenomics/params_preprocessing.sh -b /xdisk/mcnew/dannyjackson/cardinals/datafiles/indelrealignment/ -r cardinalis
 # 12102489
 
 # A2.2 generate mask
@@ -38,5 +38,5 @@ sbatch --account=mcnew \
 --nodes=1 \
 --ntasks-per-node=16 \
 --time=20:00:00 \
-~/programs/CardinalisGenomics/Genomics-Main/A_Preprossesing/A2.2_generate_mask.sh -p ~/programs/CardinalisGenomics/params_preprocessing.sh
-# 12102504
+~/programs/CardinalisGenomics/Genomics-Main/A_Preprocessing/A2.2_generate_mask.sh -p ~/programs/CardinalisGenomics/params_preprocessing.sh
+# 12102845
