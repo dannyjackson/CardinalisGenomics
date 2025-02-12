@@ -1,48 +1,100 @@
+# running interactively because it is a quick script
+chmod +x ~/programs/CardinalisGenomics/Genomics-Main/general_scripts/bed_to_genelist.sh
+# chmod -x ~/programs/CardinalisGenomics/Genomics-Main/general_scripts/bed_to_genelist.sh
 
-# snps 
-# /xdisk/mcnew/dannyjackson/cardinals/analyses/fst/pyrrurban_pyrrrural/pyrrurban_pyrrrural.fst_10000.snps.outlier.csv
-# /xdisk/mcnew/dannyjackson/cardinals/analyses/dxy/pyrrurban_pyrrrural/pyrrurban_pyrrrural.dxy_10000.snps.outlier.csv
+# FST
+# Define species, environments, and window sizes
+species=( "noca" "pyrr" )
+window_sizes=( 500000 10000 1000 )
 
-# windowed
-IN_FILE=/xdisk/mcnew/dannyjackson/cardinals/analyses/fst/pyrrurban_pyrrrural/pyrrurban_pyrrrural.fst_10000.snps.outlier.csv
-CHROM_CONVERSION=/xdisk/mcnew/dannyjackson/cardinals/referencelists/GCF_901933205_chromconversion.txt
-OUT_FILE=/xdisk/mcnew/dannyjackson/cardinals/analyses/genelist/pyrr.fst.10kb.bed
-GFF=/xdisk/mcnew/dannyjackson/cardinals/datafiles/referencegenome/ncbi_dataset/data/GCF_901933205.1/genomic.gff
-GENES_FILE=/xdisk/mcnew/dannyjackson/cardinals/analyses/genelist/pyrr.fst.10kb.genes.txt
-GENENAMES=/xdisk/mcnew/dannyjackson/cardinals/analyses/genelist/pyrr.fst.10kb.genenames.txt
+# Iterate over each combination
+for win in "${window_sizes[@]}"; do
+    for sp in "${species[@]}"; do
 
+    ~/programs/CardinalisGenomics/Genomics-Main/general_scripts/bed_to_genelist.sh \
+    -p ~/programs/CardinalisGenomics/noca_params_fst.sh \
+    -i /xdisk/mcnew/dannyjackson/cardinals/analyses/fst/${sp}urban_${sp}rural/${sp}urban_${sp}rural.fst_${win}.snps.outlier.csv \
+    -n ${sp} \
+    -m fst \
+    -w ${win}
 
-# sed -i 's/\"//g' ${IN_FILE}
-
-module load python/3.11/3.11.4
-
-python ~/programs/CardinalisGenomics/Genomics-Main/general_scripts/outlier_to_bed.py ${IN_FILE} 10000 ${OUT_FILE} ${CHROM_CONVERSION}
-
-# has to be done on elgato for now
-module load gnu8/8.3.0
-module load bedtools2/2.29.2
-
-bedtools intersect -a ${GFF} -b ${OUT_FILE} -wa > ${GENES_FILE}
-
-awk '{OFS = "\t"} {split($9, arr, ";"); print(arr[1])}' ${GENES_FILE} | sed 's/ID\=gene\-//g' | sort -u > ${GENENAMES}
+    done
+done
 
 
+# DXY
+# Define species, environments, and window sizes
+species=( "noca" "pyrr" )
+window_sizes=( 500000 10000 1000 )
+
+# Iterate over each combination
+for win in "${window_sizes[@]}"; do
+    for sp in "${species[@]}"; do
+
+    ~/programs/CardinalisGenomics/Genomics-Main/general_scripts/bed_to_genelist.sh \
+    -p ~/programs/CardinalisGenomics/noca_params_dxy.sh \
+    -i /xdisk/mcnew/dannyjackson/cardinals/analyses/dxy/${sp}urban_${sp}rural/${sp}urban_${sp}rural.dxy_${win}.snps.outlier.csv \
+    -n ${sp} \
+    -m dxy \
+    -w ${win}
+
+    done
+done
+
+# Tajima
+# Define species, environments, and window sizes
+species=( "nocaurban" "nocarural" "pyrrurban" "pyrrrural" )
+window_sizes=( 50000 10000 1000 )
+
+# Iterate over each combination
+for win in "${window_sizes[@]}"; do
+    for sp in "${species[@]}"; do
+
+    ~/programs/CardinalisGenomics/Genomics-Main/general_scripts/bed_to_genelist.sh \
+    -p ~/programs/CardinalisGenomics/noca_params_dxy.sh \
+    -i /xdisk/mcnew/dannyjackson/cardinals/analyses/Tajima/${sp}/${sp}.Tajima_${win}.snps.outlier.csv \
+    -n ${sp} \
+    -m Tajima \
+    -w ${win}
+
+    done
+done
 
 
+# RAiSD
 
+species=( "nocaurban" "nocarural" "pyrrurban" "pyrrrural" )
+window_sizes=( 10 20 50 100 500 1000 )
 
-# snps
-awk 'BEGIN {FS = ","} {$1=""}1' ${OUTDIR}/analyses/fst/pyrr.outlierfst.csv | awk 'BEGIN {OFS = ","} {$1=$1}1 ' > ${OUTDIR}/analyses/fst/pyrr.outlierfst.csv.tmp
+# Iterate over each combination
+for win in "${window_sizes[@]}"; do
+    for sp in "${species[@]}"; do
 
-mv ${OUTDIR}/analyses/fst/pyrr.outlierfst.csv.tmp ${OUTDIR}/analyses/fst/pyrr.outlierfst.csv
+    ~/programs/CardinalisGenomics/Genomics-Main/general_scripts/bed_to_genelist.sh \
+    -p ~/programs/CardinalisGenomics/${sp}_params_raisd.sh \
+    -i /xdisk/mcnew/dannyjackson/cardinals/analyses/raisd/${sp}/${sp}.raisd_${win}.outlier.csv \
+    -n ${sp} \
+    -m raisd \
+    -w ${win}
 
-sed -i 's/\"//g' ${OUTDIR}/analyses/fst/pyrr.outlierfst.csv
+    done
+done
 
-tail -n +2 ${OUTDIR}/analyses/fst/pyrr.outlierfst.csv  > ${OUTDIR}/analyses/fst/pyrr.outlierfst.headless.csv
+# RAiSD
+chmod +x ~/programs/CardinalisGenomics/Genomics-Main/D_GeneVisualization/D2_uniquegenes.sh
+species=( "noca" "pyrr" )
+window_sizes=( 10 20 50 100 500 1000 )
 
+for win in "${window_sizes[@]}"; do
+    for sp in "${species[@]}"; do
 
-awk -F',' 'NR>1 {print "NC_0"$1".1" "\t" $2-1 "\t" $2}' ${OUTDIR}/analyses/fst/pyrr.outlierfst.headless.csv > ${OUTDIR}/analyses/fst/pyrr.outlierfst.bed
+    ~/programs/CardinalisGenomics/Genomics-Main/D_GeneVisualization/D2_uniquegenes.sh \
+    -p ~/programs/CardinalisGenomics/params_base.sh
+    -i ${sp}urban \
+    -q ${sp}rural \
+    -m raisd \
+    -w ${win}
 
-bedtools intersect -a /xdisk/mcnew/dannyjackson/cardinals_dfinch/datafiles/referencegenome/ncbi_dataset/data/GCF_901933205.1/genomic.gff -b ${OUTDIR}/analyses/fst/pyrr.outlierfst.bed -wa > ${OUTDIR}/analyses/genelist/relevantgenes_snps_top.95.txt
+    done
+done
 
-awk '{OFS = "\t"} {split($9, arr, ";"); print(arr[1])}' ${OUTDIR}/analyses/genelist/relevantgenes_snps_top.95.txt | sed 's/ID\=gene\-//g' | sort -u > ${OUTDIR}/analyses/genelist/relevantgenenames_snps_top.95.txt

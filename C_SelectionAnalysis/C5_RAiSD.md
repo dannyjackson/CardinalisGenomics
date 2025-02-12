@@ -23,17 +23,25 @@ sbatch --account=mcnew \
     --time=10:00:00 \
     ~/programs/raisd_preprocessing.sh 
 
+# 
+SPECIES=( "nocaurban" "nocarural" "pyrrurban" "pyrrrural" )
+WINDOW_SIZES=( 1000 )
 
+# Iterate over each combination
+for WIN in "${WINDOW_SIZES[@]}"; do
+    for SP in "${SPECIES[@]}"; do
 
-for GROUP in nocaurban nocarural pyrrurban pyrrrural; do
     sbatch --account=mcnew \
-        --job-name=raisd.test \
+        --job-name=raisd_${WIN}_${SP} \
         --partition=standard \
         --mail-type=ALL \
-        --output=slurm_output/output.raisd.test.%j \
+        --output=slurm_output/output.raisd_${WIN}_${SP}.%j \
         --nodes=1 \
-        --ntasks-per-node=8 \
-        --time=10:00:00 \
-        ~/programs/CardinalisGenomics/Genomics-Main/raisd/raisd.sh -p ~/programs/CardinalisGenomics/Genomics-Main/raisd/params_raisd.sh -n ${GROUP} -w 1000
-done 
-# 12114965-12114968
+        --time=1:00:00 \
+        ~/programs/CardinalisGenomics/Genomics-Main/raisd/raisd.sh -p ~/programs/CardinalisGenomics/Genomics-Main/raisd/params_raisd.sh -n ${SP} -w ${WIN}
+    done 
+done
+
+~/programs/CardinalisGenomics/Genomics-Main/raisd/raisd.sh -p ~/programs/CardinalisGenomics/pyrrurban_params_raisd.sh -n pyrrurban -w 10000
+
+Rscript ~/programs/CardinalisGenomics/Genomics-Main/general_scripts/manhattanplot.r "/xdisk/mcnew/dannyjackson/cardinals" "#2d6a4f" "#74c69d" "0.001" "pyrrurban/pyrrurban.raisd_10000.Ztransformed.csv" "10000" "raisd" "pyrrurban"

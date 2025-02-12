@@ -34,7 +34,7 @@ done
 # Define species, environments, and window sizes
 declare -A time_limits=( [500000]=1:00:00 [10000]=1:00:00 [1000]=1:00:00 [1]=10:00:00 )
 species=( "nocaurban" "nocarural" "pyrrurban" "pyrrrural" )
-window_sizes=( 10000 1000 1 )
+window_sizes=( 50000 10000 1000 1 )
 
 # Iterate over each combination
 for win in "${window_sizes[@]}"; do
@@ -60,6 +60,7 @@ done
 
 
 # troubleshoot snps sbatch settings
+sed -i 's/\"//g' ../Tajima/nocaurban/nocaurban.Tajima_1.Ztransformed.csv
 
 sbatch --account=mcnew \
         --job-name=tajima_1_nocaurban \
@@ -72,8 +73,9 @@ sbatch --account=mcnew \
         --mem=470gb \
         ~/programs/CardinalisGenomics/Genomics-Main/tajima/tajima.sh \
         -p ~/programs/CardinalisGenomics/nocaurban_params_tajima.sh \
-        -w 1 -s 1
+        -w 1 -s 1 -m Tajima
 
+# 12129439
 
 sbatch --account=mcnew \
         --job-name=tajima_1_nocarural \
@@ -84,7 +86,7 @@ sbatch --account=mcnew \
         --ntasks-per-node=4 \
         --time=48:00:00 \
         --mem=470gb \
-        ~/programs/CardinalisGenomics/Genomics-Main/tajima/tajima.sh \
+        ~/programs/CardinalisGenomics/Genomics-Main/tajima/tajima_plot.sh \
         -p ~/programs/CardinalisGenomics/nocarural_params_tajima.sh \
         -w 1 -s 1
 
@@ -97,7 +99,7 @@ sbatch --account=mcnew \
         --ntasks-per-node=4 \
         --time=48:00:00 \
         --mem=470gb \
-        ~/programs/CardinalisGenomics/Genomics-Main/tajima/tajima.sh \
+        ~/programs/CardinalisGenomics/Genomics-Main/tajima/tajima_plot.sh \
         -p ~/programs/CardinalisGenomics/pyrrurban_params_tajima.sh \
         -w 1 -s 1
 
@@ -111,8 +113,8 @@ sbatch --account=mcnew \
         --ntasks-per-node=4 \
         --time=48:00:00 \
         --mem=470gb \
-        ~/programs/CardinalisGenomics/Genomics-Main/tajima/tajima.sh \
+        ~/programs/CardinalisGenomics/Genomics-Main/tajima/tajima_plot.sh \
         -p ~/programs/CardinalisGenomics/pyrrrural_params_tajima.sh \
         -w 1 -s 1
 
-# 12115213-12115216
+# 12117077-12117080
