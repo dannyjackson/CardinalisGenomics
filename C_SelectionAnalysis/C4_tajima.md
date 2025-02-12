@@ -34,7 +34,7 @@ done
 # Define species, environments, and window sizes
 declare -A time_limits=( [500000]=1:00:00 [10000]=1:00:00 [1000]=1:00:00 [1]=10:00:00 )
 species=( "nocaurban" "nocarural" "pyrrurban" "pyrrrural" )
-window_sizes=( 10000 1000 1 )
+window_sizes=( 50000 10000 1000 1 )
 
 # Iterate over each combination
 for win in "${window_sizes[@]}"; do
@@ -57,4 +57,64 @@ for win in "${window_sizes[@]}"; do
     done
 done
 
-12100781 - 12100796
+
+
+# troubleshoot snps sbatch settings
+sed -i 's/\"//g' ../Tajima/nocaurban/nocaurban.Tajima_1.Ztransformed.csv
+
+sbatch --account=mcnew \
+        --job-name=tajima_1_nocaurban \
+        --partition=standard \
+        --mail-type=ALL \
+        --output=slurm_output/output.tajima_1_nocaurban.%j \
+        --nodes=1 \
+        --ntasks-per-node=4 \
+        --time=48:00:00 \
+        --mem=470gb \
+        ~/programs/CardinalisGenomics/Genomics-Main/tajima/tajima.sh \
+        -p ~/programs/CardinalisGenomics/nocaurban_params_tajima.sh \
+        -w 1 -s 1 -m Tajima
+
+# 12129439
+
+sbatch --account=mcnew \
+        --job-name=tajima_1_nocarural \
+        --partition=standard \
+        --mail-type=ALL \
+        --output=slurm_output/output.tajima_1_nocarural.%j \
+        --nodes=1 \
+        --ntasks-per-node=4 \
+        --time=48:00:00 \
+        --mem=470gb \
+        ~/programs/CardinalisGenomics/Genomics-Main/tajima/tajima_plot.sh \
+        -p ~/programs/CardinalisGenomics/nocarural_params_tajima.sh \
+        -w 1 -s 1
+
+sbatch --account=mcnew \
+        --job-name=tajima_1_pyrrurban \
+        --partition=standard \
+        --mail-type=ALL \
+        --output=slurm_output/output.tajima_1_pyrrurban.%j \
+        --nodes=1 \
+        --ntasks-per-node=4 \
+        --time=48:00:00 \
+        --mem=470gb \
+        ~/programs/CardinalisGenomics/Genomics-Main/tajima/tajima_plot.sh \
+        -p ~/programs/CardinalisGenomics/pyrrurban_params_tajima.sh \
+        -w 1 -s 1
+
+
+sbatch --account=mcnew \
+        --job-name=tajima_1_pyrrrural \
+        --partition=standard \
+        --mail-type=ALL \
+        --output=slurm_output/output.tajima_1_pyrrrural.%j \
+        --nodes=1 \
+        --ntasks-per-node=4 \
+        --time=48:00:00 \
+        --mem=470gb \
+        ~/programs/CardinalisGenomics/Genomics-Main/tajima/tajima_plot.sh \
+        -p ~/programs/CardinalisGenomics/pyrrrural_params_tajima.sh \
+        -w 1 -s 1
+
+# 12117077-12117080
