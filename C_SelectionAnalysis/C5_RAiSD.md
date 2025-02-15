@@ -23,9 +23,9 @@ sbatch --account=mcnew \
     --time=10:00:00 \
     ~/programs/raisd_preprocessing.sh 
 
-# 
+
 SPECIES=( "nocaurban" "nocarural" "pyrrurban" "pyrrrural" )
-WINDOW_SIZES=( 1000 )
+WINDOW_SIZES=( 10 20 50 100 500 1000 )
 
 # Iterate over each combination
 for WIN in "${WINDOW_SIZES[@]}"; do
@@ -38,7 +38,7 @@ for WIN in "${WINDOW_SIZES[@]}"; do
         --output=slurm_output/output.raisd_${WIN}_${SP}.%j \
         --nodes=1 \
         --time=1:00:00 \
-        ~/programs/CardinalisGenomics/Genomics-Main/raisd/raisd.sh -p ~/programs/CardinalisGenomics/Genomics-Main/raisd/params_raisd.sh -n ${SP} -w ${WIN}
+        ~/programs/CardinalisGenomics/Genomics-Main/raisd/raisd.sh -p ~/programs/CardinalisGenomics/${SP}_params_raisd.sh -n ${SP} -w ${WIN}
     done 
 done
 

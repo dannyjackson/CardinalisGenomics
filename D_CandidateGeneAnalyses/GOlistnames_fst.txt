@@ -1,0 +1,2 @@
+noca.25000.fst
+pyrr.25000.fst

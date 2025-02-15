@@ -1,6 +1,16 @@
 A1_preprocessing.md
 
 cd /xdisk/mcnew/dannyjackson/cardinals
+# A0.5 Bam statistics
+sbatch --account=mcnew \
+--job-name=bamstats \
+--partition=standard \
+--mail-type=ALL \
+--output=slurm_output/output.bamstats.%j \
+--nodes=1 \
+--ntasks-per-node=16 \
+--time=10:00:00 \
+~/programs/CardinalisGenomics/Genomics-Main/A_Preprocessing/A0.5_bamstatistics.sh -p ~/programs/CardinalisGenomics/params_preprocessing.sh -b /xdisk/mcnew/dannyjackson/cardinals/datafiles/indelrealignment/ -r cardinalis
 
 # A1.3 site allele frequency
 species=( "nocaurban" "nocarural" "pyrrurban" "pyrrrural" )
