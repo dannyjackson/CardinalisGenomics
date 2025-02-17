@@ -31,8 +31,6 @@ done
 # Iterate over several window sizes
 
 # Define species, environments, and window sizes
-declare -A time_limits=( [500000]=1:00:00 [10000]=1:00:00 [1000]=1:00:00 [1]=48:00:00 )
-
 species=( "noca" "pyrr" )
 window_sizes=( 25000 5000 )
 
