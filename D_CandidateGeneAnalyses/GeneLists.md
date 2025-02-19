@@ -4,6 +4,7 @@ chmod +x ~/programs/CardinalisGenomics/Genomics-Main/general_scripts/bed_to_gene
 
 # FST
 # Define species, environments, and window sizes
+# Identify genes in windows
 species=( "noca" "pyrr" )
 window_sizes=( 25000 )
 
@@ -21,8 +22,25 @@ for win in "${window_sizes[@]}"; do
     done
 done
 
+# Identify nonsynonymous and missense snps in outlier windows
+# filter snpEff annotated genome with outlier regions
+for TAXA in pyrr noca; do
+    python ~/programs/CardinalisGenomics/Genomics-Main/general_scripts/outlier_to_bed.py /xdisk/mcnew/dannyjackson/cardinals/analyses/fst/${TAXA}urban_${TAXA}rural/${TAXA}urban_${TAXA}rural.fst_25000.outlier.csv 25000 /xdisk/mcnew/dannyjackson/cardinals/analyses/fst/${TAXA}urban_${TAXA}rural/${TAXA}urban_${TAXA}rural.fst.25000.outlier.regions.bed /xdisk/mcnew/dannyjackson/cardinals/referencelists/GCF_901933205_chromconversion.txt
 
-nocaurban_nocarural.dxy_25000.outlier.csv
+    IN_FILE=/xdisk/mcnew/dannyjackson/cardinals/analyses/fst/${TAXA}urban_${TAXA}rural/${TAXA}urban_${TAXA}rural.fst.25000.outlier.regions.bed
+    GFF=/xdisk/mcnew/dannyjackson/cardinals/datafiles/referencegenome/ncbi_dataset/data/GCF_901933205.1/genomic.gff
+    VCF=/xdisk/mcnew/dannyjackson/cardinals/datafiles/genotype_calls/cardinals_filtered.snpEffann.vcf
+    VCF_OUT=/xdisk/mcnew/dannyjackson/cardinals/analyses/fst/${TAXA}urban_${TAXA}rural/${TAXA}urban_${TAXA}rural.fst.25000.outlier.ann.snps.vcf
+    GENE_OUT=/xdisk/mcnew/dannyjackson/cardinals/analyses/genelist/gene_names/${TAXA}urban_${TAXA}rural.fst.25000.outlier.snpeff.genes.txt
+
+    grep '#' ${VCF} > ${VCF_OUT}
+    bedtools intersect -a ${VCF} -b ${IN_FILE} -wa >> ${VCF_OUT}
+
+    grep -e 'missense' -e 'nonsense' ${VCF_OUT} | awk '{print $8}' | awk -F"|" '{print $5}' | sort -u > ${GENE_OUT}
+done
+
+
+
 # DXY'/xdisk/mcnew/dannyjackson/cardinals/analyses/fst/pyrrurban_pyrrrural/pyrrurban_pyrrrural.fst_500000.snps.outlier.csv
 # Define species, environments, and window sizes
 species=( "noca" "pyrr" )

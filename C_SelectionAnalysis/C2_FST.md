@@ -55,14 +55,14 @@ done
 
 # Define species, environments, and window sizes
 species=( "noca" "pyrr" )
-window_sizes=( 25000 5000 )
+window_sizes=( 50000 5000 )
 
 
 # Iterate over each combination
 for win in "${window_sizes[@]}"; do
     for sp in "${species[@]}"; do
         time_limit=${time_limits[$win]}
-        step=$(expr $win / 2)
+        step=$(expr $win / 4)
 
         sbatch --account=mcnew \
                --job-name=fst_${win}_${sp} \
