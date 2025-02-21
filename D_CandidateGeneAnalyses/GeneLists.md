@@ -43,6 +43,37 @@ for win in "${window_sizes[@]}"; do
     done
 done
 
+# further annotate by high fst snps
+
+# just look at maf > 0.2 or something
+# pyrr
+bcftools view -e'MAF>0.3' pyrrurban_pyrrrural.fst.50000.outlier.ann.snps.vcf.gz | bcftools view -e'MAF>0.8' > pyrrurban_pyrrrural.fst.50000.outlier.ann.snps.maf.vcf
+
+grep -e 'missense' -e 'nonsense' pyrrurban_pyrrrural.fst.50000.outlier.ann.snps.maf.vcf | awk '{print $8}' | awk -F"|" '{print $5}' | grep -v 'LOC' | sort -u > /xdisk/mcnew/dannyjackson/cardinals/analyses/genelist/final_gene_lists/pyrr.fst.50kb.snpeff.txt
+
+
+python ~/programs/CardinalisGenomics/Genomics-Main/general_scripts/outlier_to_bed.py /xdisk/mcnew/dannyjackson/cardinals/analyses/fst/pyrrurban_pyrrrural/pyrrurban_pyrrrural.fst_1.outlier.csv 1 /xdisk/mcnew/dannyjackson/cardinals/analyses/fst/pyrrurban_pyrrrural/pyrrurban_pyrrrural.fst.1.outlier.snps.bed /xdisk/mcnew/dannyjackson/cardinals/referencelists/GCF_901933205_chromconversion.txt
+
+awk 'BEGIN {OFS="\t"}; {print $1, $2 - 1, $2}' pyrrurban_pyrrrural.fst.1.outlier.snps.bed > pyrrurban_pyrrrural.fst.1.outlier.regions.bed
+
+bedtools intersect -a /xdisk/mcnew/dannyjackson/cardinals/datafiles/genotype_calls/cardinals_filtered.snpEffann.vcf -b pyrrurban_pyrrrural.fst.50000.outlier.regions.bed -wa > pyrrurban_pyrrrural.fst.50000.outlier.ann.maf.vcf
+
+bedtools intersect -a pyrrurban_pyrrrural.fst.50000.outlier.ann.maf.vcf -b pyrrurban_pyrrrural.fst.1.outlier.regions.bed -wa > pyrrurban_pyrrrural.fst.50000.outlier.ann.snps.maf.vcf 
+
+
+>> ${VCF_OUT}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 # DXY'/xdisk/mcnew/dannyjackson/cardinals/analyses/fst/pyrrurban_pyrrrural/pyrrurban_pyrrrural.fst_500000.snps.outlier.csv
@@ -285,6 +316,35 @@ ggvenn(gene_sets,
 dev.off()
 
 
+# compute overlaps between species
+both_fst = intersect(df_noca_fst, df_pyrr_fst)
+both_raisd = intersect(df_pyrr_raisd, df_noca_raisd)
+both_dxy = intersect(df_noca_dxy, df_pyrr_dxy)
+
+df_noca_all<-read.csv("noca.all.genenames_filtered.txt", header=FALSE, stringsAsFactors = FALSE)[[1]]
+df_pyrr_all<-read.csv("pyrr.all.genenames_filtered.txt", header=FALSE, stringsAsFactors = FALSE)[[1]]
+
+both_all = intersect(df_noca_all, df_pyrr_all)
+write(both_all, file="both.all.csv")
+
+library(ggvenn) 
+
+
+gene_sets <- list(
+  pyrr_all = df_pyrr_all,
+  noca_all = df_noca_all
+)
+
+pdf(file = "both_windows.pdf", width = 6, height = 6, useDingbats=FALSE)
+
+ggvenn(gene_sets,
+    columns = c("pyrr_all", "noca_all"),
+  stroke_size = 0.5, set_name_size = 4
+  )
+dev.off()
+
+
+
 # subsets, both species
 cat intersection.pyrr* | sort -u > intersection.pyrr_all.csv
 cat intersection.noca* | sort -u > intersection.noca_all.csv
@@ -303,7 +363,7 @@ both = intersect(df_pyrr_all, df_noca_all)
 
 write(both, file="intersection.both.csv")
 
-pdf(file = "both_windows.pdf", width = 6, height = 6, useDingbats=FALSE)
+pdf(file = "both_intersection_windows.pdf", width = 6, height = 6, useDingbats=FALSE)
 
 ggvenn(gene_sets,
     columns = c("pyrr_all", "noca_all"),
@@ -318,5 +378,13 @@ dev.off()
 
 # GO Term analysis
 # Remove extraneous information from Panther output and only leave the GO terms
-grep -o 'GO:[0-9]\{6\}' pantheroutput/intersection.noca_all.nocorrection.txt > intersection.noca_all.nocorrection.GO.txt
-grep -o 'GO:[0-9]\{6\}' pantheroutput/intersection.pyrr_all.nocorrection.txt > intersection.pyrr_all.nocorrection.GO.txt
+
+for file 
+grep -o 'GO:[0-9]\{7\}' pantheroutput/intersection.noca_all.nocorrection.txt > intersection.noca_all.nocorrection.GO.txt
+grep -o 'GO:[0-9]\{7\}' pantheroutput/intersection.pyrr_all.nocorrection.txt > intersection.pyrr_all.nocorrection.GO.txt
+
+grep -o 'GO:[0-9]\{7\}' pantheroutput/intersection.pyrr_all.nocorrection.txt > intersection.pyrr_all.nocorrection.GO.txt
+
+
+
+grep -o 'GO:[0-9]\{7\}' pantheroutput/both.all.GO.nocorrection.txt > both.all.GO.nocorrection.txt
