@@ -1,53 +1,34 @@
 # gene visualization
+cd /Users/danjack/Documents/Github_local/CardinalisGenomics/D_CandidateGeneAnalyses/GOterms
 
-mkdir -p raisd raisd/plot tajima tajima/plot fst fst/plot dxy dxy/plot
+mkdir -p plot
 
 
 # local testing
-# raisd 
-find /Users/danjack/Documents/Github_local/CardinalisGenomics/D_CandidateGeneAnalyses/GOterms/raisd* | awk -F"[./]" '{ OFS="." ; print $(NF-6), $(NF-5), $(NF-4), $(NF-3), $(NF-2), $(NF-1) }' | tail -n +4 > /Users/danjack/Documents/Github_local/CardinalisGenomics/D_CandidateGeneAnalyses/GOlistnames_raisd.txt
+
+ls pantheroutput/pyrr*txt | xargs -n 1 basename > /Users/danjack/Documents/Github_local/CardinalisGenomics/D_CandidateGeneAnalyses/GOterms/GOlistnames.txt
+
 
 while read -r file;
 do
 
-Rscript /Users/danjack/Documents/Github_local/Genomics-Main/D_GeneVisualization/D2_visualization.local.r ${file}
+grep -o 'GO:[0-9]\{7\}' pantheroutput/${file} > ${file}
 
-done < /Users/danjack/Documents/Github_local/CardinalisGenomics/D_CandidateGeneAnalyses/GOlistnames_raisd.txt
+Rscript /Users/danjack/Documents/Github_local/Genomics-Main/D_GeneVisualization/D2_visualization.local.r ${file%.txt}
 
-# tajima
-cd /Users/danjack/Documents/Github_local/CardinalisGenomics/D_CandidateGeneAnalyses/GOterms/tajima
+done < /Users/danjack/Documents/Github_local/CardinalisGenomics/D_CandidateGeneAnalyses/GOterms/GOlistnames.txt
 
-find /Users/danjack/Documents/Github_local/CardinalisGenomics/D_CandidateGeneAnalyses/GOterms/Tajima/*.txt | awk -F"[./]" '{ OFS="." ; print $(NF-6), $(NF-5), $(NF-4), $(NF-3), $(NF-2), $(NF-1) }' > /Users/danjack/Documents/Github_local/CardinalisGenomics/D_CandidateGeneAnalyses/GOlistnames_tajima.txt
 
-while read -r file;
-do
 
-Rscript /Users/danjack/Documents/Github_local/Genomics-Main/D_GeneVisualization/D2_visualization.local.r ${file}
 
-done < /Users/danjack/Documents/Github_local/CardinalisGenomics/D_CandidateGeneAnalyses/GOlistnames_tajima.txt
 
-# dxy
-cd /Users/danjack/Documents/Github_local/CardinalisGenomics/D_CandidateGeneAnalyses/GOterms/dxy
-find /Users/danjack/Documents/Github_local/CardinalisGenomics/D_CandidateGeneAnalyses/GOterms/dxy/*txt | awk -F"[./]" '{ OFS="." ; print $(NF-3), $(NF-2), $(NF-1) }' > /Users/danjack/Documents/Github_local/CardinalisGenomics/D_CandidateGeneAnalyses/GOlistnames_dxy.txt
 
-Rscript /Users/danjack/Documents/Github_local/Genomics-Main/D_GeneVisualization/D2_visualization.local.r pyrr.25000.dxy
-while read -r file;
-do
 
-Rscript /Users/danjack/Documents/Github_local/Genomics-Main/D_GeneVisualization/D2_visualization.local.r ${file}
 
-done < /Users/danjack/Documents/Github_local/CardinalisGenomics/D_CandidateGeneAnalyses/GOlistnames_dxy.txt
 
-# fst
-cd /Users/danjack/Documents/Github_local/CardinalisGenomics/D_CandidateGeneAnalyses/GOterms/fst
-find /Users/danjack/Documents/Github_local/CardinalisGenomics/D_CandidateGeneAnalyses/GOterms/fst/*txt | awk -F"[./]" '{ OFS="." ; print $(NF-3), $(NF-2), $(NF-1) }' > /Users/danjack/Documents/Github_local/CardinalisGenomics/D_CandidateGeneAnalyses/GOlistnames_fst.txt
 
-while read -r file;
-do
 
-Rscript /Users/danjack/Documents/Github_local/Genomics-Main/D_GeneVisualization/D2_visualization.local.r ${file}
 
-done < /Users/danjack/Documents/Github_local/CardinalisGenomics/D_CandidateGeneAnalyses/GOlistnames_fst.txt
 
 
 
