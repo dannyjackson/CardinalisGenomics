@@ -13,5 +13,5 @@ COLOR2="#b185db"
 POP=nocaurban
 
 # source the setup file for tajima
-source ${SCRIPTDIR}/Genomics-Main/tajima/setup_tajima.sh
+source ${SCRIPTDIR}/Genomics-Main/C_SelectionAnalysis/tajima/setup_tajima.sh
 
