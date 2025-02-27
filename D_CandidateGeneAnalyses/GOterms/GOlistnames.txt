@@ -1,1 +1,10 @@
-pyrr.all.genenames_filtered.GO.txt
+noca.all.50kb.txt
+noca.dxy.50kb.txt
+noca.fst.50kb.txt
+noca.fstraisd.50kb.txt
+noca.raisd.50kb.txt
+pyrr.all.50kb.txt
+pyrr.dxy.50kb.txt
+pyrr.fst.50kb.txt
+pyrr.fstraisd.50kb.txt
+pyrr.raisd.50kb.txt

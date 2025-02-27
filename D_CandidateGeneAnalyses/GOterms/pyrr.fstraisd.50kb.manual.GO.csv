@@ -1,0 +1,32 @@
+﻿PANTHER GO-Slim Biological Process,urban,background_genelist.full.txt - REFLIST (12732),pyrr.fstraisd.50000kb.genenames_filtered.txt (692),pyrr.fstraisd.50000kb.genenames_filtered.txt (expected),pyrr.fstraisd.50000kb.genenames_filtered.txt (over/under),pyrr.fstraisd.50000kb.genenames_filtered.txt (fold Enrichment),P-value,Genes
+regeneration (GO:0031099),y,2,2,0.11,+,18.4,2.95E-03,GAP43
+tissue regeneration (GO:0042246),y,2,2,0.11,+,18.4,2.95E-03,GAP43
+insulin-like growth factor receptor signaling pathway (GO:0048009),y,5,3,0.27,+,11.04,1.47E-03,"GIGYF2, IGF1"
+positive regulation of leukocyte cell-cell adhesion (GO:1903039),y,5,2,0.27,+,7.36,2.64E-02,", FAM49B"
+positive regulation of T cell activation (GO:0050870),y,5,2,0.27,+,7.36,2.64E-02,", FAM49B"
+regulation of muscle system process (GO:0090257),y,11,4,0.6,+,6.69,2.10E-03,"CASq2, DMD"
+motor neuron axon guidance (GO:0008045),y,6,2,0.33,+,6.13,3.82E-02,NTN3
+cell population proliferation (GO:0008283),y,9,3,0.49,+,6.13,1.05E-02,"AKNA, IGF1"
+dendrite development (GO:0016358),y,9,3,0.49,+,6.13,1.05E-02,"DCDC2, NTN3"
+neuron migration (GO:0001764),y,10,3,0.54,+,5.52,1.44E-02,"DCDC2, ABI2, KIAA0319"
+skeletal muscle tissue development (GO:0007519),y,14,3,0.76,+,3.94,3.71E-02,"POPDC2, DMD"
+regulation of leukocyte activation (GO:0002694),y,14,3,0.76,+,3.94,3.71E-02,"IL15, FAM49B, BANK1"
+positive regulation of cell adhesion (GO:0045785),y,24,5,1.3,+,3.83,8.38E-03,"IL15, AKNA, CCDC80, RELL2, FAM49B, CCDC80, PLXND1"
+hippo signaling (GO:0035329),y,15,3,0.82,+,3.68,4.46E-02,"YAP1, WWTR1"
+heterophilic cell-cell adhesion via plasma membrane cell adhesion molecules (GO:0007157),y,15,3,0.82,+,3.68,4.46E-02,"TEN1, NECTIN3, TENM3"
+synapse assembly (GO:0007416),y,23,4,1.25,+,3.2,3.36E-02,"SDK1, KIRREL3, NLGN3"
+rhythmic process (GO:0048511),y,24,4,1.3,+,3.07,3.86E-02,"ID4, CRY1, FSHB"
+muscle tissue development (GO:0060537),y,31,5,1.68,+,2.97,2.45E-02,"POPDC2, FHOD3, DMD, SGCG"
+regulation of cell adhesion (GO:0030155),y,45,7,2.45,+,2.86,1.02E-02,"IL15, AKNA, CCDC80, RELL2, FAM49B, CCDC80, PLXND1"
+response to light stimulus (GO:0009416),y,26,4,1.41,+,2.83,4.99E-02,"CRY1, RHO"
+response to radiation (GO:0009314),y,34,5,1.85,+,2.71,3.52E-02,"CRY1, RHO, MTA1"
+tissue development (GO:0009888),y,145,15,7.88,+,1.9,1.51E-02,
+nervous system development (GO:0007399),y,426,33,23.15,+,1.43,3.83E-02,
+nitrogen compound metabolic process (GO:0006807),y,2441,107,132.67,-,0.81,9.82E-03,
+organonitrogen compound metabolic process (GO:1901564),y,1712,73,93.05,-,0.78,2.18E-02,
+organic substance biosynthetic process (GO:1901576),y,1280,54,69.57,-,0.78,4.37E-02,
+biosynthetic process (GO:0009058),y,1283,54,69.73,-,0.77,4.38E-02,
+organic cyclic compound metabolic process (GO:1901360),y,1013,41,55.06,-,0.74,4.29E-02,
+cellular nitrogen compound metabolic process (GO:0034641),y,1098,44,59.68,-,0.74,3.05E-02,
+small molecule metabolic process (GO:0044281),y,422,14,22.94,-,0.61,4.92E-02,
+cellular nitrogen compound biosynthetic process (GO:0044271),y,384,11,20.87,-,0.53,2.17E-02,

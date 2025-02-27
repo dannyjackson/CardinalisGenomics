@@ -1,0 +1,25 @@
+PANTHER.GO.Slim.Biological.Process,background_genelist.full.txt...REFLIST..12732.,nocaurban.raisd.50kb.unique.genenames_filtered.txt..200.,nocaurban.raisd.50kb.unique.genenames_filtered.txt..expected.,nocaurban.raisd.50kb.unique.genenames_filtered.txt..over.under.,nocaurban.raisd.50kb.unique.genenames_filtered.txt..fold.Enrichment.,P.value,qvals
+platelet aggregation (GO:0070527),5,4,0.08,+,50.93,2.92e-07,0.00030368
+protein activation cascade (GO:0072376),5,4,0.08,+,50.93,2.92e-07,0.00030368
+negative regulation of blood coagulation (GO:0030195),4,3,0.06,+,47.75,1.51e-05,0.00348977777777778
+platelet activation (GO:0030168),6,4,0.09,+,42.44,8.65e-07,0.000599733333333333
+negative regulation of coagulation (GO:0050819),5,3,0.08,+,38.2,3.73e-05,0.0077584
+homotypic cell-cell adhesion (GO:0034109),7,4,0.11,+,36.38,1.99e-06,0.0010348
+hemostasis (GO:0007599),9,4,0.14,+,28.29,7e-06,0.00182
+blood coagulation (GO:0007596),9,4,0.14,+,28.29,7e-06,0.00182
+coagulation (GO:0050817),9,4,0.14,+,28.29,7e-06,0.00182
+regulation of response to wounding (GO:1903034),7,3,0.11,+,27.28,0.000128,0.0177493333333333
+calcineurin-mediated signaling (GO:0097720),7,3,0.11,+,27.28,0.000128,0.0177493333333333
+regulation of wound healing (GO:0061041),7,3,0.11,+,27.28,0.000128,0.0177493333333333
+regulation of coagulation (GO:0050818),8,3,0.13,+,23.87,0.000202,0.0247152941176471
+negative regulation of response to external stimulus (GO:0032102),16,5,0.25,+,19.89,3.45e-06,0.0014352
+positive regulation of cell-cell adhesion (GO:0022409),11,3,0.17,+,17.36,0.000574,0.060008
+mismatch repair (GO:0006298),11,3,0.17,+,17.36,0.000574,0.060008
+regulation of body fluid levels (GO:0050878),15,4,0.24,+,16.98,7.04e-05,0.013312
+wound healing (GO:0042060),19,4,0.3,+,13.4,0.00019,0.0247
+response to wounding (GO:0009611),25,4,0.39,+,10.19,0.000577,0.060008
+cell activation (GO:0001775),29,4,0.46,+,8.78,0.00103,0.0931478260869565
+regulation of response to external stimulus (GO:0032101),50,6,0.79,+,7.64,0.000125,0.0177493333333333
+tRNA processing (GO:0008033),57,5,0.9,+,5.58,0.00196,0.169866666666667
+regulation of response to stress (GO:0080134),72,6,1.13,+,5.3,0.00092,0.0869818181818182
+tRNA metabolic process (GO:0006399),93,7,1.46,+,4.79,0.000643,0.063687619047619

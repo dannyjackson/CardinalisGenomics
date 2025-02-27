@@ -1,0 +1,10 @@
+PANTHER.GO.Slim.Biological.Process,background_genelist.full.txt...REFLIST..12732.,pyrrurban.raisd.50kb.unique.genenames_filtered.txt..359.,pyrrurban.raisd.50kb.unique.genenames_filtered.txt..expected.,pyrrurban.raisd.50kb.unique.genenames_filtered.txt..over.under.,pyrrurban.raisd.50kb.unique.genenames_filtered.txt..fold.Enrichment.,P.value,qvals
+regeneration (GO:0031099),2,2,0.06,+,35.47,0.000793,0.183271111111111
+tissue regeneration (GO:0042246),2,2,0.06,+,35.47,0.000793,0.183271111111111
+regulation of centrosome duplication (GO:0010824),6,3,0.17,+,17.73,0.000417,0.123908571428571
+regulation of centrosome cycle (GO:0046605),6,3,0.17,+,17.73,0.000417,0.123908571428571
+proton transmembrane transport (GO:1902600),14,5,0.39,+,12.67,2.81e-05,0.029224
+tRNA modification (GO:0006400),41,7,1.16,+,6.06,0.000131,0.06812
+tRNA processing (GO:0008033),57,9,1.61,+,5.6,2.77e-05,0.029224
+tRNA metabolic process (GO:0006399),93,11,2.62,+,4.19,5.92e-05,0.0410453333333333
+RNA modification (GO:0009451),79,9,2.23,+,4.04,0.000368,0.123908571428571

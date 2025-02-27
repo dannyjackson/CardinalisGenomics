@@ -1,0 +1,19 @@
+PANTHER.GO.Slim.Biological.Process,background_genelist.full.txt...REFLIST..12732.,pyrr.dxy.50000kb.genenames_filtered.txt..187.,pyrr.dxy.50000kb.genenames_filtered.txt..expected.,pyrr.dxy.50000kb.genenames_filtered.txt..over.under.,pyrr.dxy.50000kb.genenames_filtered.txt..fold.Enrichment.,P.value,qvals
+positive regulation of myeloid cell differentiation (GO:0045639),4,2,0.06,+,34.04,0.00126,0.1638
+regulation of sodium ion transmembrane transporter activity (GO:2000649),15,3,0.22,+,13.62,0.00125,0.1638
+cell recognition (GO:0008037),16,3,0.23,+,12.77,0.00152,0.175644444444444
+chemical synaptic transmission (GO:0007268),144,9,2.11,+,4.26,0.000272,0.0890933333333333
+anterograde trans-synaptic signaling (GO:0098916),144,9,2.11,+,4.26,0.000272,0.0890933333333333
+trans-synaptic signaling (GO:0099537),147,9,2.16,+,4.17,0.000317,0.0890933333333333
+synaptic signaling (GO:0099536),157,9,2.31,+,3.9,0.000514,0.0890933333333333
+cell-cell signaling (GO:0007267),247,13,3.63,+,3.58,7.25e-05,0.0890933333333333
+primary metabolic process (GO:0044238),2661,21,39.08,-,0.54,0.000736,0.11776
+metabolic process (GO:0008152),2921,23,42.9,-,0.54,0.000297,0.0890933333333333
+organic substance metabolic process (GO:0071704),2796,22,41.07,-,0.54,0.000472,0.0890933333333333
+macromolecule metabolic process (GO:0043170),2129,16,31.27,-,0.51,0.00152,0.175644444444444
+nitrogen compound metabolic process (GO:0006807),2441,18,35.85,-,0.5,0.000486,0.0890933333333333
+nucleobase-containing compound metabolic process (GO:0006139),917,3,13.47,-,0.22,0.000895,0.132971428571429
+heterocycle metabolic process (GO:0046483),965,3,14.17,-,0.21,0.000436,0.0890933333333333
+cellular aromatic compound metabolic process (GO:0006725),973,3,14.29,-,0.21,0.000436,0.0890933333333333
+organic cyclic compound metabolic process (GO:1901360),1013,3,14.88,-,0.2,0.00031,0.0890933333333333
+cellular nitrogen compound metabolic process (GO:0034641),1098,3,16.13,-,0.19,0.000103,0.0890933333333333

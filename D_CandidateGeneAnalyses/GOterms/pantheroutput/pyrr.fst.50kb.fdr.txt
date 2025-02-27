@@ -1,0 +1,23 @@
+PANTHER.GO.Slim.Biological.Process,background_genelist.full.txt...REFLIST..12732.,pyrr.fst.50000kb.genenames_filtered.txt..357.,pyrr.fst.50000kb.genenames_filtered.txt..expected.,pyrr.fst.50000kb.genenames_filtered.txt..over.under.,pyrr.fst.50000kb.genenames_filtered.txt..fold.Enrichment.,P.value,qvals
+secretory granule organization (GO:0033363),2,2,0.06,+,35.66,0.000784,0.0959247058823529
+regeneration (GO:0031099),2,2,0.06,+,35.66,0.000784,0.0959247058823529
+tissue regeneration (GO:0042246),2,2,0.06,+,35.66,0.000784,0.0959247058823529
+insulin-like growth factor receptor signaling pathway (GO:0048009),5,3,0.14,+,21.4,0.00021,0.0600888888888889
+regulation of phosphoprotein phosphatase activity (GO:0043666),5,3,0.14,+,21.4,0.00021,0.0600888888888889
+regulation of phosphatase activity (GO:0010921),6,3,0.17,+,17.83,0.000411,0.07536
+regulation of dephosphorylation (GO:0035303),9,3,0.25,+,11.89,0.00162,0.153163636363636
+nervous system development (GO:0007399),426,25,11.94,+,2.09,0.000469,0.07536
+metabolic process (GO:0008152),2921,54,81.9,-,0.66,0.00026,0.0600888888888889
+nitrogen compound metabolic process (GO:0006807),2441,44,68.44,-,0.64,0.000621,0.0922628571428572
+organic substance metabolic process (GO:0071704),2796,50,78.4,-,0.64,0.000159,0.0600888888888889
+primary metabolic process (GO:0044238),2661,47,74.61,-,0.63,0.000159,0.0600888888888889
+cellular metabolic process (GO:0044237),2255,39,63.23,-,0.62,0.000417,0.07536
+macromolecule biosynthetic process (GO:0009059),964,12,27.03,-,0.44,0.0011,0.11544
+heterocycle metabolic process (GO:0046483),965,12,27.06,-,0.44,0.0011,0.11544
+cellular aromatic compound metabolic process (GO:0006725),973,12,27.28,-,0.44,0.00111,0.11544
+nucleobase-containing compound metabolic process (GO:0006139),917,11,25.71,-,0.43,0.00117,0.115885714285714
+organic cyclic compound metabolic process (GO:1901360),1013,12,28.4,-,0.42,0.000471,0.07536
+cellular nitrogen compound metabolic process (GO:0034641),1098,13,30.79,-,0.42,0.000251,0.0600888888888889
+organic substance biosynthetic process (GO:1901576),1280,15,35.89,-,0.42,5.19e-05,0.035984
+biosynthetic process (GO:0009058),1283,15,35.97,-,0.42,5.19e-05,0.035984
+cellular biosynthetic process (GO:0044249),1249,14,35.02,-,0.4,4.1e-05,0.035984

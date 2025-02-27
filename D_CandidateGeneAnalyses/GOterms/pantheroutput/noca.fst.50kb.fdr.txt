@@ -1,0 +1,12 @@
+PANTHER.GO.Slim.Biological.Process,background_genelist.full.txt...REFLIST..12732.,noca.fst.50000kb.genenames_filtered.txt..356.,noca.fst.50000kb.genenames_filtered.txt..expected.,noca.fst.50000kb.genenames_filtered.txt..over.under.,noca.fst.50000kb.genenames_filtered.txt..fold.Enrichment.,P.value,qvals
+skeletal muscle tissue development (GO:0007519),14,5,0.39,+,12.77,2.7e-05,0.02808
+skeletal muscle organ development (GO:0060538),16,5,0.45,+,11.18,5.63e-05,0.0390346666666667
+muscle organ development (GO:0007517),20,5,0.56,+,8.94,0.000182,0.06448
+adherens junction organization (GO:0034332),23,5,0.64,+,7.77,0.000369,0.08528
+cell-cell adhesion via plasma-membrane adhesion molecules (GO:0098742),70,10,1.96,+,5.11,2.3e-05,0.02808
+cell junction assembly (GO:0034329),60,8,1.68,+,4.77,0.000248,0.06448
+cell junction organization (GO:0034330),108,11,3.02,+,3.64,0.000214,0.06448
+cell-cell adhesion (GO:0098609),161,14,4.5,+,3.11,0.00017,0.06448
+cell morphogenesis (GO:0000902),187,15,5.23,+,2.87,0.000245,0.06448
+cell-cell signaling (GO:0007267),247,17,6.91,+,2.46,0.000586,0.121888
+organonitrogen compound metabolic process (GO:1901564),1712,27,47.87,-,0.56,0.000658,0.124421818181818
