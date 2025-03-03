@@ -1,0 +1,10 @@
+﻿GO_Term,Name,Genes
+GO:0031099,regeneration,GAP43
+GO:0042246,tissue regeneration,GAP43
+GO:0010824,regulation of centrosome duplication,"NPM1,SPICE1"
+GO:0046605,regulation of centrosome cycle,"NPM1,SPICE1"
+GO:1902600,proton transmembrane transport,"ATP1A1,OTOP3,OTOP2,ATP6V1G1"
+GO:0006400,tRNA modification,"CDKAL1,MTO1,THADA,QTRT2,ELP4"
+GO:0008033,tRNA processing,"RTCB,CDKAL1,MTO1,THADA,QTRT2,TSEN54,ELP4"
+GO:0006399,tRNA metabolic process,"RTCB,CDKAL1,MTO1,THADA,QTRT2,TSEN54,ELP4,EARS2"
+GO:0009451,RNA modification,"CDKAL1,MTO1,METTL16,THADA,QTRT2,ELP4"

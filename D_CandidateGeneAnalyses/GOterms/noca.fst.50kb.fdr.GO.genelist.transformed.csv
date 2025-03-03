@@ -1,0 +1,61 @@
+,Genes,snpeff,,FST,GO_Term
+cell morphogenesis,FRY,0,,y,GO:0000902
+cell morphogenesis,SLIT3,1,,y,GO:0000902
+cell morphogenesis,SLITRK1,1,,y,GO:0000902
+cell morphogenesis,TRIO,1,,y,GO:0000902
+cell morphogenesis,UNC5C,0,,y,GO:0000902
+cell morphogenesis,UNCSC,0,,y,GO:0000902
+"cell morphogenesis, nitrogen",EPHA10,1,,y,"GO:0000902, GO:1901564"
+"cell morphogenesis, nitrogen",EPHB2,0,,y,"GO:0000902, GO:1901564"
+cell-cell signaling,BCL9,1,,y,GO:0007267
+cell-cell signaling,FCHSD2,1,,y,GO:0007267
+cell-cell signaling,GJA5,1,,y,GO:0007267
+cell-cell signaling,GJA6,0,,y,GO:0007267
+cell-cell signaling,GJB1,1,,y,GO:0007267
+cell-cell signaling,GLRB,0,,y,GO:0007267
+cell-cell signaling,GNAI2,0,,y,GO:0007267
+cell-cell signaling,GRIA2,0,,y,GO:0007267
+cell-cell signaling,GRID,0,,y,GO:0007267
+cell-cell signaling,HTR7,1,,y,GO:0007267
+cell-cell signaling,LRP2,1,,y,GO:0007267
+cell-cell signaling,SYN2,1,,y,GO:0007267
+muscle,MYF5,1,,y,"GO:0007519, GO:0060538, GO:0007517"
+muscle,MYF6,1,,y,"GO:0007519, GO:0060538, GO:0007517"
+muscle,DMD,1,,y,"GO:0007519, GO:0060538, GO:0007517, GO:0007267"
+"cell junction,adhesion",NLGN3,1,,y,"GO:0034329, GO:0034330, GO:0098609, GO:0007267"
+"cell junction,adhesion",ERC2,1,,y,"GO:0034330, GO:0007267"
+"cell junction,adhesion",TJP3,0,,y,"GO:0034330, GO:0098609"
+"cell junction,adhesion",CDH18,1,,y,"GO:0034332, GO:0098742, GO:0034329, GO:0034330, GO:0098609, GO:0000902"
+"cell junction,adhesion",CDH20,0,,y,"GO:0034332, GO:0098742, GO:0034329, GO:0034330, GO:0098609, GO:0000902"
+"cell junction,adhesion",CDH9,1,,y,"GO:0034332, GO:0098742, GO:0034329, GO:0034330, GO:0098609, GO:0000902"
+"cell junction,adhesion,morphogenesis",CDH11,1,,y,"GO:0034332, GO:0098742, GO:0098742, GO:0034329, GO:0034329, GO:0034330, GO:0034330, GO:0098609, GO:0098609, GO:0000902"
+cell adhesion,CDON,0,,y,GO:0098609
+cell adhesion,DCHS1,1,,y,GO:0098609
+"cell adhesion,morphogenesis",CNTN4,1,,y,"GO:0098742, GO:0034330, GO:0098609, GO:0000902"
+cell adhesion,ATRN,1,,y,"GO:0098742, GO:0098609"
+cell adhesion,MEGF11,1,,y,"GO:0098742, GO:0098609"
+"cell junction,adhesion",SDK1,1,,y,"GO:0098742, GO:0098742, GO:0034329, GO:0034330, GO:0034330, GO:0098609, GO:0098609"
+nitrogen,AGBL1,0,,y,GO:1901564
+nitrogen,AK4,1,,y,GO:1901564
+nitrogen,ANKZF1,1,,y,GO:1901564
+nitrogen,CERS6,1,,y,GO:1901564
+nitrogen,CHEK1,1,,y,GO:1901564
+nitrogen,CHPF,1,,y,GO:1901564
+nitrogen,DPY19L3,1,,y,GO:1901564
+nitrogen,EEFSEC,0,,y,GO:1901564
+nitrogen,EIF2AK4,1,,y,GO:1901564
+nitrogen,ENPP2,1,,y,GO:1901564
+nitrogen,FBXO32,1,,y,GO:1901564
+nitrogen,GSTZ1,1,,y,GO:1901564
+nitrogen,HECW1,0,,y,GO:1901564
+nitrogen,MAP4K3,0,,y,GO:1901564
+nitrogen,MGAT5B,0,,y,GO:1901564
+nitrogen,MRPL57,1,,y,GO:1901564
+nitrogen,PSMD14,0,,y,GO:1901564
+nitrogen,RPS6KA2,0,,y,GO:1901564
+nitrogen,SRBD1,1,,y,GO:1901564
+nitrogen,STT3A,1,,y,GO:1901564
+nitrogen,TG,1,,y,GO:1901564
+nitrogen,TRIM2,0,,y,GO:1901564
+nitrogen,VRK1,1,,y,GO:1901564
+nitrogen,ZDHHC20,1,,y,GO:1901564

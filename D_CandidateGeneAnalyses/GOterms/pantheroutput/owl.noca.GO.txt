@@ -1,0 +1,82 @@
+
+
+
+
+
+Analysis Type:	PANTHER Overrepresentation Test (Released 20240807)
+Annotation Version and Release Date:	PANTHER version 19.0 Released 2024-06-20
+Analyzed List:	intersection.owl_noca.csv (Gallus gallus)
+Reference List:	background_genelist.full.txt (Gallus gallus)
+Test Type:	FISHER
+Correction:	NONE
+PANTHER GO-Slim Biological Process	background_genelist.full.txt - REFLIST (12431)	intersection.owl_noca.csv (25)	intersection.owl_noca.csv (expected)	intersection.owl_noca.csv (over/under)	intersection.owl_noca.csv (fold Enrichment)	intersection.owl_noca.csv (raw P-value)
+regulation of muscle system process (GO:0090257)	9	2	.02	+	 > 100	1.39E-04
+synaptic membrane adhesion (GO:0099560)	6	1	.01	+	82.87	1.20E-02
+skeletal muscle tissue development (GO:0007519)	13	2	.03	+	76.50	2.99E-04
+regulation of epithelial cell differentiation (GO:0030856)	7	1	.01	+	71.03	1.40E-02
+skeletal muscle organ development (GO:0060538)	15	2	.03	+	66.30	4.01E-04
+homophilic cell adhesion via plasma membrane adhesion molecules (GO:0007156)	26	3	.05	+	57.37	1.81E-05
+smoothened signaling pathway (GO:0007224)	18	2	.04	+	55.25	5.82E-04
+regulation of neuron differentiation (GO:0045664)	9	1	.02	+	55.25	1.80E-02
+muscle organ development (GO:0007517)	19	2	.04	+	52.34	6.50E-04
+neuromuscular synaptic transmission (GO:0007274)	10	1	.02	+	49.72	1.99E-02
+synapse assembly (GO:0007416)	22	2	.04	+	45.20	8.75E-04
+synapse organization (GO:0050808)	64	5	.13	+	38.85	1.51E-07
+cell-cell adhesion via plasma-membrane adhesion molecules (GO:0098742)	70	5	.14	+	35.52	2.38E-07
+cell recognition (GO:0008037)	15	1	.03	+	33.15	2.98E-02
+heterophilic cell-cell adhesion via plasma membrane cell adhesion molecules (GO:0007157)	15	1	.03	+	33.15	2.98E-02
+muscle tissue development (GO:0060537)	30	2	.06	+	33.15	1.63E-03
+establishment or maintenance of bipolar cell polarity (GO:0061245)	17	1	.03	+	29.25	3.37E-02
+establishment or maintenance of epithelial cell apical/basal polarity (GO:0045197)	17	1	.03	+	29.25	3.37E-02
+establishment or maintenance of apical/basal cell polarity (GO:0035088)	17	1	.03	+	29.25	3.37E-02
+muscle cell development (GO:0055001)	35	2	.07	+	28.41	2.22E-03
+regulation of system process (GO:0044057)	35	2	.07	+	28.41	2.22E-03
+cell junction assembly (GO:0034329)	59	3	.12	+	25.28	2.17E-04
+muscle cell differentiation (GO:0042692)	41	2	.08	+	24.26	3.03E-03
+cell junction organization (GO:0034330)	106	5	.21	+	23.45	1.90E-06
+adherens junction organization (GO:0034332)	23	1	.05	+	21.62	4.53E-02
+regulation of synaptic plasticity (GO:0048167)	24	1	.05	+	20.72	4.72E-02
+muscle structure development (GO:0061061)	58	2	.12	+	17.15	5.99E-03
+cell-cell adhesion (GO:0098609)	158	5	.32	+	15.74	1.35E-05
+axon guidance (GO:0007411)	106	3	.21	+	14.07	1.21E-03
+neuron projection guidance (GO:0097485)	106	3	.21	+	14.07	1.21E-03
+cell adhesion (GO:0007155)	228	6	.46	+	13.09	4.71E-06
+neuron development (GO:0048666)	208	5	.42	+	11.95	5.06E-05
+axonogenesis (GO:0007409)	126	3	.25	+	11.84	1.99E-03
+cell morphogenesis involved in neuron differentiation (GO:0048667)	131	3	.26	+	11.39	2.22E-03
+regulation of cell differentiation (GO:0045595)	90	2	.18	+	11.05	1.40E-02
+transmembrane receptor protein tyrosine kinase signaling pathway (GO:0007169)	183	4	.37	+	10.87	4.51E-04
+cell morphogenesis (GO:0000902)	183	4	.37	+	10.87	4.51E-04
+axon development (GO:0061564)	141	3	.28	+	10.58	2.74E-03
+synaptic signaling (GO:0099536)	151	3	.30	+	9.88	3.32E-03
+neuron projection morphogenesis (GO:0048812)	151	3	.30	+	9.88	3.32E-03
+cell projection morphogenesis (GO:0048858)	152	3	.31	+	9.81	3.38E-03
+plasma membrane bounded cell projection morphogenesis (GO:0120039)	152	3	.31	+	9.81	3.38E-03
+neuron differentiation (GO:0030182)	272	5	.55	+	9.14	1.79E-04
+enzyme-linked receptor protein signaling pathway (GO:0007167)	223	4	.45	+	8.92	9.48E-04
+generation of neurons (GO:0048699)	283	5	.57	+	8.79	2.16E-04
+nervous system development (GO:0007399)	404	7	.81	+	8.62	1.05E-05
+cellular anatomical entity morphogenesis (GO:0032989)	178	3	.36	+	8.38	5.27E-03
+regulation of multicellular organismal process (GO:0051239)	180	3	.36	+	8.29	5.43E-03
+cell development (GO:0048468)	305	5	.61	+	8.15	3.05E-04
+neurogenesis (GO:0022008)	306	5	.62	+	8.12	3.10E-04
+neuron projection development (GO:0031175)	192	3	.39	+	7.77	6.50E-03
+multicellular organism development (GO:0007275)	665	10	1.34	+	7.48	2.82E-07
+system development (GO:0048731)	542	8	1.09	+	7.34	6.95E-06
+tissue development (GO:0009888)	140	2	.28	+	7.10	3.19E-02
+anatomical structure morphogenesis (GO:0009653)	370	5	.74	+	6.72	7.39E-04
+cell surface receptor signaling pathway (GO:0007166)	472	6	.95	+	6.32	2.78E-04
+cell-cell signaling (GO:0007267)	241	3	.48	+	6.19	1.21E-02
+multicellular organismal process (GO:0032501)	842	10	1.69	+	5.91	2.47E-06
+anatomical structure development (GO:0048856)	892	10	1.79	+	5.57	4.16E-06
+developmental process (GO:0032502)	1001	10	2.01	+	4.97	1.17E-05
+plasma membrane bounded cell projection organization (GO:0120036)	328	3	.66	+	4.55	2.72E-02
+cell projection organization (GO:0030030)	334	3	.67	+	4.47	2.85E-02
+cell differentiation (GO:0030154)	607	5	1.22	+	4.10	6.43E-03
+cellular developmental process (GO:0048869)	607	5	1.22	+	4.10	6.43E-03
+signaling (GO:0023052)	1311	10	2.64	+	3.79	1.21E-04
+cell communication (GO:0007154)	1339	10	2.69	+	3.71	1.45E-04
+signal transduction (GO:0007165)	1184	7	2.38	+	2.94	7.23E-03
+cellular response to stimulus (GO:0051716)	1506	7	3.03	+	2.31	2.53E-02
+response to stimulus (GO:0050896)	1641	7	3.30	+	2.12	3.85E-02
+regulation of biological process (GO:0050789)	3637	12	7.31	+	1.64	4.75E-02

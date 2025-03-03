@@ -1,0 +1,2 @@
+PANTHER.GO.Slim.Biological.Process,background_genelist.full.txt...REFLIST..12431.,noca.fst.50000kb.snpeff.genenames_filtered.txt..256.,noca.fst.50000kb.snpeff.genenames_filtered.txt..expected.,noca.fst.50000kb.snpeff.genenames_filtered.txt..over.under.,noca.fst.50000kb.snpeff.genenames_filtered.txt..fold.Enrichment.,P.value,noca.fst.50000kb.snpeff.genenames_filtered.txt..FDR.,qvals
+cell-cell adhesion via plasma-membrane adhesion molecules (GO:0098742),70,9,1.44,+,6.24,1.26e-05,0.0261,0.0261828

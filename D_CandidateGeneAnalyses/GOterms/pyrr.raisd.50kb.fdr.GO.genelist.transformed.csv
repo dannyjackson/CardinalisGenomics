@@ -1,0 +1,17 @@
+Genes,Interpretation,snpeff,GO_Term
+ATP1A1,proton transmembrane transport,0,GO:1902600
+ATP6V1G1,proton transmembrane transport,0,GO:1902600
+CDKAL1,gene expression,1,"GO:0006400, GO:0008033, GO:0006399, GO:0009451"
+EARS2,gene expression,0,GO:0006399
+ELP4,gene expression,0,"GO:0006400, GO:0008033, GO:0006399, GO:0009451"
+GAP43,tissue regeneration,0,"GO:0031099, GO:0042246"
+METTL16,gene expression,0,GO:0009451
+MTO1,gene expression,0,"GO:0006400, GO:0008033, GO:0006399, GO:0009451"
+NPM1,regulation of centrosome duplication,0,"GO:0010824, GO:0046605"
+OTOP2,proton transmembrane transport,0,GO:1902600
+OTOP3,proton transmembrane transport,0,GO:1902600
+QTRT2,gene expression,0,"GO:0006400, GO:0008033, GO:0006399, GO:0009451"
+RTCB,gene expression,0,"GO:0008033, GO:0006399"
+SPICE1,regulation of centrosome duplication,0,"GO:0010824, GO:0046605"
+THADA,gene expression,0,"GO:0006400, GO:0008033, GO:0006399, GO:0009451"
+TSEN54,gene expression,0,"GO:0008033, GO:0006399"

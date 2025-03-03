@@ -1,11 +1,11 @@
 Genes,Interpretation,GO_Term,Program,Also in noca?,high/moderate
-AKNA,Cell adhesion,"GO:0008283, GO:0045785, GO:0030155",raisd,n,n
-CCDC80,Cell adhesion,"GO:0045785, GO:0030155","fst, raisd",n,y
-NECTIN3,Cell adhesion,GO:0007157,fst,n,y
-PLXND1,Cell adhesion,"GO:0045785, GO:0030155",fst,n,y
-RELL2,Cell adhesion,"GO:0045785, GO:0030155",raisd,n,n
-TEN1,Cell adhesion,GO:0007157,raisd,n,n
-TENM3,Cell adhesion,GO:0007157,fst,n,n
+AKNA,Tissue structure,"GO:0008283, GO:0045785, GO:0030155",raisd,n,n
+CCDC80,Tissue structure,"GO:0045785, GO:0030155","fst, raisd",n,y
+NECTIN3,Tissue structure,GO:0007157,fst,n,y
+PLXND1,Tissue structure,"GO:0045785, GO:0030155",fst,n,y
+RELL2,Tissue structure,"GO:0045785, GO:0030155",raisd,n,n
+TEN1,Tissue structure,GO:0007157,raisd,n,n
+TENM3,Tissue structure,GO:0007157,fst,n,n
 CRY1,Circadian rhythm,"GO:0048511, GO:0009416, GO:0009314","fst, raisd",n,n
 FSHB,Circadian rhythm,GO:0048511,"fst, raisd",n,n
 ID4,Circadian rhythm,GO:0048511,"fst, raisd",y,n

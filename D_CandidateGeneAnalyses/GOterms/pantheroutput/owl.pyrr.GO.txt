@@ -1,0 +1,56 @@
+
+
+
+
+
+Analysis Type:	PANTHER Overrepresentation Test (Released 20240807)
+Annotation Version and Release Date:	PANTHER version 19.0 Released 2024-06-20
+Analyzed List:	Client Text Box Input (Gallus gallus)
+Reference List:	background_genelist.full.txt (Gallus gallus)
+Test Type:	FISHER
+Correction:	NONE
+PANTHER GO-Slim Biological Process	background_genelist.full.txt - REFLIST (12431)	Client Text Box Input (19)	Client Text Box Input (expected)	Client Text Box Input (over/under)	Client Text Box Input (fold Enrichment)	Client Text Box Input (raw P-value)
+regulation of muscle system process (GO:0090257)	9	2	.01	+	 > 100	7.92E-05
+skeletal muscle tissue development (GO:0007519)	13	2	.02	+	 > 100	1.71E-04
+regulation of epithelial cell differentiation (GO:0030856)	7	1	.01	+	93.47	1.07E-02
+skeletal muscle organ development (GO:0060538)	15	2	.02	+	87.24	2.30E-04
+muscle organ development (GO:0007517)	19	2	.03	+	68.87	3.73E-04
+synapse assembly (GO:0007416)	22	2	.03	+	59.48	5.02E-04
+calcium ion import (GO:0070509)	12	1	.02	+	54.52	1.82E-02
+homophilic cell adhesion via plasma membrane adhesion molecules (GO:0007156)	26	2	.04	+	50.33	7.04E-04
+muscle tissue development (GO:0060537)	30	2	.05	+	43.62	9.39E-04
+muscle cell development (GO:0055001)	35	2	.05	+	37.39	1.28E-03
+regulation of system process (GO:0044057)	35	2	.05	+	37.39	1.28E-03
+calcium-ion regulated exocytosis (GO:0017156)	18	1	.03	+	36.35	2.72E-02
+cell junction assembly (GO:0034329)	59	3	.09	+	33.27	9.32E-05
+muscle cell differentiation (GO:0042692)	41	2	.06	+	31.92	1.75E-03
+adherens junction organization (GO:0034332)	23	1	.04	+	28.45	3.46E-02
+cell-cell adhesion via plasma-membrane adhesion molecules (GO:0098742)	70	3	.11	+	28.04	1.55E-04
+synaptic vesicle exocytosis (GO:0016079)	25	1	.04	+	26.17	3.76E-02
+regulation of exocytosis (GO:0017157)	26	1	.04	+	25.16	3.90E-02
+synaptic vesicle endocytosis (GO:0048488)	26	1	.04	+	25.16	3.90E-02
+synaptic vesicle recycling (GO:0036465)	27	1	.04	+	24.23	4.05E-02
+muscle structure development (GO:0061061)	58	2	.09	+	22.56	3.48E-03
+calcium ion transmembrane import into cytosol (GO:0097553)	29	1	.04	+	22.56	4.34E-02
+synapse organization (GO:0050808)	64	2	.10	+	20.45	4.22E-03
+negative regulation of transport (GO:0051051)	33	1	.05	+	19.83	4.93E-02
+angiogenesis (GO:0001525)	33	1	.05	+	19.83	4.93E-02
+cell junction organization (GO:0034330)	106	3	.16	+	18.52	5.29E-04
+synaptic signaling (GO:0099536)	151	3	.23	+	13.00	1.48E-03
+cell-cell adhesion (GO:0098609)	158	3	.24	+	12.42	1.68E-03
+cell adhesion (GO:0007155)	228	4	.35	+	11.48	3.44E-04
+regulation of multicellular organismal process (GO:0051239)	180	3	.28	+	10.90	2.44E-03
+neuron development (GO:0048666)	208	3	.32	+	9.44	3.67E-03
+tissue development (GO:0009888)	140	2	.21	+	9.35	1.90E-02
+cell-cell signaling (GO:0007267)	241	3	.37	+	8.14	5.54E-03
+nervous system development (GO:0007399)	404	5	.62	+	8.10	2.82E-04
+system development (GO:0048731)	542	6	.83	+	7.24	1.11E-04
+neuron differentiation (GO:0030182)	272	3	.42	+	7.22	7.74E-03
+generation of neurons (GO:0048699)	283	3	.43	+	6.94	8.63E-03
+multicellular organism development (GO:0007275)	665	7	1.02	+	6.89	3.48E-05
+import into cell (GO:0098657)	195	2	.30	+	6.71	3.51E-02
+cell development (GO:0048468)	305	3	.47	+	6.44	1.06E-02
+neurogenesis (GO:0022008)	306	3	.47	+	6.41	1.07E-02
+multicellular organismal process (GO:0032501)	842	7	1.29	+	5.44	1.56E-04
+anatomical structure development (GO:0048856)	892	7	1.36	+	5.13	2.24E-04
+developmental process (GO:0032502)	1001	7	1.53	+	4.58	4.57E-04

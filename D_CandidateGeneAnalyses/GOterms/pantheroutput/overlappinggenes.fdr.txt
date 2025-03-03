@@ -1,0 +1,46 @@
+PANTHER.GO.Slim.Biological.Process,background_genelist.full.txt...REFLIST..12431.,intersection.overlapping.csv..49.,intersection.overlapping.csv..expected.,intersection.overlapping.csv..over.under.,intersection.overlapping.csv..fold.Enrichment.,P.value,intersection.overlapping.csv..FDR.,qvals
+regulation of muscle system process (GO:0090257),9,2,0.04,+,56.38,0.000538,0.0414,0.0414060740740741
+skeletal muscle tissue development (GO:0007519),13,2,0.05,+,39.03,0.00115,0.075,0.074678125
+skeletal muscle organ development (GO:0060538),15,2,0.06,+,33.83,0.00155,0.0945,0.0947323529411765
+adherens junction organization (GO:0034332),23,3,0.09,+,33.09,9.64e-05,0.0111,0.0110462105263158
+homophilic cell adhesion via plasma membrane adhesion molecules (GO:0007156),26,3,0.1,+,29.27,0.00014,0.0133,0.0132236363636364
+smoothened signaling pathway (GO:0007224),18,2,0.07,+,28.19,0.00224,0.122,0.117407
+muscle organ development (GO:0007517),19,2,0.07,+,26.7,0.00249,0.126,0.126200487804878
+cell-cell adhesion via plasma-membrane adhesion molecules (GO:0098742),70,7,0.28,+,25.37,9.4e-09,1.95e-05,1.95332e-05
+synapse assembly (GO:0007416),22,2,0.09,+,23.06,0.00334,0.154,0.154233777777778
+cell junction assembly (GO:0034329),59,5,0.23,+,21.5,3.29e-06,0.00076,0.000759624444444444
+cell-cell junction assembly (GO:0007043),37,3,0.15,+,20.57,0.000407,0.0325,0.0325286923076923
+synapse organization (GO:0050808),64,5,0.25,+,19.82,4.94e-06,0.000933,0.000933210909090909
+cell-cell junction organization (GO:0045216),43,3,0.17,+,17.7,0.000636,0.0472,0.0472002857142857
+cell junction organization (GO:0034330),106,7,0.42,+,16.75,1.72e-07,0.000119,0.000119138666666667
+cell-cell adhesion (GO:0098609),158,7,0.62,+,11.24,2.57e-06,0.000892,0.000759624444444444
+synaptic signaling (GO:0099536),151,6,0.6,+,10.08,2.64e-05,0.00366,0.00365728
+cell morphogenesis (GO:0000902),183,7,0.72,+,9.7,6.81e-06,0.00109,0.00108855230769231
+axon guidance (GO:0007411),106,4,0.42,+,9.57,0.000788,0.0565,0.0545821333333333
+neuron projection guidance (GO:0097485),106,4,0.42,+,9.57,0.000788,0.0546,0.0545821333333333
+cell adhesion (GO:0007155),228,8,0.9,+,8.9,2.67e-06,0.000793,0.000759624444444444
+neuron development (GO:0048666),208,7,0.82,+,8.54,1.57e-05,0.00233,0.00233032857142857
+axonogenesis (GO:0007409),126,4,0.5,+,8.05,0.0015,0.0944,0.0944545454545455
+cell morphogenesis involved in neuron differentiation (GO:0048667),131,4,0.52,+,7.75,0.00173,0.103,0.102712571428571
+chemical synaptic transmission (GO:0007268),138,4,0.54,+,7.35,0.00209,0.121,0.117378918918919
+anterograde trans-synaptic signaling (GO:0098916),138,4,0.54,+,7.35,0.00209,0.117,0.117378918918919
+axon development (GO:0061564),141,4,0.56,+,7.2,0.00226,0.121,0.117407
+trans-synaptic signaling (GO:0099537),141,4,0.56,+,7.2,0.00226,0.118,0.117407
+neuron projection morphogenesis (GO:0048812),151,4,0.6,+,6.72,0.0029,0.143,0.140265
+cell projection morphogenesis (GO:0048858),152,4,0.6,+,6.68,0.00297,0.144,0.140265
+plasma membrane bounded cell projection morphogenesis (GO:0120039),152,4,0.6,+,6.68,0.00297,0.14,0.140265
+neuron projection development (GO:0031175),192,5,0.76,+,6.61,0.000917,0.0615,0.0614685806451613
+neuron differentiation (GO:0030182),272,7,1.07,+,6.53,8.7e-05,0.0113,0.0108178235294118
+cell-cell signaling (GO:0007267),241,6,0.95,+,6.32,0.000347,0.0289,0.02884264
+nervous system development (GO:0007399),404,10,1.59,+,6.28,3.11e-06,0.000807,0.000759624444444444
+generation of neurons (GO:0048699),283,7,1.12,+,6.28,0.000111,0.0116,0.0115329
+cell development (GO:0048468),305,7,1.2,+,5.82,0.000177,0.016,0.0156715833333333
+neurogenesis (GO:0022008),306,7,1.21,+,5.8,0.000181,0.0157,0.0156715833333333
+multicellular organism development (GO:0007275),665,15,2.62,+,5.72,2.07e-08,2.15e-05,2.15073e-05
+anatomical structure morphogenesis (GO:0009653),370,8,1.46,+,5.49,8.85e-05,0.0108,0.0108178235294118
+system development (GO:0048731),542,11,2.14,+,5.15,6.3e-06,0.00109,0.00108855230769231
+multicellular organismal process (GO:0032501),842,15,3.32,+,4.52,4.57e-07,0.000237,0.0002374115
+anatomical structure development (GO:0048856),892,15,3.52,+,4.27,9.55e-07,0.000397,0.000396898
+developmental process (GO:0032502),1001,15,3.95,+,3.8,4.05e-06,0.000841,0.00084159
+signaling (GO:0023052),1311,15,5.17,+,2.9,0.000101,0.011,0.0110462105263158
+cell communication (GO:0007154),1339,15,5.28,+,2.84,0.000128,0.0127,0.0126659047619048
