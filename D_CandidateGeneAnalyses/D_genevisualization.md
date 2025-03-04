@@ -3,23 +3,74 @@ cd /Users/danjack/Documents/Github_local/CardinalisGenomics/D_CandidateGeneAnaly
 
 mkdir -p plot
 
+Rscript /Users/danjack/Documents/Github_local/Genomics-Main/D_GeneVisualization/D2_visualization.local.r both.all.GO.nocorrection
 
 # local testing
 
-ls pantheroutput/pyrr*txt | xargs -n 1 basename > /Users/danjack/Documents/Github_local/CardinalisGenomics/D_CandidateGeneAnalyses/GOterms/GOlistnames.txt
+ls pantheroutput/*b.txt | xargs -n 1 basename > /Users/danjack/Documents/Github_local/CardinalisGenomics/D_CandidateGeneAnalyses/GOterms/GOlistnames.txt
+
+Rscript /Users/danjack/Documents/Github_local/Genomics-Main/D_GeneVisualization/panther_fdr.r pantheroutput/pyrr.fst.50kb.snpeff
+Rscript /Users/danjack/Documents/Github_local/Genomics-Main/D_GeneVisualization/panther_fdr.r pantheroutput/pyrr.raisd.50kb.snpeff
+Rscript /Users/danjack/Documents/Github_local/Genomics-Main/D_GeneVisualization/panther_fdr.r pantheroutput/noca.fst.50kb.snpeff
+Rscript /Users/danjack/Documents/Github_local/Genomics-Main/D_GeneVisualization/panther_fdr.r pantheroutput/noca.raisd.50kb.snpeff
+
+grep -o 'GO:[0-9]\{7\}' pantheroutput/noca.raisd.50kb.snpeff.fdr.txt > noca.raisd.50kb.snpeff.fdr.txt
+
+Rscript /Users/danjack/Documents/Github_local/Genomics-Main/D_GeneVisualization/D2_visualization.local.r noca.fstraisd.50kb.fdr.GO
+Rscript /Users/danjack/Documents/Github_local/Genomics-Main/D_GeneVisualization/D2_visualization.local.r noca.fst.50kb.fdr.GO
+Rscript /Users/danjack/Documents/Github_local/Genomics-Main/D_GeneVisualization/D2_visualization.local.r noca.raisd.50kb.fdr.GO
+Rscript /Users/danjack/Documents/Github_local/Genomics-Main/D_GeneVisualization/D2_visualization.local.r pyrr.fst.50kb.fdr.GO
+Rscript /Users/danjack/Documents/Github_local/Genomics-Main/D_GeneVisualization/D2_visualization.local.r pyrr.raisd.50kb.fdr.GO
+
+
+Rscript /Users/danjack/Documents/Github_local/Genomics-Main/D_GeneVisualization/panther_fdr.r pantheroutput/pyrr.fst.50kb
+Rscript /Users/danjack/Documents/Github_local/Genomics-Main/D_GeneVisualization/panther_fdr.r pantheroutput/bothspecies
+Rscript /Users/danjack/Documents/Github_local/Genomics-Main/D_GeneVisualization/panther_fdr.r pantheroutput/fst
+Rscript /Users/danjack/Documents/Github_local/Genomics-Main/D_GeneVisualization/panther_fdr.r pantheroutput/raisd
+
+Rscript /Users/danjack/Documents/Github_local/Genomics-Main/D_GeneVisualization/panther_fdr.r pantheroutput/overlappinggenes
+grep -o 'GO:[0-9]\{7\}' pantheroutput/overlappinggenes.fdr.txt > overlappinggenes.fdr.txt
+Rscript /Users/danjack/Documents/Github_local/Genomics-Main/D_GeneVisualization/D2_visualization.local.r overlappinggenes.fdr
+
+grep -o 'GO:[0-9]\{7\}' pantheroutput/noca.raisd.50kb.snpeff.fdr.txt
+ > ${file}
+
+while read -r file;
+do
+
+Rscript /Users/danjack/Documents/Github_local/Genomics-Main/D_GeneVisualization/panther_fdr.r pantheroutput/${file%.txt}
+
+grep -o 'GO:[0-9]\{7\}' pantheroutput/${file%.txt}.fdr.txt > ${file%.txt}.fdr.GO.txt
+
+done < /Users/danjack/Documents/Github_local/CardinalisGenomics/D_CandidateGeneAnalyses/GOterms/GOlistnames.txt
 
 
 while read -r file;
 do
 
-grep -o 'GO:[0-9]\{7\}' pantheroutput/${file} > ${file}
-
-Rscript /Users/danjack/Documents/Github_local/Genomics-Main/D_GeneVisualization/D2_visualization.local.r ${file%.txt}
+Rscript /Users/danjack/Documents/Github_local/Genomics-Main/D_GeneVisualization/D2_visualization.local.r ${file%.txt}.fdr.GO
 
 done < /Users/danjack/Documents/Github_local/CardinalisGenomics/D_CandidateGeneAnalyses/GOterms/GOlistnames.txt
 
+cd plot/
+mv *heatmap.png heatmap/
+mv *scatter.png scatter/
+mv *treemap.png tree/
+
+mv *heatmap.pdf heatmap/
+mv *scatter.pdf scatter/
+mv *treemap.pdf tree/
+
+grep -o 'GO:[0-9]\{7\}' pantheroutput/noca.fstraisd.50kb.fdr.txt > noca.fstraisd.50kb.fdr.GO.txt
+
+Rscript /Users/danjack/Documents/Github_local/Genomics-Main/D_GeneVisualization/D2_visualization.local.r noca.fstraisd.50kb.fdr.GO
 
 
+Rscript /Users/danjack/Documents/Github_local/Genomics-Main/D_GeneVisualization/D2_visualization.local.r pyrr.fst.50kb.all.GO
+
+Rscript /Users/danjack/Documents/Github_local/Genomics-Main/D_GeneVisualization/D2_visualization.local.r both.fst.50kb.all.GO.fdr02
+
+Rscript /Users/danjack/Documents/Github_local/Genomics-Main/D_GeneVisualization/D2_visualization.local.r noca.fst.50kb.all.GO
 
 
 
@@ -108,3 +159,54 @@ args <- commandArgs(trailingOnly = TRUE)
 outdir <- args[1]
 scriptdir <- args [2]
 file <- args[3]
+
+
+
+
+
+# visualize overlapping GO terms across analyses
+
+# Analyze overlap between methods
+library(ggvenn)
+
+df_noca_fstraisd<-read.csv("noca.fstraisd.50kb.fdr.GO.txt", header=FALSE, stringsAsFactors = FALSE)[[1]]
+
+df_noca_fst<-read.csv("noca.fst.50kb.fdr.GO.txt", header=FALSE, stringsAsFactors = FALSE)[[1]]
+
+df_noca_raisd<-read.csv("noca.raisd.50kb.fdr.GO.txt", header=FALSE, stringsAsFactors = FALSE)[[1]]
+
+# 
+
+df_pyrr_fst<-read.csv("pyrr.fst.50kb.fdr.GO.txt", header=FALSE, stringsAsFactors = FALSE)[[1]]
+
+df_pyrr_raisd<-read.csv("pyrr.raisd.50kb.fdr.GO.txt", header=FALSE, stringsAsFactors = FALSE)[[1]]
+
+
+# Compute overlaps
+# none across noca analyses
+noca_fst_raisd = intersect(df_noca_fst, df_noca_raisd) # none
+noca_fst_raisd_all <- Reduce(intersect, list(df_noca_fst, df_noca_fstraisd, df_noca_raisd))
+
+pyrr_fst_raisd = intersect(df_pyrr_fst, df_pyrr_raisd) # [1] "GO:0031099" "GO:0042246" # regeneration and tissue regeneration
+
+
+gene_sets <- list(
+  pyrr_fst = df_pyrr_fst,
+  pyrr_raisd = df_pyrr_raisd
+)
+
+
+# pdf(file = "noca_windows.pdf", width = 6, height = 6, useDingbats=FALSE)
+
+ggvenn(gene_sets,
+    columns = c("pyrr_fst", "pyrr_raisd"),
+  stroke_size = 0.5, set_name_size = 4
+  )
+
+# dev.off()
+
+
+# compare between noca and pyrr
+fst = intersect(df_noca_fst, df_pyrr_fst) # none
+raisd = intersect(df_noca_raisd, df_pyrr_raisd)
+# "GO:0008033" "GO:0006399" tRNA processing, tRNA metabolic process

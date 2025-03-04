@@ -45,6 +45,27 @@ done
 
 # further annotate by high fst snps
 
+# find snps with more than 2 individuals varying
+bcftools view -i 'AC>0' pyrrurban_pyrrrural.fst.50000.outlier.ann.snps.vcf.gz 
+
+-Oz -o pyrrurban_pyrrrural.fst.50000.outlier.ann.snps.filtered.vcf.gz
+
+
+bcftools +fill-tags pyrrurban_pyrrrural.fst.50000.outlier.ann.snps.vcf.gz -- -t AC | bcftools view -i 'AC>2 & AC<24' -Oz -o pyrrurban_pyrrrural.filtered.vcf.gz
+
+
+bcftools query -f '%CHROM\t%POS\t%REF\t%ALT\t[%GT ]\n' pyrrurban_pyrrrural.fst.50000.outlier.ann.snps.vcf.gz | \
+awk '{count=0; for (i=5; i<=NF; i++) if ($i ~ /1/) count++; if (count > 2) print $0}' | bcftools view -i 'AC>2 & AC<24' 
+
+-Oz -o pyrrurban_pyrrrural.filtered.vcf.gz
+
+
+
+
+# 
+
+
+
 # just look at maf > 0.2 or something
 # pyrr
 bcftools view -e'MAF>0.3' pyrrurban_pyrrrural.fst.50000.outlier.ann.snps.vcf.gz | bcftools view -e'MAF>0.8' > pyrrurban_pyrrrural.fst.50000.outlier.ann.snps.maf.vcf
@@ -56,25 +77,49 @@ python ~/programs/CardinalisGenomics/Genomics-Main/general_scripts/outlier_to_be
 
 awk 'BEGIN {OFS="\t"}; {print $1, $2 - 1, $2}' pyrrurban_pyrrrural.fst.1.outlier.snps.bed > pyrrurban_pyrrrural.fst.1.outlier.regions.bed
 
-bedtools intersect -a /xdisk/mcnew/dannyjackson/cardinals/datafiles/genotype_calls/cardinals_filtered.snpEffann.vcf -b pyrrurban_pyrrrural.fst.50000.outlier.regions.bed -wa > pyrrurban_pyrrrural.fst.50000.outlier.ann.maf.vcf
+awk '{if(/#/)print;else exit}' /xdisk/mcnew/dannyjackson/cardinals/datafiles/genotype_calls/cardinals_filtered.snpEffann.vcf > pyrrurban_pyrrrural.fst.50000.outlier.ann.vcf
 
-bedtools intersect -a pyrrurban_pyrrrural.fst.50000.outlier.ann.maf.vcf -b pyrrurban_pyrrrural.fst.1.outlier.regions.bed -wa > pyrrurban_pyrrrural.fst.50000.outlier.ann.snps.maf.vcf 
+bedtools intersect -a /xdisk/mcnew/dannyjackson/cardinals/datafiles/genotype_calls/cardinals_filtered.snpEffann.vcf -b pyrrurban_pyrrrural.fst.50000.outlier.regions.bed -wa >> pyrrurban_pyrrrural.fst.50000.outlier.ann.vcf
 
+awk '{if(/#/)print;else exit}' pyrrurban_pyrrrural.fst.50000.outlier.ann.vcf > pyrrurban_pyrrrural.fst.50000.outlier.ann.snps.vcf
 
->> ${VCF_OUT}
-
-
-
+bedtools intersect -a tmp.vcf -b pyrrurban_pyrrrural.fst.1.outlier.regions.bed -wa > pyrrurban_pyrrrural.fst.50000.outlier.ann.snps.vcf 
 
 
+grep -e 'MODERATE' -e 'HIGH' pyrrurban_pyrrrural.fst.50000.outlier.ann.snps.vcf | awk '{print $8}' | awk -F"|" '{print $5}' | grep -v 'LOC' | sort -u > /xdisk/mcnew/dannyjackson/cardinals/analyses/genelist/final_gene_lists/pyrr.fst.50kb.snpeff.txt
 
+grep -e 'chromosome_number_variation' -e 'exon_loss_variant' -e 'frameshift_variant' -e 'rare_amino_acid_variant' -e 'splice_acceptor_variant' -e 'splice_donor_variant' -e 'start_lost' -e 'stop_gained' -e 'stop_lost' -e 'transcript_ablation' -e '3_prime_UTR_truncation & exon_loss' -e '5_prime_UTR_truncation & exon_loss_variant' -e 'coding_sequence_variant' -e 'conservative_inframe_deletion' -e 'conservative_inframe_insertion' -e 'disruptive_inframe_deletion' -e 'disruptive_inframe_insertion' -e 'missense_variant' -e 'regulatory_region_ablation' -e 'splice_region_variant' -e 'TFBS_ablation' pyrrurban_pyrrrural.fst.50000.outlier.ann.vcf | awk '{print $8}' | awk -F"|" '{print $5}' | grep -v 'LOC' | sort -u > /xdisk/mcnew/dannyjackson/cardinals/analyses/genelist/final_gene_lists/pyrr.fst.50kb.snpeff.txt
 
-
-
-
+cat  pyrrurban_pyrrrural.fst.50000.outlier.ann.vcf | awk '{print $8}' | awk -F"|" '{print $5}' | grep -v 'LOC' | sort -u | wc -l 
 
 
 
+
+
+# FDR adjust p values 
+
+
+
+
+
+
+
+
+
+
+
+pyrr.fst.50kb.snpeff.txt (raw P-value)
+
+pvals <- c(0.001, 0.02, 0.05, 0.10, 0.15, 0.25, 0.40)
+
+# FDR correction
+qvals <- p.adjust(pvals, method = "fdr")
+
+# Filter q-values greater than 0.2
+qvals_filtered <- qvals[qvals > 0.2]
+
+# Print results
+qvals_filtered
 
 # DXY'/xdisk/mcnew/dannyjackson/cardinals/analyses/fst/pyrrurban_pyrrrural/pyrrurban_pyrrrural.fst_500000.snps.outlier.csv
 # Define species, environments, and window sizes
@@ -250,132 +295,272 @@ cp * /home/u15/dannyjackson/programs/CardinalisGenomics/D_CandidateGeneAnalyses/
 
 # Analyze overlap between methods
 library(ggvenn)
-# NOCA
-df_noca_fst<-read.csv("noca.fst.50000kb.genenames_filtered.txt", header=FALSE, stringsAsFactors = FALSE)[[1]]
-df_noca_dxy<-read.csv("noca.dxy.50000kb.genenames_filtered.txt", header=FALSE, stringsAsFactors = FALSE)[[1]]
-df_noca_raisd<-read.csv("nocaurban.raisd.50kb.unique.genenames_filtered.txt", header=FALSE, stringsAsFactors = FALSE)[[1]]
 
+df_noca_fst<-read.csv("noca.fst.50000kb.genenames_filtered.txt", header=FALSE, stringsAsFactors = FALSE)[[1]]
+df_noca_raisd<-read.csv("nocaurban.raisd.50kb.unique.genenames_filtered.txt", header=FALSE, stringsAsFactors = FALSE)[[1]]
+df_pyrr_fst<-read.csv("pyrr.fst.50000kb.genenames_filtered.txt", header=FALSE, stringsAsFactors = FALSE)[[1]]
+df_pyrr_raisd<-read.csv("pyrrurban.raisd.50kb.unique.genenames_filtered.txt", header=FALSE, stringsAsFactors = FALSE)[[1]]
+df_owl_tmp<-read.csv("BurrowingOwlGenes.txt", header=FALSE, stringsAsFactors = FALSE)[[1]]
+df_owl<-unique(df_owl_tmp)
+df_lizard<-read.csv("LizardUrbanGenes.txt", header=FALSE, stringsAsFactors = FALSE)[[1]]
+df_lizardmorph<-read.csv("LizardMorphologyGenes.txt", header=FALSE, stringsAsFactors = FALSE)[[1]]
+df_tit<-read.csv("GreatTitGenes.txt", header=FALSE, stringsAsFactors = FALSE)[[1]]
+
+df_noca_fstraisd <- unique(c(df_noca_fst, df_noca_raisd))
+df_pyrr_fstraisd <- unique(c(df_pyrr_fst, df_pyrr_raisd))
+
+# compare with owl and great tit
 gene_sets <- list(
-  noca_fst = df_noca_fst,
-  noca_dxy = df_noca_dxy,
-  noca_raisd = df_noca_raisd
+  noca = df_noca_fstraisd,
+  pyrr = df_pyrr_fstraisd,
+  owl = df_owl,
+  tit = df_tit
 )
 
-# Compute overlaps
-noca_fst_dxy = intersect(df_noca_fst, df_noca_dxy)
-noca_fst_raisd = intersect(df_noca_fst, df_noca_raisd)
-noca_dxy_raisd = intersect(df_noca_dxy, df_noca_raisd)
-noca_fst_dxy_raisd <- Reduce(intersect, list(df_noca_fst, df_noca_dxy, df_noca_raisd))
+intersect_owl <- Reduce(intersect, list(df_noca_fstraisd, df_pyrr_fstraisd, df_owl))
+write(intersect_owl, file="intersection.owl.csv")
 
+intersect_owl_noca = intersect(df_noca_fstraisd, df_owl)
+write(intersect_owl_noca, file="intersection.owl_noca.csv")
 
+intersect_owl_pyrr = intersect(df_pyrr_fstraisd, df_owl)
+write(intersect_owl_pyrr, file="intersection.owl_pyrr.csv")
 
-write(noca_fst_dxy, file="intersection.noca_fst_dxy.csv")
-write(noca_fst_raisd, file="intersection.noca_fst_raisd.csv")
-write(noca_dxy_raisd, file="intersection.noca_dxy_raisd.csv")
-write(noca_fst_dxy_raisd, file="intersection.noca_fst_dxy_raisd.csv")
-
-pdf(file = "noca_windows.pdf", width = 6, height = 6, useDingbats=FALSE)
+pdf(file = "intersection.owl.tit.pdf", width = 6, height = 6, useDingbats=FALSE)
 
 ggvenn(gene_sets,
-    columns = c("noca_fst", "noca_dxy", "noca_raisd"),
+    columns = c("noca", "pyrr", "owl", "tit"),
   stroke_size = 0.5, set_name_size = 4
   )
 dev.off()
 
-# PYRR
 
-df_pyrr_fst<-read.csv("pyrr.fst.50000kb.genenames_filtered.txt", header=FALSE, stringsAsFactors = FALSE)[[1]]
-df_pyrr_dxy<-read.csv("pyrr.dxy.50000kb.genenames_filtered.txt", header=FALSE, stringsAsFactors = FALSE)[[1]]
-df_pyrr_raisd<-read.csv("pyrrurban.raisd.50kb.unique.genenames_filtered.txt", header=FALSE, stringsAsFactors = FALSE)[[1]]
+# identify genes in overlapping bits
+# noca owl
+noca_owl = intersect(df_noca_fstraisd, df_owl)
+write(noca_owl, file="intersection.noca_owl.csv")
+# noca owl tit
+noca_owl_tit <- Reduce(intersect, list(df_noca_fstraisd, df_owl, df_tit))
+write(noca_owl_tit, file="intersection.noca_owl_tit.csv")
+# noca tit
+noca_tit = intersect(df_noca_fstraisd, df_tit)
+write(noca_tit, file="intersection.noca_tit.csv")
+# noca pyrr owl
+noca_pyrr_owl <- Reduce(intersect, list(df_noca_fstraisd, df_owl, df_pyrr_fstraisd))
+write(noca_pyrr_owl, file="intersection.noca_pyrr_owl.csv")
+# pyrr owl
+pyrr_owl = intersect(df_pyrr_fstraisd, df_owl)
+write(pyrr_owl, file="intersection.pyrr_owl.csv")
+# pyrr tit
+pyrr_tit = intersect(df_pyrr_fstraisd, df_tit)
+write(pyrr_tit, file="intersection.pyrr_tit.csv")
+# owl tit
+owl_tit = intersect(df_owl, df_tit)
+write(owl_tit, file="intersection.owl_tit.csv")
 
+
+# genes in 2/4 lists
+fst = intersect(df_noca_fst, df_pyrr_fst)
+
+# genes in 3/4 lists
+intersect_nocaall_pyrrfst <- Reduce(intersect, list(df_noca_fst, df_noca_raisd, df_pyrr_fst))
+
+
+# genes in either cardinal species + one other species
+overlapping<-unique(c(noca_owl, noca_tit, pyrr_owl, pyrr_tit))
+write(overlapping, file="intersection.overlapping.csv")
+
+
+
+
+
+
+
+
+
+
+
+# compare between cardinals
 gene_sets <- list(
+  noca_fst = df_noca_fst,
+  noca_raisd = df_noca_raisd,
   pyrr_fst = df_pyrr_fst,
-  pyrr_dxy = df_pyrr_dxy,
   pyrr_raisd = df_pyrr_raisd
 )
 
+
+
+
 # Compute overlaps
-pyrr_fst_dxy = intersect(df_pyrr_fst, df_pyrr_dxy)
+noca_fst_raisd = intersect(df_noca_fst, df_noca_raisd)
 pyrr_fst_raisd = intersect(df_pyrr_fst, df_pyrr_raisd)
-pyrr_dxy_raisd = intersect(df_pyrr_dxy, df_pyrr_raisd)
-pyrr_fst_dxy_raisd <- Reduce(intersect, list(df_pyrr_fst, df_pyrr_dxy, df_pyrr_raisd))
+noca_pyrr = intersect(df_noca_fstraisd, df_pyrr_fstraisd)
+noca_pyrr_allanalyses = intersect(noca_fst_raisd, pyrr_fst_raisd)
+raisd = intersect(df_noca_raisd, df_pyrr_raisd)
+fst = intersect(df_noca_fst, df_pyrr_fst)
 
+# genes in 3/4 lists
+intersect_nocaall_pyrrfst <- Reduce(intersect, list(df_noca_fst, df_noca_raisd, df_pyrr_fst))
+intersect_nocaall_pyrrraisd <- Reduce(intersect, list(df_noca_fst, df_noca_raisd, df_pyrr_raisd))
+intersect_nocafst_pyrrall <- Reduce(intersect, list(df_pyrr_fst, df_pyrr_raisd, df_noca_fst))
+intersect_nocaraisd_pyrrall <- Reduce(intersect, list(df_pyrr_fst, df_pyrr_raisd, df_noca_raisd))
 
+intersect_3of4 <- unique(vctrs::vec_c(intersect_nocaall_pyrrfst, intersect_nocaall_pyrrraisd, intersect_nocafst_pyrrall, intersect_nocaraisd_pyrrall))
+write(intersect_3of4, file="intersection.3of4.csv")
 
-write(pyrr_fst_dxy, file="intersection.pyrr_fst_dxy.csv")
+write(raisd, file="intersection.raisd.csv")
+write(fst, file="intersection.fst.csv")
+
+write(noca_fst_raisd, file="intersection.noca_fst_raisd.csv")
 write(pyrr_fst_raisd, file="intersection.pyrr_fst_raisd.csv")
-write(pyrr_dxy_raisd, file="intersection.pyrr_dxy_raisd.csv")
-write(pyrr_fst_dxy_raisd, file="intersection.pyrr_fst_dxy_raisd.csv")
+write(noca_pyrr, file="intersection.noca_pyrr.csv")
+write(noca_pyrr_allanalyses, file="intersection.noca_pyrr_allanalyses.csv")
 
-pdf(file = "pyrr_windows.pdf", width = 6, height = 6, useDingbats=FALSE)
+pdf(file = "intersection.pdf", width = 6, height = 6, useDingbats=FALSE)
 
 ggvenn(gene_sets,
-    columns = c("pyrr_fst", "pyrr_dxy", "pyrr_raisd"),
+    columns = c("noca_fst", "noca_raisd", "pyrr_raisd",  "pyrr_fst"),
   stroke_size = 0.5, set_name_size = 4
   )
 dev.off()
 
+# test for significance in overlap
+# noca vs pyrr
+background<-read.csv("background_genelist.full.txt", header=FALSE, stringsAsFactors = FALSE)[[1]]
+N=length(background) # 16264
+k = 132
+m = length(df_noca_fstraisd) # 667
+n = length(df_pyrr_fstraisd) # 895
 
-# compute overlaps between species
-both_fst = intersect(df_noca_fst, df_pyrr_fst)
-both_raisd = intersect(df_pyrr_raisd, df_noca_raisd)
-both_dxy = intersect(df_noca_dxy, df_pyrr_dxy)
+# fisher.test(matrix(c(k, m-k, n-k, N-m-n+k), nrow = 2))
 
-df_noca_all<-read.csv("noca.all.genenames_filtered.txt", header=FALSE, stringsAsFactors = FALSE)[[1]]
-df_pyrr_all<-read.csv("pyrr.all.genenames_filtered.txt", header=FALSE, stringsAsFactors = FALSE)[[1]]
+fisher.test(matrix(c(132, 684-132, 924-132, 16264-684-924+132), nrow = 2))
 
-both_all = intersect(df_noca_all, df_pyrr_all)
-write(both_all, file="both.all.csv")
+Fisher's Exact Test for Count Data
 
-library(ggvenn) 
+data:  matrix(c(132, 684 - 132, 924 - 132, 16264 - 684 - 924 + 132), nrow = 2)
+p-value < 2.2e-16
+alternative hypothesis: true odds ratio is not equal to 1
+95 percent confidence interval:
+3.615506 5.483880
+sample estimates:
+odds ratio 
+4.464239 
 
+# noca vs owl
+N=length(background) # 16264
+k = length(intersect(df_noca_fstraisd, df_owl)) # 21
 
-gene_sets <- list(
-  pyrr_all = df_pyrr_all,
-  noca_all = df_noca_all
-)
+m = length(df_noca_fstraisd) # 684
+n = length(df_owl) # 174
 
-pdf(file = "both_windows.pdf", width = 6, height = 6, useDingbats=FALSE)
-
-ggvenn(gene_sets,
-    columns = c("pyrr_all", "noca_all"),
-  stroke_size = 0.5, set_name_size = 4
-  )
-dev.off()
-
-
-
-# subsets, both species
-cat intersection.pyrr* | sort -u > intersection.pyrr_all.csv
-cat intersection.noca* | sort -u > intersection.noca_all.csv
-
-library(ggvenn)
-df_pyrr_all<-read.csv("intersection.pyrr_all.csv", header=TRUE, stringsAsFactors = FALSE)[[1]]
-df_noca_all<-read.csv("intersection.noca_all.csv", header=TRUE, stringsAsFactors = FALSE)[[1]]
-
-gene_sets <- list(
-  pyrr_all = df_pyrr_all,
-  noca_all = df_noca_all
-)
-
-# Compute overlaps
-both = intersect(df_pyrr_all, df_noca_all)
-
-write(both, file="intersection.both.csv")
-
-pdf(file = "both_intersection_windows.pdf", width = 6, height = 6, useDingbats=FALSE)
-
-ggvenn(gene_sets,
-    columns = c("pyrr_all", "noca_all"),
-  stroke_size = 0.5, set_name_size = 4
-  )
-dev.off()
+fisher.test(matrix(c(k, m-k, n-k, N-m-n+k), nrow = 2))
 
 
+        Fisher's Exact Test for Count Data
+
+data:  matrix(c(k, m - k, n - k, N - m - n + k), nrow = 2)
+p-value = 9.369e-06
+alternative hypothesis: true odds ratio is not equal to 1
+95 percent confidence interval:
+ 1.960531 5.238269
+sample estimates:
+odds ratio 
+  3.280927 
+
+# noca vs tit
+N=length(background) # 16264
+k = length(intersect(df_noca_fstraisd, df_tit)) # 8
+
+m = length(df_noca_fstraisd) # 684
+n = length(df_tit) # 73
+
+fisher.test(matrix(c(k, m-k, n-k, N-m-n+k), nrow = 2))
 
 
+        Fisher's Exact Test for Count Data
+
+data:  matrix(c(k, m - k, n - k, N - m - n + k), nrow = 2)
+p-value = 0.00987
+alternative hypothesis: true odds ratio is not equal to 1
+95 percent confidence interval:
+ 1.196662 6.094150
+sample estimates:
+odds ratio 
+  2.900475 
 
 
+# pyrr vs owl
+N=length(background) # 16264
+k = length(intersect(df_pyrr_fstraisd, df_owl)) # 19
+
+m = length(df_pyrr_fstraisd) # 895
+n = length(df_owl) # 174
+
+fisher.test(matrix(c(k, m-k, n-k, N-m-n+k), nrow = 2))
+
+        Fisher's Exact Test for Count Data
+
+data:  matrix(c(k, m - k, n - k, N - m - n + k), nrow = 2)
+p-value = 0.003943
+alternative hypothesis: true odds ratio is not equal to 1
+95 percent confidence interval:
+ 1.241715 3.458386
+sample estimates:
+odds ratio 
+  2.128775 
+
+# pyrr vs tit
+N=length(background) # 16264
+k = length(intersect(df_pyrr_fstraisd, df_tit)) # 5
+
+m = length(df_pyrr_fstraisd) # 895
+n = length(df_tit) # 73
+
+fisher.test(matrix(c(k, m-k, n-k, N-m-n+k), nrow = 2))
+
+
+        Fisher's Exact Test for Count Data
+
+data:  matrix(c(k, m - k, n - k, N - m - n + k), nrow = 2)
+p-value = 0.6012
+alternative hypothesis: true odds ratio is not equal to 1
+95 percent confidence interval:
+ 0.396738 3.108486
+sample estimates:
+odds ratio 
+  1.264106 
+
+
+# owl vs tit
+N=length(background) # 16264
+k = length(intersect(df_owl, df_tit)) # 5
+
+m = length(df_owl) # 895
+n = length(df_tit) # 73
+
+fisher.test(matrix(c(k, m-k, n-k, N-m-n+k), nrow = 2))
+
+
+# p adjust
+# noca_pyrr, noca_owl, noca_tit, pyrr_owl, pyrr_tit
+p = c(2.2e-16, 9.369e-06, 0.00987, 0.003943, 0.6012)
+options(scipen = 999)
+p.adjust(p, method = "fdr")
+0.0000000000000011 # noca pyrr
+0.0000234225000000 # noca owl
+0.0123375000000000 # noca tit
+0.0065716666666667 # pyrr owl
+0.6012000000000000 # pyrr tit
+
+# noca_pyrr, noca_owl, noca_tit, pyrr_owl, pyrr_tit, owl_tit
+p = c(2.2e-16, 9.369e-06, 0.00987, 0.003943, 0.6012, 0.007766)
+options(scipen = 999)
+p.adjust(p, method = "fdr")
+[1] 0.00000000000000132 0.00002810700000000 0.01184400000000000
+[4] 0.00788600000000000 0.60119999999999996 0.01164900000000000
+options(scipen = 0)
+p.adjust(p, method = "fdr")
 # GO Term analysis
 # Remove extraneous information from Panther output and only leave the GO terms
 

@@ -79,3 +79,25 @@ for win in "${window_sizes[@]}"; do
     done
 done
 
+
+window_sizes=( 1 )
+
+# Iterate over each combination
+for win in "${window_sizes[@]}"; do
+    for sp in "${species[@]}"; do
+        time_limit=${time_limits[$win]}
+
+        sbatch --account=mcnew \
+               --job-name=fst_${win}_${sp} \
+               --partition=standard \
+               --mail-type=ALL \
+               --output=slurm_output/output.fst_${win}_${sp}.%j \
+               --nodes=1 \
+               --ntasks-per-node=4 \
+               --time=1:00:00 \
+               --mem=50gb \
+               ~/programs/CardinalisGenomics/Genomics-Main/C_SelectionAnalysis/fst/fst.sh \
+               -p ~/programs/CardinalisGenomics/${sp}_params_fst.sh \
+               -w $win -s $win 
+    done
+done
