@@ -1,19 +1,19 @@
-PANTHER.GO.Slim.Biological.Process,background_genelist.full.txt...REFLIST..12732.,noca.fstraisd.50000kb.genenames_filtered.txt..540.,noca.fstraisd.50000kb.genenames_filtered.txt..expected.,noca.fstraisd.50000kb.genenames_filtered.txt..over.under.,noca.fstraisd.50000kb.genenames_filtered.txt..fold.Enrichment.,P.value,noca.fstraisd.50000kb.genenames_filtered.txt..FDR.,qvals
-platelet aggregation (GO:0070527),5,4,0.21,+,18.86,1.55e-05,0.0322,0.01612
-protein activation cascade (GO:0072376),5,4,0.21,+,18.86,1.55e-05,0.0161,0.01612
-negative regulation of blood coagulation (GO:0030195),4,3,0.17,+,17.68,0.000294,0.0764,0.0642909090909091
-platelet activation (GO:0030168),6,4,0.25,+,15.72,4.48e-05,0.0233,0.0215072
-negative regulation of coagulation (GO:0050819),5,3,0.21,+,14.15,0.000712,0.106,0.105782857142857
-homotypic cell-cell adhesion (GO:0034109),7,4,0.3,+,13.47,0.000101,0.0351,0.0350133333333333
-hemostasis (GO:0007599),9,4,0.38,+,10.48,0.00034,0.0786,0.0642909090909091
-blood coagulation (GO:0007596),9,4,0.38,+,10.48,0.00034,0.0707,0.0642909090909091
-coagulation (GO:0050817),9,4,0.38,+,10.48,0.00034,0.0643,0.0642909090909091
-negative regulation of response to external stimulus (GO:0032102),16,6,0.68,+,8.84,3.15e-05,0.0218,0.0215072
-skeletal muscle tissue development (GO:0007519),14,5,0.59,+,8.42,0.000196,0.0583,0.05824
-skeletal muscle organ development (GO:0060538),16,5,0.68,+,7.37,0.000399,0.0691,0.06916
-muscle organ development (GO:0007517),20,5,0.85,+,5.89,0.00123,0.16,0.159058823529412
-muscle tissue development (GO:0060537),31,6,1.31,+,4.56,0.00168,0.195,0.194133333333333
-cell junction assembly (GO:0034329),60,9,2.54,+,3.54,0.00089,0.123,0.123413333333333
-cell-cell adhesion via plasma-membrane adhesion molecules (GO:0098742),70,10,2.97,+,3.37,0.000694,0.111,0.105782857142857
-cell-cell adhesion (GO:0098609),161,19,6.83,+,2.78,5.17e-05,0.0215,0.0215072
-cell adhesion (GO:0007155),231,21,9.8,+,2.14,0.0013,0.159,0.159058823529412
+PANTHER.GO.Slim.Biological.Process	background_genelist.full.txt...REFLIST..12732.	noca.fstraisd.50000kb.genenames_filtered.txt..540.	noca.fstraisd.50000kb.genenames_filtered.txt..expected.	noca.fstraisd.50000kb.genenames_filtered.txt..over.under.	noca.fstraisd.50000kb.genenames_filtered.txt..fold.Enrichment.	P.value	noca.fstraisd.50000kb.genenames_filtered.txt..FDR.	qvals
+platelet aggregation (GO:0070527)	5	4	0.21	+	18.86	1.55E-05	0.0322	0.01612
+protein activation cascade (GO:0072376)	5	4	0.21	+	18.86	1.55E-05	0.0161	0.01612
+negative regulation of blood coagulation (GO:0030195)	4	3	0.17	+	17.68	0.000294	0.0764	0.064290909
+platelet activation (GO:0030168)	6	4	0.25	+	15.72	4.48E-05	0.0233	0.0215072
+negative regulation of coagulation (GO:0050819)	5	3	0.21	+	14.15	0.000712	0.106	0.105782857
+homotypic cell-cell adhesion (GO:0034109)	7	4	0.3	+	13.47	0.000101	0.0351	0.035013333
+hemostasis (GO:0007599)	9	4	0.38	+	10.48	0.00034	0.0786	0.064290909
+blood coagulation (GO:0007596)	9	4	0.38	+	10.48	0.00034	0.0707	0.064290909
+coagulation (GO:0050817)	9	4	0.38	+	10.48	0.00034	0.0643	0.064290909
+negative regulation of response to external stimulus (GO:0032102)	16	6	0.68	+	8.84	3.15E-05	0.0218	0.0215072
+skeletal muscle tissue development (GO:0007519)	14	5	0.59	+	8.42	0.000196	0.0583	0.05824
+skeletal muscle organ development (GO:0060538)	16	5	0.68	+	7.37	0.000399	0.0691	0.06916
+muscle organ development (GO:0007517)	20	5	0.85	+	5.89	0.00123	0.16	0.159058824
+muscle tissue development (GO:0060537)	31	6	1.31	+	4.56	0.00168	0.195	0.194133333
+cell junction assembly (GO:0034329)	60	9	2.54	+	3.54	0.00089	0.123	0.123413333
+cell-cell adhesion via plasma-membrane adhesion molecules (GO:0098742)	70	10	2.97	+	3.37	0.000694	0.111	0.105782857
+cell-cell adhesion (GO:0098609)	161	19	6.83	+	2.78	5.17E-05	0.0215	0.0215072
+cell adhesion (GO:0007155)	231	21	9.8	+	2.14	0.0013	0.159	0.159058824

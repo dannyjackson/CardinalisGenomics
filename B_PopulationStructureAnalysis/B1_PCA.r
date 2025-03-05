@@ -216,6 +216,109 @@ xlab="Individual #", ylab="Ancestry", border=NA)
 dev.off()
 
 
+# plot PCA by each species
+# northern cardinals
+cd /xdisk/mcnew/dannyjackson/cardinals/datafiles/geno_likelihoods/all/
+
+plink --bed /xdisk/mcnew/dannyjackson/cardinals/datafiles/geno_likelihoods/all/genolike_pruned.bed --bim /xdisk/mcnew/dannyjackson/cardinals/datafiles/geno_likelihoods/all/genolike_pruned.bim --fam /xdisk/mcnew/dannyjackson/cardinals/datafiles/geno_likelihoods/all/genolike_pruned.fam --allow-extra-chr --snps-only 'just-acgt' --remove /xdisk/mcnew/dannyjackson/cardinals/referencelists/subsetnoca.txt --out genolike_pruned_subset_noca --make-bed 
+
+pcangsd -p /xdisk/mcnew/dannyjackson/cardinals/datafiles/geno_likelihoods/all/genolike_pruned_subset_noca -o /xdisk/mcnew/dannyjackson/cardinals/analyses/pca/genolike_pruned_subset_noca -t 12 -e 2 --selection --admix
+
+# plot it in R
+cd /xdisk/mcnew/dannyjackson/cardinals/analyses/pca/
+
+C <- as.matrix(read.table("genolike_pruned_subset_noca.cov")) # Reads estimated covariance matrix
+tab <- read.table("/xdisk/mcnew/dannyjackson/cardinals/referencelists/sample_info_subset_noca.txt", header = TRUE)
+labs <- data.frame(tab)
+# Plot PCA plot
+e <- eigen(C)
+PC1.PV.full = (e$values[1]/sum(e$values))*100
+PC2.PV.full = (e$values[2]/sum(e$values))*100
+PC1.PV = round(PC1.PV.full, digits = 2)
+PC2.PV = round(PC2.PV.full, digits = 2)
+
+labs$Species <- factor(labs$Species)
+labs$Treatment <- factor(labs$Treatment)
+labs$Sample <- factor(labs$Sample)
+
+pdf(file = "pca_pruned_noca_species.pdf", useDingbats=FALSE)
+plot(e$vectors[,1:2], xlab=paste0("PC1 (Percent Variation =",PC1.PV,"%)"), ylab=paste0("PC2 (Percent Variation =",PC2.PV,"%)"), main="PCA", col=as.integer(labs$Species))
+legend("topright", legend=levels(labs$Species), pch="o", col=1:nlevels(labs$Species))
+dev.off()
+
+pdf(file = "pca_pruned_noca_treatment.pdf", useDingbats=FALSE)
+plot(e$vectors[,1:2], xlab=paste0("PC1 (Percent Variation =",PC1.PV,"%)"), ylab=paste0("PC2 (Percent Variation =",PC2.PV,"%)"), main="PCA", col=as.integer(labs$Treatment))
+legend("topright", legend=levels(labs$Treatment), pch="o", col=1:nlevels(labs$Treatment))
+dev.off()
+
+pdf(file = "pca_pruned_noca_sample.pdf", useDingbats=FALSE)
+plot(e$vectors[,1:2], xlab=paste0("PC1 (Percent Variation =",PC1.PV,"%)"), ylab=paste0("PC2 (Percent Variation =",PC2.PV,"%)"), main="PCA", col=as.integer(labs$Sample))
+legend("topright", legend=levels(labs$Sample), pch="o", col=1:nlevels(labs$Sample))
+dev.off()
+
+# plot admixture
+tbl=read.table("genolike_pruned_subset_noca.admix.3.Q")
+pdf(file = "admix_pruned_noca.pdf",   # The directory you want to save the file in
+    width = 8, # The width of the plot in inches
+    height = 4)
+barplot(t(as.matrix(tbl)), col=rainbow(3),
+xlab="Individual #", ylab="Ancestry", border=NA)
+dev.off()
+
+# just pyrrhuloxia
+
+cd /xdisk/mcnew/dannyjackson/cardinals/datafiles/geno_likelihoods/all/
+
+plink --bed /xdisk/mcnew/dannyjackson/cardinals/datafiles/geno_likelihoods/all/genolike_pruned.bed --bim /xdisk/mcnew/dannyjackson/cardinals/datafiles/geno_likelihoods/all/genolike_pruned.bim --fam /xdisk/mcnew/dannyjackson/cardinals/datafiles/geno_likelihoods/all/genolike_pruned.fam --allow-extra-chr --snps-only 'just-acgt' --remove /xdisk/mcnew/dannyjackson/cardinals/referencelists/subsetpyrr.txt --out genolike_pruned_subset_pyrr --make-bed 
+
+pcangsd -p /xdisk/mcnew/dannyjackson/cardinals/datafiles/geno_likelihoods/all/genolike_pruned_subset_pyrr -o /xdisk/mcnew/dannyjackson/cardinals/analyses/pca/genolike_pruned_subset_pyrr -t 12 -e 2 --selection --admix
+
+# plot it in R
+cd /xdisk/mcnew/dannyjackson/cardinals/analyses/pca/
+
+C <- as.matrix(read.table("genolike_pruned_subset_pyrr.cov")) # Reads estimated covariance matrix
+tab <- read.table("/xdisk/mcnew/dannyjackson/cardinals/referencelists/sample_info_subset_pyrr.txt", header = TRUE)
+labs <- data.frame(tab)
+# Plot PCA plot
+e <- eigen(C)
+PC1.PV.full = (e$values[1]/sum(e$values))*100
+PC2.PV.full = (e$values[2]/sum(e$values))*100
+PC1.PV = round(PC1.PV.full, digits = 2)
+PC2.PV = round(PC2.PV.full, digits = 2)
+
+labs$Species <- factor(labs$Species)
+labs$Treatment <- factor(labs$Treatment)
+labs$Sample <- factor(labs$Sample)
+
+pdf(file = "pca_pruned_pyrr_species.pdf", useDingbats=FALSE)
+plot(e$vectors[,1:2], xlab=paste0("PC1 (Percent Variation =",PC1.PV,"%)"), ylab=paste0("PC2 (Percent Variation =",PC2.PV,"%)"), main="PCA", col=as.integer(labs$Species))
+legend("topright", legend=levels(labs$Species), pch="o", col=1:nlevels(labs$Species))
+dev.off()
+
+pdf(file = "pca_pruned_pyrr_treatment.pdf", useDingbats=FALSE)
+plot(e$vectors[,1:2], xlab=paste0("PC1 (Percent Variation =",PC1.PV,"%)"), ylab=paste0("PC2 (Percent Variation =",PC2.PV,"%)"), main="PCA", col=as.integer(labs$Treatment))
+legend("topright", legend=levels(labs$Treatment), pch="o", col=1:nlevels(labs$Treatment))
+dev.off()
+
+pdf(file = "pca_pruned_pyrr_sample.pdf", useDingbats=FALSE)
+plot(e$vectors[,1:2], xlab=paste0("PC1 (Percent Variation =",PC1.PV,"%)"), ylab=paste0("PC2 (Percent Variation =",PC2.PV,"%)"), main="PCA", col=as.integer(labs$Sample))
+legend("topright", legend=levels(labs$Sample), pch="o", col=1:nlevels(labs$Sample))
+dev.off()
+
+# plot admixture
+tbl=read.table("genolike_pruned_subset_pyrr.admix.3.Q")
+pdf(file = "admix_pruned_pyrr.pdf",   # The directory you want to save the file in
+    width = 8, # The width of the plot in inches
+    height = 4)
+barplot(t(as.matrix(tbl)), col=rainbow(3),
+xlab="Individual #", ylab="Ancestry", border=NA)
+dev.off()
+
+
+
+
+
+
 
 # rerun selection using subset individuals
 
