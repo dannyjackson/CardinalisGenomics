@@ -210,3 +210,30 @@ ggvenn(gene_sets,
 fst = intersect(df_noca_fst, df_pyrr_fst) # none
 raisd = intersect(df_noca_raisd, df_pyrr_raisd)
 # "GO:0008033" "GO:0006399" tRNA processing, tRNA metabolic process
+
+
+# make supplementary table 2, list of all candidate genes
+# Define file names
+files = {
+    "PYRR_fst": "pyrr.fst.50000kb.genenames_filtered.txt",
+    "PYRR_raisd": "pyrrurban.raisd.50kb.unique.genenames_filtered.txt",
+    "NOCA_fst": "noca.fst.50000kb.genenames_filtered.txt",
+    "NOCA_raisd": "nocaurban.raisd.50kb.unique.genenames_filtered.txt",
+    "BurrowingOwl": "BurrowingOwlGenes.txt",
+    "GreatTit": "GreatTitGenes.txt"
+}
+
+# Read gene lists into sets
+gene_sets = {key: set(open(fname).read().splitlines()) for key, fname in files.items()}
+
+# Get all unique genes
+all_genes = sorted(set().union(*gene_sets.values()))
+
+# Write output file
+with open("gene_presence_summary.csv", "w") as out:
+    out.write("Gene,NOCA_fst,NOCA_raisd,PYRR_fst,PYRR_raisd,BurrowingOwl,GreatTit\n")
+    for gene in all_genes:
+        out.write(f"{gene}," + ",".join(str(int(gene in gene_sets[col])) for col in ["NOCA_fst", "NOCA_raisd", "PYRR_fst", "PYRR_raisd", 
+        "BurrowingOwl", "GreatTit"]) + "\n")
+
+print("Summary file 'gene_presence_summary.csv' created successfully.")
