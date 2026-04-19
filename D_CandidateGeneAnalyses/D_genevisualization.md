@@ -13,14 +13,24 @@ Rscript /Users/danjack/Documents/Github_local/Genomics-Main/D_GeneVisualization/
 Rscript /Users/danjack/Documents/Github_local/Genomics-Main/D_GeneVisualization/panther_fdr.r pantheroutput/pyrr.raisd.50kb.snpeff
 Rscript /Users/danjack/Documents/Github_local/Genomics-Main/D_GeneVisualization/panther_fdr.r pantheroutput/noca.fst.50kb.snpeff
 Rscript /Users/danjack/Documents/Github_local/Genomics-Main/D_GeneVisualization/panther_fdr.r pantheroutput/noca.raisd.50kb.snpeff
+Rscript /Users/danjack/Documents/Github_local/Genomics-Main/D_GeneVisualization/panther_fdr.r pantheroutput/nonoverlap.noca_only
+Rscript /Users/danjack/Documents/Github_local/Genomics-Main/D_GeneVisualization/panther_fdr.r pantheroutput/nonoverlap.pyrr_only
+
+Rscript /Users/danjack/Documents/Github_local/Genomics-Main/D_GeneVisualization/panther_fdr.r pyrr_rural_go_panther
+Rscript /Users/danjack/Documents/Github_local/Genomics-Main/D_GeneVisualization/panther_fdr.r noca_rural_go_panther
+
+
 
 grep -o 'GO:[0-9]\{7\}' pantheroutput/noca.raisd.50kb.snpeff.fdr.txt > noca.raisd.50kb.snpeff.fdr.txt
+grep -o 'GO:[0-9]\{7\}' pantheroutput/nonoverlap.noca_only.fdr.txt > nonoverlap.noca_only.fdr.GO.txt
+
 
 Rscript /Users/danjack/Documents/Github_local/Genomics-Main/D_GeneVisualization/D2_visualization.local.r noca.fstraisd.50kb.fdr.GO
 Rscript /Users/danjack/Documents/Github_local/Genomics-Main/D_GeneVisualization/D2_visualization.local.r noca.fst.50kb.fdr.GO
 Rscript /Users/danjack/Documents/Github_local/Genomics-Main/D_GeneVisualization/D2_visualization.local.r noca.raisd.50kb.fdr.GO
 Rscript /Users/danjack/Documents/Github_local/Genomics-Main/D_GeneVisualization/D2_visualization.local.r pyrr.fst.50kb.fdr.GO
 Rscript /Users/danjack/Documents/Github_local/Genomics-Main/D_GeneVisualization/D2_visualization.local.r pyrr.raisd.50kb.fdr.GO
+Rscript /Users/danjack/Documents/Github_local/Genomics-Main/D_GeneVisualization/D2_visualization.local.r nonoverlap.noca_only.fdr.GO
 
 
 Rscript /Users/danjack/Documents/Github_local/Genomics-Main/D_GeneVisualization/panther_fdr.r pantheroutput/pyrr.fst.50kb

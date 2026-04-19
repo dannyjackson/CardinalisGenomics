@@ -101,3 +101,156 @@ for win in "${window_sizes[@]}"; do
                -w $win -s $win 
     done
 done
+
+
+
+
+# Make violin plots
+library(ggplot2)
+library(dplyr)
+
+# Read the files
+file1 <- read.table("nocaurban_nocarural/50000/nocaurban_nocarural.50000.fst", header = TRUE, stringsAsFactors = FALSE)
+file2 <- read.table("pyrrurban_pyrrrural/50000/pyrrurban_pyrrrural.50000.fst", header = TRUE, stringsAsFactors = FALSE)
+
+file1 <- read.table("nocaurban_nocarural/1/nocaurban_nocarural.1.fst", header = TRUE, stringsAsFactors = FALSE)
+file2 <- read.table("pyrrurban_pyrrrural/1/pyrrurban_pyrrrural.1.fst", header = TRUE, stringsAsFactors = FALSE)
+
+file1$dataset <- "file1"
+file2$dataset <- "file2"
+
+combined <- bind_rows(file1, file2)
+
+combined$dataset <- factor(combined$dataset, 
+                           levels = c("file1", "file2"), 
+                           labels = c("noca", "pyrr"))
+
+wilcox_test <- wilcox.test(fst ~ dataset, data = combined)
+print(wilcox_test)
+
+# snp data
+data:  fst by dataset
+W = 3.7979e+11, p-value < 2.2e-16
+alternative hypothesis: true location shift is not equal to 0
+
+# 50000 data
+data:  fst by dataset
+W = 2613407156, p-value < 2.2e-16
+alternative hypothesis: true location shift is not equal to 0
+
+# Create and save the plot
+
+p <- ggplot(combined, aes(x = dataset, y = fst, fill = dataset)) +
+  geom_violin(trim = FALSE, alpha = 0.6) +
+  geom_boxplot(width = 0.1, outlier.shape = NA, alpha = 0.8) +
+  theme_minimal() +
+  labs(x = "", y = "FST value", title = "FST Comparison: noca vs pyrr") +
+  theme(legend.position = "none")
+
+# Save to file
+ggsave("fst_violin_noca_pyrr.1.png", plot = p, width = 6, height = 4, dpi = 300)
+# ggsave("fst_violin_noca_pyrr.50000.png", plot = p, width = 6, height = 4, dpi = 300)
+
+
+# compute FST comparison between taxa
+# pyrr urban vs noca urban
+~/programs/angsd/misc/realSFS /xdisk/mcnew/dannyjackson/cardinals/datafiles/safs/pyrrurban.saf.idx  /xdisk/mcnew/dannyjackson/cardinals/datafiles/safs/nocaurban.saf.idx > /xdisk/mcnew/dannyjackson/cardinals/datafiles/pyrrurban_nocaurban.ml
+
+POP1="pyrrurban"
+POP2="nocaurban"
+OUTDIR="/xdisk/mcnew/dannyjackson/cardinals/"
+ANGSD="~/programs/angsd/"
+# Compute FST index
+FST_INDEX="${OUTDIR}/analyses/fst/${POP1}_${POP2}.fst.idx"
+
+~/programs/angsd/misc/realSFS fst index "${OUTDIR}/datafiles/safs/${POP1}.saf.idx" "${OUTDIR}/datafiles/safs/${POP2}.saf.idx" \
+    -sfs /xdisk/mcnew/dannyjackson/cardinals/datafiles/pyrrurban_nocaurban.ml -fstout "${OUTDIR}/analyses/fst/${POP1}_${POP2}"
+
+
+# Compute global FST estimate
+GLOBAL_FST_FILE="${OUTDIR}/analyses/fst/${POP1}_${POP2}.globalFST.txt"
+if [ -f "$GLOBAL_FST_FILE" ]; then
+    echo "Global FST estimate already exists, skipping computation."
+else
+    echo "Computing global FST estimate..."
+    echo -e "FST.Unweight\tFST.Weight" > "$GLOBAL_FST_FILE"
+    ~/programs/angsd/misc/realSFS fst stats "$FST_INDEX" >> "$GLOBAL_FST_FILE"
+fi
+## -> FST.Unweight[nObs:895129]:0.414326 Fst.Weight:0.638210
+
+# pyrr urban vs noca rural
+~/programs/angsd/misc/realSFS /xdisk/mcnew/dannyjackson/cardinals/datafiles/safs/pyrrurban.saf.idx  /xdisk/mcnew/dannyjackson/cardinals/datafiles/safs/nocarural.saf.idx > /xdisk/mcnew/dannyjackson/cardinals/datafiles/pyrrurban_nocarural.ml
+
+POP1="pyrrurban"
+POP2="nocarural"
+OUTDIR="/xdisk/mcnew/dannyjackson/cardinals/"
+ANGSD="~/programs/angsd/"
+# Compute FST index
+FST_INDEX="${OUTDIR}/analyses/fst/${POP1}_${POP2}.fst.idx"
+
+~/programs/angsd/misc/realSFS fst index "${OUTDIR}/datafiles/safs/${POP1}.saf.idx" "${OUTDIR}/datafiles/safs/${POP2}.saf.idx" \
+    -sfs /xdisk/mcnew/dannyjackson/cardinals/datafiles/pyrrurban_nocarural.ml -fstout "${OUTDIR}/analyses/fst/${POP1}_${POP2}"
+
+# Compute global FST estimate
+GLOBAL_FST_FILE="${OUTDIR}/analyses/fst/${POP1}_${POP2}.globalFST.txt"
+if [ -f "$GLOBAL_FST_FILE" ]; then
+    echo "Global FST estimate already exists, skipping computation."
+else
+    echo "Computing global FST estimate..."
+    echo -e "FST.Unweight\tFST.Weight" > "$GLOBAL_FST_FILE"
+    ~/programs/angsd/misc/realSFS fst stats "$FST_INDEX" >> "$GLOBAL_FST_FILE"
+fi
+## -> FST.Unweight[nObs:895133]:0.414907 Fst.Weight:0.637908
+
+
+# pyrr rural vs noca urban
+
+~/programs/angsd/misc/realSFS /xdisk/mcnew/dannyjackson/cardinals/datafiles/safs/pyrrrural.saf.idx  /xdisk/mcnew/dannyjackson/cardinals/datafiles/safs/nocaurban.saf.idx > /xdisk/mcnew/dannyjackson/cardinals/datafiles/pyrrrural_nocaurban.ml
+
+POP1="pyrrrural"
+POP2="nocaurban"
+OUTDIR="/xdisk/mcnew/dannyjackson/cardinals/"
+ANGSD="~/programs/angsd/"
+# Compute FST index
+FST_INDEX="${OUTDIR}/analyses/fst/${POP1}_${POP2}.fst.idx"
+
+~/programs/angsd/misc/realSFS fst index "${OUTDIR}/datafiles/safs/${POP1}.saf.idx" "${OUTDIR}/datafiles/safs/${POP2}.saf.idx" \
+    -sfs /xdisk/mcnew/dannyjackson/cardinals/datafiles/pyrrrural_nocaurban.ml -fstout "${OUTDIR}/analyses/fst/${POP1}_${POP2}"
+
+# Compute global FST estimate
+GLOBAL_FST_FILE="${OUTDIR}/analyses/fst/${POP1}_${POP2}.globalFST.txt"
+if [ -f "$GLOBAL_FST_FILE" ]; then
+    echo "Global FST estimate already exists, skipping computation."
+else
+    echo "Computing global FST estimate..."
+    echo -e "FST.Unweight\tFST.Weight" > "$GLOBAL_FST_FILE"
+    ~/programs/angsd/misc/realSFS fst stats "$FST_INDEX" >> "$GLOBAL_FST_FILE"
+fi
+## -> FST.Unweight[nObs:895135]:0.415734 Fst.Weight:0.637540
+
+# pyrr rural vs noca rural
+
+~/programs/angsd/misc/realSFS /xdisk/mcnew/dannyjackson/cardinals/datafiles/safs/pyrrrural.saf.idx  /xdisk/mcnew/dannyjackson/cardinals/datafiles/safs/nocarural.saf.idx > /xdisk/mcnew/dannyjackson/cardinals/datafiles/pyrrrural_nocarural.ml
+
+POP1="pyrrrural"
+POP2="nocarural"
+OUTDIR="/xdisk/mcnew/dannyjackson/cardinals/"
+ANGSD="~/programs/angsd/"
+# Compute FST index
+FST_INDEX="${OUTDIR}/analyses/fst/${POP1}_${POP2}.fst.idx"
+
+~/programs/angsd/misc/realSFS fst index "${OUTDIR}/datafiles/safs/${POP1}.saf.idx" "${OUTDIR}/datafiles/safs/${POP2}.saf.idx" \
+    -sfs /xdisk/mcnew/dannyjackson/cardinals/datafiles/pyrrrural_nocarural.ml -fstout "${OUTDIR}/analyses/fst/${POP1}_${POP2}"
+
+# Compute global FST estimate
+GLOBAL_FST_FILE="${OUTDIR}/analyses/fst/${POP1}_${POP2}.globalFST.txt"
+if [ -f "$GLOBAL_FST_FILE" ]; then
+    echo "Global FST estimate already exists, skipping computation."
+else
+    echo "Computing global FST estimate..."
+    echo -e "FST.Unweight\tFST.Weight" > "$GLOBAL_FST_FILE"
+    ~/programs/angsd/misc/realSFS fst stats "$FST_INDEX" >> "$GLOBAL_FST_FILE"
+fi
+
+##        -> FST.Unweight[nObs:895049]:0.415577 Fst.Weight:0.636954
+

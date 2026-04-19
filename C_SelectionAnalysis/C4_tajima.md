@@ -25,6 +25,14 @@ declare -A time_limits=( [50000]=1:00:00 [10000]=1:00:00 [5000]=1:00:00 [1000]=1
 species=( "nocaurban" "nocarural" "pyrrurban" "pyrrrural" )
 window_sizes=( 50000 25000 10000 5000 1000 1)
 
+~/programs/CardinalisGenomics/Genomics-Main/C_SelectionAnalysis/tajima/tajima.sh \
+               -p ~/programs/CardinalisGenomics/nocaurban_params_tajima.sh \
+               -w 50000 -s 12500
+
+~/programs/CardinalisGenomics/Genomics-Main/C_SelectionAnalysis/tajima/tajima.sh \
+               -p ~/programs/CardinalisGenomics/pyrrurban_params_tajima.sh \
+               -w 50000 -s 12500
+
 # Iterate over each combination
 for win in "${window_sizes[@]}"; do
     for sp in "${species[@]}"; do

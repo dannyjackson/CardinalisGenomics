@@ -1,3 +1,13 @@
+install.packages(c(
+  "ggplot2",
+  "sf",
+  "rnaturalearth",
+  "rnaturalearthdata",
+  "ggspatial",
+  "rosm",
+  "ggmap"
+))
+
 library(ggplot2)
 library(sf)
 library(rnaturalearth)
@@ -11,7 +21,7 @@ register_google(key = "AIzaSyChTsYLBX8qJeNRdxhwgSruZfu4eXFKrxI")
 
 
 # Read data and convert WKT to sf
-sites <- read.csv("samplelocations.csv")
+sites <- read.csv("B_PopulationStructureAnalysis/samplelocations.csv")
 sites_sf <- st_as_sf(sites, wkt = "WKT", crs = 4326)  # Convert WKT to sf object
 
 # Register Google API Key (if not already registered)
@@ -46,15 +56,13 @@ bbox <- c(
   top = max_lat + buffer_factor * lat_range
 )
 
-# Get Google Terrain Map
+# Get Google Terrain Map -- hybrid
 terrain_map <- get_googlemap(
   center = c(lon = mean(c(bbox["left"], bbox["right"])), lat = mean(c(bbox["bottom"], bbox["top"]))),
   zoom = 7,  # Adjust manually if needed
   maptype = "hybrid",
   scale = 2
 )
-
-
 
 # Plot with custom colors
 ggmap(terrain_map) +
@@ -63,15 +71,87 @@ ggmap(terrain_map) +
   theme_minimal() +
   labs(color = "Species & Population")  # Legend label
 
-
 ggsave(
-  "allplot.pdf",
+  "allplot.hybrid.pdf",
   plot = last_plot(),
   width = 8,
   height = 8,
   units = "in",
   dpi = 300
 )
+
+# Get Google Terrain Map -- satellite
+terrain_map <- get_googlemap(
+  center = c(lon = mean(c(bbox["left"], bbox["right"])), lat = mean(c(bbox["bottom"], bbox["top"]))),
+  zoom = 7,  # Adjust manually if needed
+  maptype = "satellite",
+  scale = 2
+)
+
+# Plot with custom colors
+ggmap(terrain_map) +
+  geom_sf(data = sites_sf, aes(color = Species), inherit.aes = FALSE, size = 3, alpha = 0.8) +
+  scale_color_manual(values = custom_colors) +  # Use pre-defined colors
+  theme_minimal() +
+  labs(color = "Species & Population")  # Legend label
+
+ggsave(
+  "allplot.satellite.pdf",
+  plot = last_plot(),
+  width = 8,
+  height = 8,
+  units = "in",
+  dpi = 300
+)
+
+
+# Get Google Terrain Map -- roadmap
+terrain_map <- get_googlemap(
+  center = c(lon = mean(c(bbox["left"], bbox["right"])), lat = mean(c(bbox["bottom"], bbox["top"]))),
+  zoom = 7,  # Adjust manually if needed
+  maptype = "roadmap",
+  scale = 2
+)
+
+# Plot with custom colors
+ggmap(terrain_map) +
+  geom_sf(data = sites_sf, aes(color = Species), inherit.aes = FALSE, size = 3, alpha = 0.8) +
+  scale_color_manual(values = custom_colors) +  # Use pre-defined colors
+  theme_minimal() +
+  labs(color = "Species & Population")  # Legend label
+
+ggsave(
+  "allplot.roadmap.pdf",
+  plot = last_plot(),
+  width = 8,
+  height = 8,
+  units = "in",
+  dpi = 300
+)
+
+# Get Google Terrain Map -- terrain
+terrain_map <- get_googlemap(
+  center = c(lon = mean(c(bbox["left"], bbox["right"])), lat = mean(c(bbox["bottom"], bbox["top"]))),
+  zoom = 7,  # Adjust manually if needed
+  maptype = "terrain",
+  scale = 2
+)
+# Plot with custom colors
+ggmap(terrain_map) +
+  geom_sf(data = sites_sf, aes(color = Species), inherit.aes = FALSE, size = 3, alpha = 0.8) +
+  scale_color_manual(values = custom_colors) +  # Use pre-defined colors
+  theme_minimal() +
+  labs(color = "Species & Population")  # Legend label
+
+ggsave(
+  "allplot.terrain.pdf",
+  plot = last_plot(),
+  width = 8,
+  height = 8,
+  units = "in",
+  dpi = 300
+)
+
 
 
 # plot just urban 
@@ -100,6 +180,7 @@ bbox <- c(
   top = max_lat + buffer_factor * lat_range
 )
 
+# HYBRID
 # Get Google Terrain Map
 terrain_map <- get_googlemap(
   center = c(lon = mean(c(bbox["left"], bbox["right"])), lat = mean(c(bbox["bottom"], bbox["top"]))),
@@ -122,7 +203,97 @@ ggmap(terrain_map) +
 
 
 ggsave(
-  "urbanplot.pdf",
+  "urbanplot.hybrid.pdf",
+  plot = last_plot(),
+  width = 8,
+  height = 8,
+  units = "in",
+  dpi = 300
+)
+# SATELLITE
+# Get Google Terrain Map
+terrain_map <- get_googlemap(
+  center = c(lon = mean(c(bbox["left"], bbox["right"])), lat = mean(c(bbox["bottom"], bbox["top"]))),
+  zoom = 10,  # Adjust manually if needed
+  maptype = "satellite",
+  scale = 2
+)
+
+# Plot with Google Terrain Map and jittered points
+# Subset sites_sf to include only Urban population
+urban_sites_sf <- sites_sf %>% filter(Population == "Urban")
+
+# Plot with Google Terrain Map and jittered points
+ggmap(terrain_map) +
+  geom_jitter(data = urban_sites_sf, aes(x = Longitude, y = Latitude, color = Species), 
+              inherit.aes = FALSE, size = 3, alpha = 0.8, width = 0.01, height = 0.01) +  # Adjust jitter width and height
+  scale_color_manual(values = custom_colors) +  # Use pre-defined colors
+  theme_minimal() +
+  labs(color = "Species & Population (Urban Only)")  # Updated legend label
+
+
+ggsave(
+  "urbanplot.satellite.pdf",
+  plot = last_plot(),
+  width = 8,
+  height = 8,
+  units = "in",
+  dpi = 300
+)
+# ROADMAP
+# Get Google Terrain Map
+terrain_map <- get_googlemap(
+  center = c(lon = mean(c(bbox["left"], bbox["right"])), lat = mean(c(bbox["bottom"], bbox["top"]))),
+  zoom = 10,  # Adjust manually if needed
+  maptype = "roadmap",
+  scale = 2
+)
+
+# Plot with Google Terrain Map and jittered points
+# Subset sites_sf to include only Urban population
+urban_sites_sf <- sites_sf %>% filter(Population == "Urban")
+
+# Plot with Google Terrain Map and jittered points
+ggmap(terrain_map) +
+  geom_jitter(data = urban_sites_sf, aes(x = Longitude, y = Latitude, color = Species), 
+              inherit.aes = FALSE, size = 3, alpha = 0.8, width = 0.01, height = 0.01) +  # Adjust jitter width and height
+  scale_color_manual(values = custom_colors) +  # Use pre-defined colors
+  theme_minimal() +
+  labs(color = "Species & Population (Urban Only)")  # Updated legend label
+
+
+ggsave(
+  "urbanplot.roadmap.pdf",
+  plot = last_plot(),
+  width = 8,
+  height = 8,
+  units = "in",
+  dpi = 300
+)
+# TERRAIN
+# Get Google Terrain Map
+terrain_map <- get_googlemap(
+  center = c(lon = mean(c(bbox["left"], bbox["right"])), lat = mean(c(bbox["bottom"], bbox["top"]))),
+  zoom = 10,  # Adjust manually if needed
+  maptype = "terrain",
+  scale = 2
+)
+
+# Plot with Google Terrain Map and jittered points
+# Subset sites_sf to include only Urban population
+urban_sites_sf <- sites_sf %>% filter(Population == "Urban")
+
+# Plot with Google Terrain Map and jittered points
+ggmap(terrain_map) +
+  geom_jitter(data = urban_sites_sf, aes(x = Longitude, y = Latitude, color = Species), 
+              inherit.aes = FALSE, size = 3, alpha = 0.8, width = 0.01, height = 0.01) +  # Adjust jitter width and height
+  scale_color_manual(values = custom_colors) +  # Use pre-defined colors
+  theme_minimal() +
+  labs(color = "Species & Population (Urban Only)")  # Updated legend label
+
+
+ggsave(
+  "urbanplot.terrain.pdf",
   plot = last_plot(),
   width = 8,
   height = 8,

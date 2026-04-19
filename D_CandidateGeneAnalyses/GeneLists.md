@@ -222,9 +222,18 @@ for win in "${window_sizes[@]}"; do
     done
 done
 
+# Test if rural RAiSD analyses find similar GO terms
+GENE_LIST1=/xdisk/mcnew/dannyjackson/cardinals/analyses/genelist/gene_names/nocarural.raisd.50kb.genenames.txt
+GENE_LIST2=/xdisk/mcnew/dannyjackson/cardinals/analyses/genelist/gene_names/nocaurban.raisd.50kb.genenames.txt
+
+grep -Fxv -f "$GENE_LIST2" "$GENE_LIST1" > /xdisk/mcnew/dannyjackson/cardinals/analyses/genelist/gene_names/nocarural.raisd.50kb.unique.genenames.txt
 
 
 
+GENE_LIST1=/xdisk/mcnew/dannyjackson/cardinals/analyses/genelist/gene_names/pyrrrural.raisd.50kb.genenames.txt
+GENE_LIST2=/xdisk/mcnew/dannyjackson/cardinals/analyses/genelist/gene_names/pyrrurban.raisd.50kb.genenames.txt
+
+grep -Fxv -f "$GENE_LIST2" "$GENE_LIST1" > /xdisk/mcnew/dannyjackson/cardinals/analyses/genelist/gene_names/pyrrrural.raisd.50kb.unique.genenames.txt
 
 
 
@@ -335,6 +344,12 @@ ggvenn(gene_sets,
 dev.off()
 
 
+# identify nonoverlapping genes in noca and pyrr
+noca_only <- setdiff(df_noca_fstraisd, df_pyrr_fstraisd)
+pyrr_only <- setdiff(df_pyrr_fstraisd, df_noca_fstraisd)
+write(noca_only, file="nonoverlap.noca_only.csv")
+write(pyrr_only, file="nonoverlap.pyrr_only.csv")
+
 # identify genes in overlapping bits
 # noca owl
 noca_owl = intersect(df_noca_fstraisd, df_owl)
@@ -357,6 +372,7 @@ write(pyrr_tit, file="intersection.pyrr_tit.csv")
 # owl tit
 owl_tit = intersect(df_owl, df_tit)
 write(owl_tit, file="intersection.owl_tit.csv")
+
 
 
 # genes in 2/4 lists
